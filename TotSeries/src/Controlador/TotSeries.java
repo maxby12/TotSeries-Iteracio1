@@ -5,10 +5,49 @@
  */
 package Controlador;
 
+import Model.Client;
+import Model.TotSeriesDades;
+import java.util.Timer;
+
 /**
  *
  * @author Albert
  */
 public class TotSeries {
+    
+    private TotSeriesDades _data;
+    private Timer timer;
+    
+    
+    public TotSeries(TotSeriesDades data) {
+        this.timer = new Timer();
+        this._data = data;
+    }
+    
+    // METODES DE CASSOS D'US
+    
+    public void mirarCataleg(String userName) {
+        
+    }
+    
+    public void visualitzarTopCapitols(String userName) {
+        
+    }
+    
+    public void registrarUsuari() {
+        
+    }
+    
+    public void reproduirCapitol(String userName, int numCap) {
+        
+    }
+    
+    public void aturaCapitol(String userName, int numCap) {
+        
+    }
+    
+    public void valorarCapitol(String userName, int numCap) {
+        
+    }
     
 }

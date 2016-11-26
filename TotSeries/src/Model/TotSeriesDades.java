@@ -6,6 +6,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  *
@@ -16,14 +17,14 @@ public class TotSeriesDades {
     private ArrayList<Client> _llistaClients;
     private Cataleg _cataleg;
     private Administrador _admin;
-    private Data _diaCobro;
+    private Date _dataPagament;
 
-    public TotSeriesDades(Data _diaCobro) {
+    public TotSeriesDades(Date _diaCobro) {
         this._llistaClientsVIP = new ArrayList<ClientVIP>() ;
         this._llistaClients = new ArrayList<Client>();
         this._cataleg = new Cataleg();
         this._admin = new Administrador();
-        this._diaCobro = _diaCobro;
+        this._dataPagament = _diaCobro;
         //hem de decidir com introduim la data
     }
     
