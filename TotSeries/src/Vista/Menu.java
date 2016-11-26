@@ -5,8 +5,9 @@
  */
 package Vista;
 
-import Controlador.TotSeries;
+import Controlador.CtrlTotSeries;
 import java.util.Date;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -16,19 +17,22 @@ import java.util.Scanner;
 public class Menu {
     
     /** Utilitat per llegir línies senceres de la pantalla */
-    private static final Scanner scanner = new Scanner(System.in);
-    private TotSeries _ctrl;
+    private static final Scanner sc = new Scanner(System.in);
+    private CtrlTotSeries _ctrl;
+    
+    
+    static private String[] descMenuPrincipal={"Mirar Catàleg",
+                                           "Registrar Usuari",
+                                           "Mirar Top Capitols",
+                                           "Finalitzar aplicació"};
     
     
     // METODES PUBLICS
     
-    public Menu(TotSeries ctrl) {
+    public Menu(CtrlTotSeries ctrl) {
         this._ctrl = ctrl;
     }
     
-    
-
-
     /**
      * Mostra un text per pantalla (sense salt de línia al final).
      *
@@ -90,7 +94,7 @@ public class Menu {
      * @return cadena introduida per l'usuari
      */
     public static String llegeixString() {
-        return scanner.nextLine();
+        return sc.nextLine();
     }
 
     /**
@@ -105,11 +109,11 @@ public class Menu {
     
     public Date llegeixDataNaixament() {
         System.out.print("Introdueix el dia: ");
-        int dia = scanner.nextInt();
+        int dia = sc.nextInt();
         System.out.print("Introdueix el mes: ");
-        int mes = scanner.nextInt();
+        int mes = sc.nextInt();
         System.out.print("Introdueix l'any: ");
-        int any = scanner.nextInt();
+        int any = sc.nextInt();
         Date d = new Date(dia,mes,any);
         return d;
     }
@@ -121,9 +125,56 @@ public class Menu {
      */
     public void show() {
         
+        // Creem el menú principal
+        int opcio = 1;
+        
+        do {
+            // Mostrem les opcions del menú
+            mostrarMenuP();
+            
+            try {
+                //Demanem una opcio
+                opcio = sc.nextInt();
+
+                // MENU PRINCIPAL
+                switch(opcio) {
+                    case 1:
+                        
+                        break;
+
+                    case 2:
+                        
+                        break;
+
+                    case 3:
+                        
+                        break;
+                        
+                    case 4:
+                        System.out.println("Fin de sessión");
+                        break;
+                } // FI MENU PRINCIPAL
+            }
+            catch(InputMismatchException exc) {
+                System.out.println("Valor introducido erronio!");
+                sc.next(); // Això passa la excepció
+            }
+        } while(opcio!=4);
+        
     }
     
+    
     // METODES PRIVATS (DE SUPORT)
+
+
+    private void mostrarMenuP() {
+        int i = 1;
+        System.out.println("------------------\n  MENU PRINCIPAL\n------------------");
+        for (String s : descMenuPrincipal) {
+            System.out.println(i+": "+s);
+            i++;
+        }
+    }
     
     private void retornMenuSerie() {
         

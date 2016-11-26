@@ -125,7 +125,7 @@ public class TotSeriesDades {
     public String mostrarCataleg(){
         return this._cataleg.toString();
     }
-    
+    /*
     public String mostrarSerie(int numSerie){
         
     }
@@ -133,7 +133,7 @@ public class TotSeriesDades {
     public String mostrarTemporada(int numTemp){
         
     }
-    
+    */
     public boolean comprovarClient(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;

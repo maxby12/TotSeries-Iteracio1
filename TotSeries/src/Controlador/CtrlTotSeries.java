@@ -13,13 +13,13 @@ import java.util.Timer;
  *
  * @author Albert
  */
-public class TotSeries {
+public class CtrlTotSeries {
     
     private TotSeriesDades _data;
     private Timer timer;
     
     
-    public TotSeries(TotSeriesDades data, String rutaXML) {
+    public CtrlTotSeries(TotSeriesDades data, String rutaXML) {
         this.timer = new Timer();
         this._data = data;
         TotSeriesDataManager dataManager = new TotSeriesDataManager();

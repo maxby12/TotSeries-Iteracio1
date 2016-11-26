@@ -6,7 +6,7 @@ package Controlador;
  * 
  */
 public class TotSeriesDataManager {
-
+    
 	/* -------------------------------------------------------------------
 	 * Metodes a implementar per vosaltres. En aquests metodes creareu els
 	 * vostres objectes a partir de la informacio obtinguda del fitxer XML
@@ -63,7 +63,7 @@ public class TotSeriesDataManager {
 
 		System.out.println("Temporada: " + numTemporada + " Numero Episodis: "+ numEpisodis);
                 System.out.println("--------------------------------------------------");
-
+                
 	}
         
         /**
