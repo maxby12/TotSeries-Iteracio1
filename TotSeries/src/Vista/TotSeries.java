@@ -33,6 +33,7 @@ public class TotSeries {
         
         // EXECUTEM APLICACIÓ PRINCIPAL (MAIN MENU)
         vista.show();
+        
     }
     
 }

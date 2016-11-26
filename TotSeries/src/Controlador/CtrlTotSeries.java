@@ -16,11 +16,9 @@ import java.util.Timer;
 public class CtrlTotSeries {
     
     private TotSeriesDades _data;
-    private Timer timer;
     
     
     public CtrlTotSeries(TotSeriesDades data, String rutaXML) {
-        this.timer = new Timer();
         this._data = data;
         TotSeriesDataManager dataManager = new TotSeriesDataManager();
         dataManager.obtenirDades(rutaXML);
