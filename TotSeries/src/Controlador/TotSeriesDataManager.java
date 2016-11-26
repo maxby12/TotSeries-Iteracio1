@@ -30,6 +30,25 @@ public class TotSeriesDataManager {
         private Artista _artistaActual;
         private Serie _serieActual;
         private Temporada _tempActual;
+        private int _codiSerie;
+        private int _codiTemporada;
+        private int _numCapitol;
+
+    public ArrayList<Client> getLlistaClients() {
+        return _llistaClients;
+    }
+
+    public Cataleg getCataleg() {
+        return _cataleg;
+    }
+
+    public ArrayList<Administrador> getAdministradors() {
+        return _administradors;
+    }
+
+        
+        
+        
         
 	/* -------------------------------------------------------------------
 	 * Metodes a implementar per vosaltres. En aquests metodes creareu els
@@ -50,6 +69,7 @@ public class TotSeriesDataManager {
                 this._llistaClients = new ArrayList<Client>();
                 this._administradors = new ArrayList<Administrador>();
                 this._cataleg = new Cataleg();
+                this._codiSerie = -1;
 		TotSeriesXMLParser parser = new TotSeriesXMLParser(this);
 		parser.parse(nomFitxer);
 	}
@@ -63,10 +83,11 @@ public class TotSeriesDataManager {
 	 */
 	
 	public void crearSerie(String id, String title, String desc) {		
-
-            Serie s = new Serie(title, desc, 0, 0, null, null, null, null);
+            this._codiSerie++;
+            Serie s = new Serie(title, desc, 0, 0, new ArrayList<Temporada>(), null, new ArrayList<Actor>(), null,this._codiSerie);
             this._serieActual = s;
             this._cataleg.addSerie(s);
+            
             /*
 		System.out.println("\nSerie amb ID: " + id);
 		System.out.println("--------------------------------------------------");
@@ -84,8 +105,10 @@ public class TotSeriesDataManager {
 	 */
 	
 	public void crearTemporada(String numTemporada, String numEpisodis) {		
-
-            Temporada t = new Temporada(parseInt(numTemporada), parseInt(numEpisodis));
+            int nt = parseInt(numTemporada);
+            this._numCapitol = -1;
+            this._codiTemporada = nt-1;
+            Temporada t = new Temporada(nt, parseInt(numEpisodis));
             this._tempActual = t;
             this._serieActual.addTemporada(t);
             
@@ -109,10 +132,11 @@ public class TotSeriesDataManager {
 	 */
 	
 	public void crearEpisodi(String title, String duration, String idioma, String description, String data) {		
-            
+            // TODO HERE, ESTABLIR CODI CCCTTTSSS
+            this._numCapitol++;
             String[] parts = data.split("/");
             Date d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
-            Capitol c = new Capitol(title, duration, idioma, description, 0f, d);
+            Capitol c = new Capitol(title, duration, idioma, description, 0f, d, this._numCapitol);
             this._tempActual.addCapitol(c);
             
             /*
@@ -215,8 +239,8 @@ public class TotSeriesDataManager {
 	public void crearAdmin(String id, String nom, String usuari, String password) {
 
 
-            ClientVIP c = new ClientVIP(usuari, password, nom, "Espanya", new Date(1,2,1990));
-            this._llistaClients.add(c);
+            Administrador c = new Administrador(nom,usuari,password);
+            this._administradors.add(c);
             /*
 		System.out.println("\nAdmin ID: " + id);
 		System.out.println("-----------------");
@@ -240,8 +264,14 @@ public class TotSeriesDataManager {
 
 	public void crearClient(String id, String nom, String dni, String adreca, String usuari, String password, String vip) {
 
-
-            Client c = new Client(usuari, password, nom, "Espanya", new Date(1,2,1990));
+            Client c;
+            if (vip.equals("false")) {
+                c = new Client(usuari, password, nom, "Espanya", new Date(1,2,1990));
+            }
+            else {
+                c = new ClientVIP(usuari, password, nom, "Espanya", new Date(1,2,1990));
+            }
+            
             this._llistaClients.add(c);
             /*
 		System.out.println("\nClient ID: " + id);

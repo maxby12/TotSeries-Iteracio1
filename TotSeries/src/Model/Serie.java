@@ -20,8 +20,9 @@ public class Serie {
     private Director _director;
     private ArrayList<Actor> _actors;
     private Productora _productora;
+    private int _num;
 
-    public Serie(String _titol, String _despcripcio, int _nTemporades, float _nota, ArrayList<Temporada> _temporades, Director _director, ArrayList<Actor> _actors, Productora _productora) {
+    public Serie(String _titol, String _despcripcio, int _nTemporades, float _nota, ArrayList<Temporada> _temporades, Director _director, ArrayList<Actor> _actors, Productora _productora, int _codi) {
         this._titol = _titol;
         this._despcripcio = _despcripcio;
         this._nTemporades = _nTemporades;
@@ -30,6 +31,7 @@ public class Serie {
         this._director = _director;
         this._actors = _actors;
         this._productora = _productora;
+        this._num = _codi;
     }
     
     public void addTemporada(Temporada t) {
@@ -104,11 +106,11 @@ public class Serie {
     public void setProductora(Productora _productora) {
         this._productora = _productora;
     }
-
+/*
     public Capitol getCapitol(int numCap){
        // return this._temporades.get(numTemp).getCapitol(numCap);
     }
-    
+    */
     public String mostrarTemporada(int numTemp){
         return this._temporades.get(numTemp).toString();
     }

@@ -27,9 +27,6 @@ public class TotSeriesDades {
     
     
     public TotSeriesDades(Date _diaCobro) {
-        this._llistaClients = new ArrayList<Client>();
-        this._cataleg = new Cataleg();
-        this._administradors = new ArrayList<Administrador>();
         this._dataPagament = _diaCobro;
         //hem de decidir com introduim la data
     }
@@ -119,7 +116,7 @@ public class TotSeriesDades {
     public String mostrarCataleg(){
         return this._cataleg.toString();
     }
-    
+    /*
     public String mostrarSerie(int numSerie){
         
     }
@@ -131,7 +128,7 @@ public class TotSeriesDades {
     public String getCapitol(int numCap){
         
     }
-    
+    */
     public boolean comprovarClient(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;

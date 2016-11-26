@@ -23,6 +23,7 @@ public class Temporada {
         this._num = _num;
         this._nCapTemporada = _numCap;
         this._nota = 0.0f;
+        
     }
     
     public void addCapitol(Capitol c) {

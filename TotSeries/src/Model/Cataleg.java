@@ -21,6 +21,7 @@ public class Cataleg {
         this._topCapitols = new RankingCapitols();
         this._topMillorsSeries = new RankingSeries();
         this._topPitjorsSeries = new RankingSeries();
+        this._series = new ArrayList<Serie>();
     }
     
     public void addSerie(Serie s) {
@@ -33,9 +34,13 @@ public class Cataleg {
     
     @Override
     public String toString() {
-        return "Cataleg{" + "_series=" + _series + '}';
+        String c = "";
+        for (Serie s : this._series) {
+            c = c + s.toString() + "\n";
+        }
+        return c;
     }
-
+/*
     public Capitol getCapitol(int numCap){
         
     }
@@ -47,7 +52,7 @@ public class Cataleg {
     public String mostrarTemporada(int numTemp){
         
     }
-    
+    */
     public String mostrarTopCap(){
         return this._topCapitols.toString();
     }

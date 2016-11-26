@@ -139,7 +139,7 @@ public class Menu {
                 // MENU PRINCIPAL
                 switch(opcio) {
                     case 1:
-                        
+                        this.menuCataleg("");
                         break;
 
                     case 2:
@@ -175,6 +175,12 @@ public class Menu {
             i++;
         }
     }
+    
+    private void menuCataleg(String userName) {
+        String llistaSeries = this._ctrl.mirarCataleg(userName);
+        escriu(llistaSeries);
+    }
+    
     
     private void retornMenuSerie() {
         

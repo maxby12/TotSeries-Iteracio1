@@ -21,8 +21,9 @@ public class Capitol {
     private ArrayList<Valoracio> _llistaValoracions;
     private float _nota;
     private Date _estrena;
+    private int _num;
 
-    public Capitol(String _nom, String _duracio, String _idioma, String _descripcio, float _nota, Date _estrena) {
+    public Capitol(String _nom, String _duracio, String _idioma, String _descripcio, float _nota, Date _estrena, int _num) {
         this._nom = _nom;
         this._duracio = _duracio;
         this._idioma = _idioma;
@@ -30,6 +31,7 @@ public class Capitol {
         this._llistaValoracions = new ArrayList<Valoracio>();
         this._nota = _nota;
         this._estrena = _estrena;
+        this._num = _num;
     }
 
     public void addValoracio(Valoracio valoracio){

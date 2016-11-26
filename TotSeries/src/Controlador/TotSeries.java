@@ -5,8 +5,13 @@
  */
 package Controlador;
 
+import Model.Administrador;
+import Model.Cataleg;
 import Model.Client;
 import Model.TotSeriesDades;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.Timer;
 
 /**
@@ -22,12 +27,19 @@ public class TotSeries {
         this._data = data;
         TotSeriesDataManager dataManager = new TotSeriesDataManager();
         dataManager.obtenirDades(rutaXML);
+        ArrayList<Client> clients = dataManager.getLlistaClients();
+        ArrayList<Administrador> admins = dataManager.getAdministradors();
+        Cataleg c = dataManager.getCataleg();
+        this._data.setCataleg(c);
+        this._data.setAdministradors(admins);
+        this._data.setLlistaClients(clients);
+        
     }
     
     // METODES DE CASSOS D'US
     
-    public void mirarCataleg(String userName) {
-        
+    public String mirarCataleg(String userName) {
+        return this._data.mostrarCataleg();
     }
     
     public void visualitzarTopCapitols(String userName) {
