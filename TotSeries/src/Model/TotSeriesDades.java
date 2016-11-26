@@ -16,7 +16,7 @@ import java.util.Iterator;
 public class TotSeriesDades {
     private ArrayList<Client> _llistaClients;
     private Cataleg _cataleg;
-    private Administrador _admin;
+    private ArrayList<Administrador> _administradors;
     private Date _dataPagament;
     
     
@@ -29,9 +29,17 @@ public class TotSeriesDades {
     public TotSeriesDades(Date _diaCobro) {
         this._llistaClients = new ArrayList<Client>();
         this._cataleg = new Cataleg();
-        this._admin = new Administrador();
+        this._administradors = new ArrayList<Administrador>();
         this._dataPagament = _diaCobro;
         //hem de decidir com introduim la data
+    }
+
+    public ArrayList<Administrador> getAdministradors() {
+        return _administradors;
+    }
+
+    public void setAdministradors(ArrayList<Administrador> _administradors) {
+        this._administradors = _administradors;
     }
     
     public ArrayList<Client> getLlistaClients() {
@@ -48,14 +56,6 @@ public class TotSeriesDades {
 
     public void setCataleg(Cataleg _cataleg) {
         this._cataleg = _cataleg;
-    }
-
-    public Administrador getAdmin() {
-        return _admin;
-    }
-
-    public void setAdmin(Administrador _admin) {
-        this._admin = _admin;
     }
 
     public Date getDataPagament() {
@@ -123,7 +123,7 @@ public class TotSeriesDades {
     public String mostrarTemporada(int numTemp){
         
     }
-
+    
     public boolean comprovarClient(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
