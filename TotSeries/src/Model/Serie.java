@@ -19,7 +19,7 @@ public class Serie {
     private float _nota;
     private ArrayList<Temporada> _temporades;
     private Director _director;
-    private ArrayList<actor> _actors;
+    private ArrayList<Actor> _actors;
     private Productora _productora;
 
     public String getTitol() {

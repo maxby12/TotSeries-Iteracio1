@@ -10,20 +10,24 @@ package Model;
  * @author Raül
  */
 public class Factura {
-    private double _valor;
+    private float _valor;
+    
+    public Factura(float valor) {
+        this._valor = valor;
+    }
 
-    public double getValor() {
+    public float getValor() {
         return _valor;
     }
+    
+    public void setValor(float valor) {
+        this._valor = valor;
+    }
 
-    public void incrementar() {
-        this._valor = _valor + 1;
+    public void incrementar(float x) {
+        this._valor = _valor + x;
     }
     
-    public void incrementarVIP() {
-        this._valor = _valor + 0.9;
-    }
-
     @Override
     public String toString() {
         return "Factura{" + "_valor=" + _valor + '}';

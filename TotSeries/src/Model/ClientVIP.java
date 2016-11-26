@@ -5,13 +5,16 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author Raül
  */
 public class ClientVIP extends Client {
 
-    public ClientVIP() {
+    public ClientVIP(String userName, String password, String nom, String nacionalitat, Date dataNaixament) {
+        super(userName, password, nom, nacionalitat, dataNaixament);
     }
     
      @Override
@@ -21,7 +24,7 @@ public class ClientVIP extends Client {
     
     @Override
     public void incrementarFactura(){
-        this._factura.incrementarVIP();
+        this._factura.incrementar(0.9f);
     }
     
 }

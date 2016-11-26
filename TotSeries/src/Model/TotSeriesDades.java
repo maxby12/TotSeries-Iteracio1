@@ -7,20 +7,26 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 /**
  *
  * @author Albert
  */
 public class TotSeriesDades {
-    private ArrayList<ClientVIP> _llistaClientsVIP;
     private ArrayList<Client> _llistaClients;
     private Cataleg _cataleg;
     private Administrador _admin;
     private Date _dataPagament;
-
+    
+    
+    // Definim els possibles estats dels Clients
+    protected enum View {
+        EMISSIO, NOEMISSIO
+    }
+    
+    
     public TotSeriesDades(Date _diaCobro) {
-        this._llistaClientsVIP = new ArrayList<ClientVIP>() ;
         this._llistaClients = new ArrayList<Client>();
         this._cataleg = new Cataleg();
         this._admin = new Administrador();
@@ -28,16 +34,6 @@ public class TotSeriesDades {
         //hem de decidir com introduim la data
     }
     
-    
-
-    public ArrayList<ClientVIP> getLlistaClientsVIP() {
-        return _llistaClientsVIP;
-    }
-
-    public void setLlistaClientsVIP(ArrayList<ClientVIP> _llistaClientsVIP) {
-        this._llistaClientsVIP = _llistaClientsVIP;
-    }
-
     public ArrayList<Client> getLlistaClients() {
         return _llistaClients;
     }
@@ -62,40 +58,68 @@ public class TotSeriesDades {
         this._admin = _admin;
     }
 
-    public Data getDiaCobro() {
-        return _diaCobro;
+    public Date getDataPagament() {
+        return _dataPagament;
     }
 
-    public void setDiaCobro(Data _diaCobro) {
-        this._diaCobro = _diaCobro;
+    public void setDataPagament(Date _diaCobro) {
+        this._dataPagament = _diaCobro;
     }
     
-    public void addClient(){
+    public void addClient(String userName, String password, String nom, String nacionalitat, Date dataNaixament){
+        Client c = new Client(userName, password, nom, nacionalitat, dataNaixament);
+        this._llistaClients.add(c);
+    }
+    
+    public View getViewStatus(String userName){
+        Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
+        boolean found = false;
+        View status = null;
+        while (llistaClientsIterator.hasNext() && !found) {
+            Client c = llistaClientsIterator.next();
+            if (c.getUsername().equals(userName)) {
+                status = c.getViewStatus();
+                found = true;
+            }
+        }
+        return status;
+    }
+    
+    public boolean comprovarDuplicat(String userName){
+        Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
+        boolean found = false;
+        while (llistaClientsIterator.hasNext() && !found) {
+            Client c = llistaClientsIterator.next();
+            found = c.getUsername().equals(userName);
+        }
+        return found;
+    }
+    
+    public void iniciarStreaming(String userName, int numCap){
+        Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
+        boolean found = false;
+        while (llistaClientsIterator.hasNext() && !found) {
+            Client c = llistaClientsIterator.next();
+            if (c.getUsername().equals(userName)) {
+                c.setViewStatus(View.EMISSIO);
+                c.incrementarFactura();
+            }
+        }
+        // Inicia el streaming del capitol numero numCap
         
     }
     
-    public boolean getViewStatus(){
+    public void finalitzarStreaming(String userName, int numCap){
+        Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
+        boolean found = false;
+        while (llistaClientsIterator.hasNext() && !found) {
+            Client c = llistaClientsIterator.next();
+            if (c.getUsername().equals(userName)) {
+                c.setViewStatus(View.NOEMISSIO);
+            }
+        }
         
-    }
-    
-    public boolean comprovarDuplicat(){
-        
-    }
-    
-    public void setViewStatus(){
-    
-    }
-    
-    public void iniciarStreaming(){
-        
-    }
-    
-    public void finalitzarStreaming(){
-        
-    }
-    
-    public void incrementarFactura(){
-        
+        // Finalitza el streaming del capitol numero numCap
     }
     
     public String mostrarCataleg(){
