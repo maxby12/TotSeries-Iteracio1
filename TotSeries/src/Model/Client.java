@@ -20,7 +20,7 @@ public class Client {
     private Date _dataNaixament;
     private View _viewStatus;
     Factura _factura;
-
+    
     
     public Client(String userName, String password, String nom, String nacionalitat, Date dataNaixament) {
         this._nom = nom;

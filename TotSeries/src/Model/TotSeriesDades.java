@@ -84,17 +84,7 @@ public class TotSeriesDades {
         }
         return status;
     }
-    
-    public boolean comprovarDuplicat(String userName){
-        Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
-        boolean found = false;
-        while (llistaClientsIterator.hasNext() && !found) {
-            Client c = llistaClientsIterator.next();
-            found = (c.getUsername()).equals(userName);
-        }
-        return found;
-    }
-    
+
     public void iniciarStreaming(String userName, int numCap){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
@@ -125,7 +115,7 @@ public class TotSeriesDades {
     public String mostrarCataleg(){
         return this._cataleg.toString();
     }
-    /*
+
     public String mostrarSerie(int numSerie){
         
     }
@@ -133,7 +123,7 @@ public class TotSeriesDades {
     public String mostrarTemporada(int numTemp){
         
     }
-    */
+
     public boolean comprovarClient(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
