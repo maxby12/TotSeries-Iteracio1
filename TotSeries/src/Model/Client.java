@@ -15,7 +15,7 @@ public class Client {
     private String _password;
     private String _nacionalitat;
     private boolean _viewStatus; 
-    private Factura _factura;
+    Factura _factura;
     
 
     public String getNom() {

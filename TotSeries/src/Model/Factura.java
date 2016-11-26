@@ -19,6 +19,10 @@ public class Factura {
     public void incrementar() {
         this._valor = _valor + 1;
     }
+    
+    public void incrementarVIP() {
+        this._valor = _valor + 0.9;
+    }
 
     @Override
     public String toString() {

@@ -5,10 +5,120 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Albert
  */
 public class TotSeriesDades {
+    private ArrayList<ClientVIP> _llistaClientsVIP;
+    private ArrayList<Client> _llistaClients;
+    private Cataleg _cataleg;
+    private Administrador _admin;
+    private Data _diaCobro;
+
+    public TotSeriesDades(Data _diaCobro) {
+        this._llistaClientsVIP = new ArrayList<ClientVIP>() ;
+        this._llistaClients = new ArrayList<Client>();
+        this._cataleg = new Cataleg();
+        this._admin = new Administrador();
+        this._diaCobro = _diaCobro;
+        //hem de decidir com introduim la data
+    }
+    
+    
+
+    public ArrayList<ClientVIP> getLlistaClientsVIP() {
+        return _llistaClientsVIP;
+    }
+
+    public void setLlistaClientsVIP(ArrayList<ClientVIP> _llistaClientsVIP) {
+        this._llistaClientsVIP = _llistaClientsVIP;
+    }
+
+    public ArrayList<Client> getLlistaClients() {
+        return _llistaClients;
+    }
+
+    public void setLlistaClients(ArrayList<Client> _llistaClients) {
+        this._llistaClients = _llistaClients;
+    }
+
+    public Cataleg getCataleg() {
+        return _cataleg;
+    }
+
+    public void setCataleg(Cataleg _cataleg) {
+        this._cataleg = _cataleg;
+    }
+
+    public Administrador getAdmin() {
+        return _admin;
+    }
+
+    public void setAdmin(Administrador _admin) {
+        this._admin = _admin;
+    }
+
+    public Data getDiaCobro() {
+        return _diaCobro;
+    }
+
+    public void setDiaCobro(Data _diaCobro) {
+        this._diaCobro = _diaCobro;
+    }
+    
+    public void addClient(){
+        
+    }
+    
+    public boolean getViewStatus(){
+        
+    }
+    
+    public boolean comprovarDuplicat(){
+        
+    }
+    
+    public void setViewStatus(){
+    
+    }
+    
+    public void iniciarStreaming(){
+        
+    }
+    
+    public void finalitzarStreaming(){
+        
+    }
+    
+    public void incrementarFactura(){
+        
+    }
+    
+    public String mostrarCataleg(){
+        
+    }
+    
+    public String mostrarSerie(){
+        
+    }
+    
+    public String mostrarTemporada(){
+        
+    }
+    
+    public boolean comprovarClient(){
+        
+    }
+    
+    public Capitol getCapitol(){
+        
+    }
+    
+    public String topCap(){
+        
+    }
     
 }

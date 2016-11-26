@@ -11,12 +11,17 @@ package Model;
  */
 public class ClientVIP extends Client {
 
-    @Override
+    public ClientVIP() {
+    }
+    
+     @Override
     public String toString() {
         return "ClientVIP{" + '}';
     }
-
-    public ClientVIP() {
+    
+    @Override
+    public void incrementarFactura(){
+        this._factura.incrementarVIP();
     }
     
 }

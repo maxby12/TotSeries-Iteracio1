@@ -5,10 +5,23 @@
  */
 package Model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Albert
  */
 public class Cataleg {
+    private ArrayList<Serie> _series;
+    private RankingCapitols _topCapitols;
+    private RankingSeries _topMillorsSeries;
+    private RankingSeries _topPitjorsSeries;
+
+    public Cataleg() {
+        this._series = new ArrayList<Serie>();
+        this._topCapitols = new RankingCapitols();
+        this._topMillorsSeries = new RankingSeries();
+        this._topPitjorsSeries = new RankingSeries();
+    }
     
 }
