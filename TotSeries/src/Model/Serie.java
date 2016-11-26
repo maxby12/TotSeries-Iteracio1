@@ -94,11 +94,11 @@ public class Serie {
         this._productora = _productora;
     }
 
-    public Capitol getCapitol(numTemp,numCap){
+    public Capitol getCapitol(int numTemp, int numCap){
         return this._temporades.getTemporada(numTemp).getCapitol(numCap);
     }
     
-    public String mostrarTemporada(numTemp){
+    public String mostrarTemporada(int numTemp){
         return this._temporades.getTemporada(numTemp).toString();
     }
 

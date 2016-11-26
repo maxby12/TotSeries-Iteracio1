@@ -23,5 +23,10 @@ public class Cataleg {
         this._topMillorsSeries = new RankingSeries();
         this._topPitjorsSeries = new RankingSeries();
     }
-    
+
+    @Override
+    public String toString() {
+        return "Cataleg{" + "_series=" + _series + '}';
+    }
+
 }

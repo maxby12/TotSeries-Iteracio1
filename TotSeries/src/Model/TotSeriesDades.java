@@ -90,7 +90,7 @@ public class TotSeriesDades {
         boolean found = false;
         while (llistaClientsIterator.hasNext() && !found) {
             Client c = llistaClientsIterator.next();
-            found = c.getUsername().equals(userName);
+            found = (c.getUsername()).equals(userName);
         }
         return found;
     }
@@ -123,7 +123,7 @@ public class TotSeriesDades {
     }
     
     public String mostrarCataleg(){
-        
+        return this._cataleg.toString();
     }
     
     public String mostrarSerie(){
@@ -134,8 +134,14 @@ public class TotSeriesDades {
         
     }
     
-    public boolean comprovarClient(){
-        
+    public boolean comprovarClient(String userName){
+        Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
+        boolean found = false;
+        while (llistaClientsIterator.hasNext() && !found) {
+            Client c = llistaClientsIterator.next();
+            found = (c.getUsername()).equals(userName);
+        }
+        return found;
     }
     
     public Capitol getCapitol(){
