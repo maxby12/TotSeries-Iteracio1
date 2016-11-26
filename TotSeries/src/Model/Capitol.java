@@ -5,6 +5,8 @@
  */
 package Model;
 
+import java.util.Date;
+
 /**
  *
  * @author Albert
@@ -16,13 +18,15 @@ public class Capitol {
     private String _idioma;
     private String _descripcio;
     private float _nota;
+    private Date _estrena;
 
-    public Capitol(String _nom, String _duracio, String _idioma, String _descripcio, float _nota) {
+    public Capitol(String _nom, String _duracio, String _idioma, String _descripcio, float _nota, Date _estrena) {
         this._nom = _nom;
         this._duracio = _duracio;
         this._idioma = _idioma;
         this._descripcio = _descripcio;
         this._nota = _nota;
+        this._estrena = _estrena;
     }
 
     @Override

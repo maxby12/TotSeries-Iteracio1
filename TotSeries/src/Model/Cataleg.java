@@ -22,7 +22,11 @@ public class Cataleg {
         this._topMillorsSeries = new RankingSeries();
         this._topPitjorsSeries = new RankingSeries();
     }
-
+    
+    public void addSerie(Serie s) {
+        this._series.add(s);
+    }
+    
     public RankingCapitols getTopCapitols() {
         return _topCapitols;
     }

@@ -3,11 +3,14 @@ package Controlador;
 import Model.Actor;
 import Model.Administrador;
 import Model.Artista;
+import Model.Capitol;
 import Model.Cataleg;
 import Model.Client;
 import Model.ClientVIP;
 import Model.Director;
 import Model.Productora;
+import Model.Serie;
+import Model.Temporada;
 import Model.Valoracio;
 import static java.lang.Integer.parseInt;
 import java.util.ArrayList;
@@ -23,8 +26,10 @@ public class TotSeriesDataManager {
         private ArrayList<Client> _llistaClients;
         private Cataleg _cataleg;
         private ArrayList<Administrador> _administradors;
-        private ArrayList<Productora> _productores;
-        private ArrayList<Artista> _artistes;
+        private Productora _prodActual;
+        private Artista _artistaActual;
+        private Serie _serieActual;
+        private Temporada _tempActual;
         
 	/* -------------------------------------------------------------------
 	 * Metodes a implementar per vosaltres. En aquests metodes creareu els
@@ -44,8 +49,6 @@ public class TotSeriesDataManager {
 	public void obtenirDades(String nomFitxer) {
                 this._llistaClients = new ArrayList<Client>();
                 this._administradors = new ArrayList<Administrador>();
-                this._productores = new ArrayList<Productora>();
-                this._artistes = new ArrayList<Artista>();
                 this._cataleg = new Cataleg();
 		TotSeriesXMLParser parser = new TotSeriesXMLParser(this);
 		parser.parse(nomFitxer);
@@ -61,14 +64,15 @@ public class TotSeriesDataManager {
 	
 	public void crearSerie(String id, String title, String desc) {		
 
-		/*  TODO: A partir d'aqui creeu el vostre objecte que contingui la informacio
-		 *  d'una nova serie.
-		 */
-
+            Serie s = new Serie(title, desc, 0, 0, null, null, null, null);
+            this._serieActual = s;
+            this._cataleg.addSerie(s);
+            /*
 		System.out.println("\nSerie amb ID: " + id);
 		System.out.println("--------------------------------------------------");
 		System.out.println("Titol: " + title);
 		System.out.println("Descripció: " + desc);
+            */
 	}
         
         /**
@@ -81,12 +85,15 @@ public class TotSeriesDataManager {
 	
 	public void crearTemporada(String numTemporada, String numEpisodis) {		
 
-		/*  TODO: A partir d'aqui creeu el vostre objecte que contingui la informacio
-		 *  d'una nova temporada.
-		 */
+            Temporada t = new Temporada(parseInt(numTemporada), parseInt(numEpisodis));
+            this._tempActual = t;
+            this._serieActual.addTemporada(t);
+            
 
+            /*
 		System.out.println("Temporada: " + numTemporada + " Numero Episodis: "+ numEpisodis);
                 System.out.println("--------------------------------------------------");
+            */
                 
 	}
         
@@ -102,17 +109,20 @@ public class TotSeriesDataManager {
 	 */
 	
 	public void crearEpisodi(String title, String duration, String idioma, String description, String data) {		
-
-		/*  TODO: A partir d'aqui creeu el vostre objecte que contingui la informacio
-		 *  d'una nou episodi.
-		 */
-
+            
+            String[] parts = data.split("/");
+            Date d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+            Capitol c = new Capitol(title, duration, idioma, description, 0f, d);
+            this._tempActual.addCapitol(c);
+            
+            /*
 		System.out.println("\nTitol: " + title);
                 System.out.println("--------------------------------------------------");
                 System.out.println("Duració; " + duration);
                 System.out.println("Data d'estrena: " + data);
                 System.out.println("Idioma: " + idioma);
                 System.out.println(description);
+            */
                 
 	}
 
@@ -128,14 +138,14 @@ public class TotSeriesDataManager {
 
 	public void crearArtista(String id, String nom, String tipus, String idSerie, String nacionalitat) {
             
-            Artista a;
             if (tipus.equals("actor")) {
-                a = new Actor(nom, nacionalitat, idSerie);
+                Actor a = new Actor(nom, nacionalitat, idSerie);
+                this._serieActual.addActor(a);
             }
             else {
-                a = new Director(nom, nacionalitat, idSerie);
+                Director d = new Director(nom, nacionalitat, idSerie);
+                this._serieActual.setDirector(d);
             }
-            this._artistes.add(a);
             /*
 		System.out.println("\nArtista amb ID: " + id);
 		System.out.println("--------------------------------------");
@@ -146,7 +156,7 @@ public class TotSeriesDataManager {
             */
 	}
 	
-		
+	
 	/**
 	 * Crea productora del fitxer XML
 	 * 
@@ -157,7 +167,7 @@ public class TotSeriesDataManager {
 	public void crearProductora (String id, String nom, String idSerie) {
             
             Productora p = new Productora(nom, id, "1990", idSerie);
-            this._productores.add(p);
+            this._serieActual.setProductora(p);
             
             /*
 		System.out.println("\nProductora amb ID: " + id);

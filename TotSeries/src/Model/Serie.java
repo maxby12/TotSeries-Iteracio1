@@ -15,18 +15,16 @@ public class Serie {
     private String _titol;
     private String _despcripcio;
     private int _nTemporades;
-    private int _nCapTemporada;
     private float _nota;
     private ArrayList<Temporada> _temporades;
     private Director _director;
     private ArrayList<Actor> _actors;
     private Productora _productora;
 
-    public Serie(String _titol, String _despcripcio, int _nTemporades, int _nCapTemporada, float _nota, ArrayList<Temporada> _temporades, Director _director, ArrayList<Actor> _actors, Productora _productora) {
+    public Serie(String _titol, String _despcripcio, int _nTemporades, float _nota, ArrayList<Temporada> _temporades, Director _director, ArrayList<Actor> _actors, Productora _productora) {
         this._titol = _titol;
         this._despcripcio = _despcripcio;
         this._nTemporades = _nTemporades;
-        this._nCapTemporada = _nCapTemporada;
         this._nota = _nota;
         this._temporades = _temporades;
         this._director = _director;
@@ -34,7 +32,14 @@ public class Serie {
         this._productora = _productora;
     }
     
+    public void addTemporada(Temporada t) {
+        this._temporades.add(t);
+        this._nTemporades++;
+    }
     
+    public void addActor(Actor a) {
+        this._actors.add(a);
+    }
     
     public String getTitol() {
         return _titol;
@@ -59,15 +64,7 @@ public class Serie {
     public void setnTemporades(int _nTemporades) {
         this._nTemporades = _nTemporades;
     }
-
-    public int getnCapTemporada() {
-        return _nCapTemporada;
-    }
-
-    public void setnCapTemporada(int _nCapTemporada) {
-        this._nCapTemporada = _nCapTemporada;
-    }
-
+    
     public float getNota() {
         return _nota;
     }
@@ -118,7 +115,7 @@ public class Serie {
     
     @Override
     public String toString() {
-        return "Serie{" + "_titol=" + _titol + ", _despcripcio=" + _despcripcio + ", _nTemporades=" + _nTemporades + ", _nCapTemporada=" + _nCapTemporada + ", _nota=" + _nota + ", _director=" + _director + ", _productora=" + _productora + '}';
+        return "Serie{" + "_titol=" + _titol + ", _despcripcio=" + _despcripcio + ", _nTemporades=" + _nTemporades + ", _nota=" + _nota + ", _director=" + _director + ", _productora=" + _productora + '}';
     }
 
 }
