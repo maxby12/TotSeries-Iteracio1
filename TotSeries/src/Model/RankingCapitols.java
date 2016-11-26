@@ -14,6 +14,10 @@ import java.util.ArrayList;
 public class RankingCapitols {
     private ArrayList<Capitol> _capitols;
 
+    public RankingCapitols() {
+        this._capitols = new ArrayList<Capitol>(10);
+    }
+
     @Override
     public String toString() {
         return "RankingCapitols{" + "_capitols=" + _capitols+ '}';

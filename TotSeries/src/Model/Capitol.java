@@ -5,6 +5,7 @@
  */
 package Model;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -17,6 +18,7 @@ public class Capitol {
     private String _duracio;
     private String _idioma;
     private String _descripcio;
+    private ArrayList<Valoracio> _llistaValoracions;
     private float _nota;
     private Date _estrena;
 
@@ -25,10 +27,18 @@ public class Capitol {
         this._duracio = _duracio;
         this._idioma = _idioma;
         this._descripcio = _descripcio;
+        this._llistaValoracions = new ArrayList<Valoracio>();
         this._nota = _nota;
         this._estrena = _estrena;
     }
 
+    public void addValoracio(Valoracio valoracio){
+        this._llistaValoracions.add(valoracio);
+        //s'ha de fer la nota mitjana
+        //aixo implica funcions extres a temporada i serie
+        //ja ho implementarem a la seguen iteracio
+    }
+    
     @Override
     public String toString() {
         return "Capitol{" + "_nom=" + _nom + ", _duracio=" + _duracio + ", _idioma=" + _idioma + ", _descripcio=" + _descripcio + ", _nota=" + _nota + '}';

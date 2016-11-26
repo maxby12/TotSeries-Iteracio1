@@ -36,4 +36,19 @@ public class Cataleg {
         return "Cataleg{" + "_series=" + _series + '}';
     }
 
+    public Capitol getCapitol(int numCap){
+        
+    }
+    
+    public String mostrarSerie(int numS){
+        
+    }
+    
+    public String mostrarTemporada(int numTemp){
+        
+    }
+    
+    public String mostrarTopCap(){
+        return this._topCapitols.toString();
+    }
 }

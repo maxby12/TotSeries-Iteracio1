@@ -112,6 +112,10 @@ public class TotSeriesDades {
         // Finalitza el streaming del capitol numero numCap
     }
     
+    public void incrementarFactura(){
+        
+    }
+    
     public String mostrarCataleg(){
         return this._cataleg.toString();
     }
@@ -121,6 +125,10 @@ public class TotSeriesDades {
     }
     
     public String mostrarTemporada(int numTemp){
+        
+    }
+    
+    public String getCapitol(int numCap){
         
     }
     

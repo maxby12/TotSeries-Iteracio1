@@ -105,8 +105,8 @@ public class Serie {
         this._productora = _productora;
     }
 
-    public Capitol getCapitol(int numTemp, int numCap){
-        return this._temporades.get(numTemp).getCapitol(numCap);
+    public Capitol getCapitol(int numCap){
+       // return this._temporades.get(numTemp).getCapitol(numCap);
     }
     
     public String mostrarTemporada(int numTemp){
