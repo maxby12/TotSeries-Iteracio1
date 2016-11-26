@@ -14,11 +14,13 @@ public class Productora {
     private String _nom;
     private String _id;
     private String _anyCreacio;
+    private String _idSerie;
 
-    public Productora(String _nom, String _id, String _anyCreacio) {
+    public Productora(String _nom, String _id, String _anyCreacio, String _idSerie) {
         this._nom = _nom;
         this._id = _id;
         this._anyCreacio = _anyCreacio;
+        this._idSerie = _idSerie;
     }
 
     public String getNom() {
@@ -32,12 +34,17 @@ public class Productora {
     public String getAnyCreacio() {
         return _anyCreacio;
     }
-    
-    
-    
+
+    public String getIdSerie() {
+        return _idSerie;
+    }
+
     @Override
     public String toString() {
-        return "Productora{" + "_nom=" + _nom + ", _id=" + _id + ", _anyCreacio=" + _anyCreacio + '}';
+        return "Productora{" + "_nom=" + _nom + ", _id=" + _id + ", _anyCreacio=" + _anyCreacio + ", _idSerie=" + _idSerie + '}';
     }
+    
+    
+    
 
 }

@@ -18,7 +18,6 @@ public class Cataleg {
     private RankingSeries _topPitjorsSeries;
 
     public Cataleg() {
-        this._series = new ArrayList<Serie>();
         this._topCapitols = new RankingCapitols();
         this._topMillorsSeries = new RankingSeries();
         this._topPitjorsSeries = new RankingSeries();

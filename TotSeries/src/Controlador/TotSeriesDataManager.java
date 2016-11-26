@@ -1,5 +1,18 @@
 package Controlador;
 
+import Model.Actor;
+import Model.Administrador;
+import Model.Artista;
+import Model.Cataleg;
+import Model.Client;
+import Model.ClientVIP;
+import Model.Director;
+import Model.Productora;
+import Model.Valoracio;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Data manager per TotSeries. Crea les estructures de dades necessàries 
  * per a manegar l'aplicació de gestió de TotSeries.
@@ -7,6 +20,12 @@ package Controlador;
  */
 public class TotSeriesDataManager {
     
+        private ArrayList<Client> _llistaClients;
+        private Cataleg _cataleg;
+        private ArrayList<Administrador> _administradors;
+        private ArrayList<Productora> _productores;
+        private ArrayList<Artista> _artistes;
+        
 	/* -------------------------------------------------------------------
 	 * Metodes a implementar per vosaltres. En aquests metodes creareu els
 	 * vostres objectes a partir de la informacio obtinguda del fitxer XML
@@ -23,6 +42,11 @@ public class TotSeriesDataManager {
 	 * @param nomFitxer ruta del fitxer XML del que obtenir les dades
 	 */
 	public void obtenirDades(String nomFitxer) {
+                this._llistaClients = new ArrayList<Client>();
+                this._administradors = new ArrayList<Administrador>();
+                this._productores = new ArrayList<Productora>();
+                this._artistes = new ArrayList<Artista>();
+                this._cataleg = new Cataleg();
 		TotSeriesXMLParser parser = new TotSeriesXMLParser(this);
 		parser.parse(nomFitxer);
 	}
@@ -103,16 +127,23 @@ public class TotSeriesDataManager {
 	 */
 
 	public void crearArtista(String id, String nom, String tipus, String idSerie, String nacionalitat) {
-
-		/* TODO: Aqui feu el necessari per a crear els artistes per a la serie
-		 */
-
+            
+            Artista a;
+            if (tipus.equals("actor")) {
+                a = new Actor(nom, nacionalitat, idSerie);
+            }
+            else {
+                a = new Director(nom, nacionalitat, idSerie);
+            }
+            this._artistes.add(a);
+            /*
 		System.out.println("\nArtista amb ID: " + id);
 		System.out.println("--------------------------------------");
 		System.out.println("Nom: " + nom);
 		System.out.println("Tipus: " + tipus);
 		System.out.println("Serie ID: " + idSerie);
                 System.out.println("Nacionalitat: " + nacionalitat);
+            */
 	}
 	
 		
@@ -124,14 +155,16 @@ public class TotSeriesDataManager {
 	 * @param idSerie id de la serie que va fer. El podeu utilitzar o no
 	 */
 	public void crearProductora (String id, String nom, String idSerie) {
-
-		/* TODO: Aqui feu el necessari per a crear les productores per a les series
-		 */
-
+            
+            Productora p = new Productora(nom, id, "1990", idSerie);
+            this._productores.add(p);
+            
+            /*
 		System.out.println("\nProductora amb ID: " + id);
 		System.out.println("--------------------------------------");
 		System.out.println("Nom: " + nom);
 		System.out.println("Serie ID: " + idSerie);
+            */
 	}
 
 	/**
@@ -145,15 +178,20 @@ public class TotSeriesDataManager {
 	 */
 	
 	public void crearValoracio(String id, String client, String episodi, String puntuacio, String data) {
-
-		/* TODO: A partir d'aqui creeu la valoracio
-		 */
+            
+            String[] parts = data.split("/");
+            int n = parseInt(puntuacio);
+            Date d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
+            Valoracio v = new Valoracio(n, d);
+            
+            /*
 		System.out.println("\nValoracio amb ID: " + id);
 		System.out.println("--------------------------------------");
 		System.out.println("Client: " + client);
 		System.out.println("Episodi: " + episodi);
 		System.out.println("Puntuacio: " + puntuacio);
 		System.out.println("Data: " + data);
+            */
 	}
 
 	/**
@@ -166,16 +204,18 @@ public class TotSeriesDataManager {
 	 */
 	public void crearAdmin(String id, String nom, String usuari, String password) {
 
-		/* TODO: Creeu aqui el vostre admin
-		 */
 
+            ClientVIP c = new ClientVIP(usuari, password, nom, "Espanya", new Date(1,2,1990));
+            this._llistaClients.add(c);
+            /*
 		System.out.println("\nAdmin ID: " + id);
 		System.out.println("-----------------");
 		System.out.println("Nom: " + nom);
 		System.out.println("Usuari: " + usuari);
 		System.out.println("Password: " + password);
+            */
 	}
-
+        
 	/**
 	 * Crea un nou client a partir de la informacio obtinguda del fitxer XML
 	 * 
@@ -190,9 +230,10 @@ public class TotSeriesDataManager {
 
 	public void crearClient(String id, String nom, String dni, String adreca, String usuari, String password, String vip) {
 
-		/* TODO: Creeu aqui el vostre client
-		 */
 
+            Client c = new Client(usuari, password, nom, "Espanya", new Date(1,2,1990));
+            this._llistaClients.add(c);
+            /*
 		System.out.println("\nClient ID: " + id);
 		System.out.println("-----------------");
 		System.out.println("Nom: " + nom);
@@ -201,6 +242,6 @@ public class TotSeriesDataManager {
 		System.out.println("Adreça: " + adreca);
 		System.out.println("Password: " + password);
 		System.out.println("Es VIP: " + vip);
-		
+            */
 	}
 }

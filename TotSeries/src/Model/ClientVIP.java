@@ -17,9 +17,9 @@ public class ClientVIP extends Client {
         super(userName, password, nom, nacionalitat, dataNaixament);
     }
     
-     @Override
+    @Override
     public String toString() {
-        return "ClientVIP{" + '}';
+        return "ClientVIP{" + "_nom=" + this.getNom() + ", _username=" + this.getUsername() + ", _nacionalitat=" + this.getNacionalitat() + ", _dataNaixament=" + this.getDataNaixament() + ", _viewStatus=" + this.getViewStatus() + ", _factura=" + this.getFactura() + '}';
     }
     
     @Override

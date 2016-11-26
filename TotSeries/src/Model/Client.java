@@ -63,10 +63,10 @@ public class Client {
     public void setNacionalitat(String _nacionalitat) {
         this._nacionalitat = _nacionalitat;
     }
-   
+
     @Override
     public String toString() {
-        return "Client{" + "_nom=" + _nom + ", _username=" + _username + ", _password=" + _password + ", _nacionalitat=" + _nacionalitat + '}';
+        return "Client{" + "_nom=" + _nom + ", _username=" + _username + ", _nacionalitat=" + _nacionalitat + ", _dataNaixament=" + _dataNaixament + ", _viewStatus=" + _viewStatus + ", _factura=" + _factura + '}';
     }
     
     public void incrementarFactura(){
@@ -80,4 +80,23 @@ public class Client {
     public void setViewStatus(View _viewStatus) {
         this._viewStatus = _viewStatus;
     }
+
+    public Date getDataNaixament() {
+        return _dataNaixament;
+    }
+
+    public void setDataNaixament(Date _dataNaixament) {
+        this._dataNaixament = _dataNaixament;
+    }
+
+    public Factura getFactura() {
+        return _factura;
+    }
+
+    public void setFactura(Factura _factura) {
+        this._factura = _factura;
+    }
+    
+    
+    
 }

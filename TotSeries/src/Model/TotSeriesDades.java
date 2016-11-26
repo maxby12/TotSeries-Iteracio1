@@ -115,7 +115,7 @@ public class TotSeriesDades {
     public String mostrarCataleg(){
         return this._cataleg.toString();
     }
-
+    
     public String mostrarSerie(int numSerie){
         
     }

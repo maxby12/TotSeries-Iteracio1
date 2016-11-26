@@ -11,13 +11,13 @@ package Model;
  */
 public class Actor extends Artista {
 
-    public Actor(String _nom, String _nacionalitat) {
-        super(_nom, _nacionalitat);
+    public Actor(String _nom, String _nacionalitat, String _idSerie) {
+        super(_nom, _nacionalitat, _idSerie);
     }
 
     @Override
     public String toString() {
-        return "Actor{ Nom=" + this.getNom() + ", Nacionalitat=" + this.getNacionalitat() + '}';
+        return "Actor{ Nom=" + this.getNom() + ", Nacionalitat=" + this.getNacionalitat() + ", IdSerie=" + this.getIdSerie() + '}';
     }
 
 }

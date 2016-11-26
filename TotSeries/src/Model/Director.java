@@ -11,13 +11,13 @@ package Model;
  */
 public class Director extends Artista {
 
-    public Director(String nom, String nacionalitat) {
-        super(nom, nacionalitat);
+    public Director(String nom, String nacionalitat, String _idSerie) {
+        super(nom, nacionalitat, _idSerie);
     }
 
     @Override
     public String toString() {
-        return "Director{ Nom=" + this.getNom() + ", Nacionalitat=" + this.getNacionalitat() + '}';
+        return "Director{ Nom=" + this.getNom() + ", Nacionalitat=" + this.getNacionalitat() + ", IdSerie=" + this.getIdSerie() + '}';
     }
     
 }
