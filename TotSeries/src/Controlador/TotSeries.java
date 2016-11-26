@@ -13,12 +13,12 @@ import java.util.Timer;
  *
  * @author Albert
  */
-public class CtrlTotSeries {
+public class TotSeries {
     
     private TotSeriesDades _data;
     
     
-    public CtrlTotSeries(TotSeriesDades data, String rutaXML) {
+    public TotSeries(TotSeriesDades data, String rutaXML) {
         this._data = data;
         TotSeriesDataManager dataManager = new TotSeriesDataManager();
         dataManager.obtenirDades(rutaXML);

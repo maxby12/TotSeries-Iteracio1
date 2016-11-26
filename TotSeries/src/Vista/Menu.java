@@ -5,7 +5,7 @@
  */
 package Vista;
 
-import Controlador.CtrlTotSeries;
+import Controlador.TotSeries;
 import java.util.Date;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -18,7 +18,7 @@ public class Menu {
     
     /** Utilitat per llegir línies senceres de la pantalla */
     private static final Scanner sc = new Scanner(System.in);
-    private CtrlTotSeries _ctrl;
+    private TotSeries _ctrl;
     
     
     static private String[] descMenuPrincipal={"Mirar Catàleg",
@@ -29,7 +29,7 @@ public class Menu {
     
     // METODES PUBLICS
     
-    public Menu(CtrlTotSeries ctrl) {
+    public Menu(TotSeries ctrl) {
         this._ctrl = ctrl;
     }
     
