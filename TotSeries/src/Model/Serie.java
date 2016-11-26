@@ -22,6 +22,20 @@ public class Serie {
     private ArrayList<Actor> _actors;
     private Productora _productora;
 
+    public Serie(String _titol, String _despcripcio, int _nTemporades, int _nCapTemporada, float _nota, ArrayList<Temporada> _temporades, Director _director, ArrayList<Actor> _actors, Productora _productora) {
+        this._titol = _titol;
+        this._despcripcio = _despcripcio;
+        this._nTemporades = _nTemporades;
+        this._nCapTemporada = _nCapTemporada;
+        this._nota = _nota;
+        this._temporades = _temporades;
+        this._director = _director;
+        this._actors = _actors;
+        this._productora = _productora;
+    }
+    
+    
+    
     public String getTitol() {
         return _titol;
     }
@@ -78,11 +92,11 @@ public class Serie {
         this._director = _director;
     }
 
-    public ArrayList<actor> getActors() {
+    public ArrayList<Actor> getActors() {
         return _actors;
     }
 
-    public void setActors(ArrayList<actor> _actors) {
+    public void setActors(ArrayList<Actor> _actors) {
         this._actors = _actors;
     }
 
@@ -95,17 +109,16 @@ public class Serie {
     }
 
     public Capitol getCapitol(int numTemp, int numCap){
-        return this._temporades.getTemporada(numTemp).getCapitol(numCap);
+        return this._temporades.get(numTemp).getCapitol(numCap);
     }
     
     public String mostrarTemporada(int numTemp){
-        return this._temporades.getTemporada(numTemp).toString();
+        return this._temporades.get(numTemp).toString();
     }
-
+    
     @Override
     public String toString() {
         return "Serie{" + "_titol=" + _titol + ", _despcripcio=" + _despcripcio + ", _nTemporades=" + _nTemporades + ", _nCapTemporada=" + _nCapTemporada + ", _nota=" + _nota + ", _director=" + _director + ", _productora=" + _productora + '}';
     }
-    
-    
+
 }
