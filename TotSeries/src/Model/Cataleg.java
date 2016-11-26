@@ -24,6 +24,10 @@ public class Cataleg {
         this._topPitjorsSeries = new RankingSeries();
     }
 
+    public RankingCapitols getTopCapitols() {
+        return _topCapitols;
+    }
+    
     @Override
     public String toString() {
         return "Cataleg{" + "_series=" + _series + '}';

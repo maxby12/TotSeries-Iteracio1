@@ -144,12 +144,8 @@ public class TotSeriesDades {
         return found;
     }
     
-    public Capitol getCapitol(){
-        
-    }
-    
-    public String topCap(){
-        
+    public String mostrarTopCap(){
+        return this._cataleg.getTopCapitols().toString();
     }
     
 }
