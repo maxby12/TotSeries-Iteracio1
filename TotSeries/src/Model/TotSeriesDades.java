@@ -126,11 +126,11 @@ public class TotSeriesDades {
         return this._cataleg.toString();
     }
     
-    public String mostrarSerie(){
+    public String mostrarSerie(int numSerie){
         
     }
     
-    public String mostrarTemporada(){
+    public String mostrarTemporada(int numTemp){
         
     }
     

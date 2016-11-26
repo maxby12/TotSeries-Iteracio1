@@ -19,9 +19,11 @@ public class TotSeries {
     private Timer timer;
     
     
-    public TotSeries(TotSeriesDades data) {
+    public TotSeries(TotSeriesDades data, String rutaXML) {
         this.timer = new Timer();
         this._data = data;
+        TotSeriesDataManager dataManager = new TotSeriesDataManager();
+        dataManager.obtenirDades(rutaXML);
     }
     
     // METODES DE CASSOS D'US

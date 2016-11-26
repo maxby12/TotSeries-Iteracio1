@@ -26,8 +26,8 @@ public class TotSeriesApp {
         
         // Creem el Model amb la data de pagament
         TotSeriesDades data = new TotSeriesDades(dataPagament);
-        // Creem el Controlador amb el Model
-        TotSeries ctrl = new TotSeries(data);
+        // Creem el Controlador amb el Model i la ruta del XML amb les dades
+        TotSeries ctrl = new TotSeries(data,"data/TotSeries.xml");
         // Creem la Vista amb el Controlador
         Menu vista = new Menu(ctrl);
         
