@@ -124,11 +124,11 @@ public class TotSeriesDades {
     public String mostrarTemporada(int numTemp){
         return this._cataleg.mostrarTemporada(numTemp);
     }
-    
+    /*
     public String getCapitol(int numCap){
         
     }
-    
+    */
     public boolean comprovarClient(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;

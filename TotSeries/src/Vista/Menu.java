@@ -238,4 +238,34 @@ public class Menu {
         } while(opcio!=0);
     }
     
+    
+    private void menuRegistreUsuari() {
+        String userName;
+        String password;
+        String nom;
+        String nacionalitat;
+        Date dataNaixament;
+        boolean noDuplicat;
+        
+        // Creem el menú
+        
+        escriu("------------------\n  Registre d'usuari \n------------------");
+        escriu("entra nom d'usuari");
+        userName = llegeixString();
+        escriu("entra contrasenya");
+        password = llegeixString();
+        escriu("entra nom");
+        nom = llegeixString();
+        escriu("entra nacionalitat");
+        nacionalitat = llegeixString();
+        escriu("data de naixament:");
+        dataNaixament = llegeixDataNaixament();
+        noDuplicat = this._ctrl.registrarUsuari(userName,password,nom,nacionalitat,dataNaixament);
+         
+        if(noDuplicat){
+            escriu("");
+        }
+      
+    }
+    
 }

@@ -42,11 +42,11 @@ public class Cataleg {
         }
         return c;
     }
-    
+    /*
     public Capitol getCapitol(int numCap){
         
     }
-    
+    */
     public String mostrarTemporada(int numTemp){
         Serie s = this._series.get(numTemp%1000);
         return s.mostrarTemporada(numTemp/1000);
