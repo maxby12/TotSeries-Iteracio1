@@ -61,5 +61,13 @@ public class TotSeries {
     public void valorarCapitol(String userName, int numCap) {
         
     }
+
+    public String mostrarTemporada(int numTemp) {
+        return this._data.mostrarTemporada(numTemp);
+    }
+
+    public String mostrarSerie(int numSerie) {
+        return this._data.mostrarSerie(numSerie);
+    }
     
 }

@@ -116,19 +116,19 @@ public class TotSeriesDades {
     public String mostrarCataleg(){
         return this._cataleg.toString();
     }
-    /*
+    
     public String mostrarSerie(int numSerie){
-        
+        return this._cataleg.mostrarSerie(numSerie);
     }
     
     public String mostrarTemporada(int numTemp){
-        
+        return this._cataleg.mostrarTemporada(numTemp);
     }
     
     public String getCapitol(int numCap){
         
     }
-    */
+    
     public boolean comprovarClient(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;

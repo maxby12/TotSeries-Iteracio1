@@ -39,7 +39,7 @@ public class Menu {
      * @param s text a mostrar.
      */
     public static void escriu(String s) {
-        System.out.print(s);
+        System.out.println(s);
     }
 
     /**
@@ -48,7 +48,7 @@ public class Menu {
      * @param i enter a mostrar.
      */
     public static void escriu(int i) {
-        System.out.print(i);
+        System.out.println(i);
     }
 
     /**
@@ -57,7 +57,7 @@ public class Menu {
      * @param f nombre flotant a mostrar.
      */
     public static void escriu(float f) {
-        System.out.print(f);
+        System.out.println(f);
     }
 
     /**
@@ -132,33 +132,28 @@ public class Menu {
             // Mostrem les opcions del menú
             mostrarMenuP();
             
-            try {
-                //Demanem una opcio
-                opcio = sc.nextInt();
+            //Demanem una opcio
+            opcio = llegeixInt();
 
-                // MENU PRINCIPAL
-                switch(opcio) {
-                    case 1:
-                        this.menuCataleg("");
-                        break;
+            // MENU PRINCIPAL
+            switch(opcio) {
+                case 1:
+                    this.menuCataleg("");
+                    break;
 
-                    case 2:
-                        
-                        break;
+                case 2:
 
-                    case 3:
-                        
-                        break;
-                        
-                    case 4:
-                        System.out.println("Fin de sessión");
-                        break;
-                } // FI MENU PRINCIPAL
-            }
-            catch(InputMismatchException exc) {
-                System.out.println("Valor introducido erronio!");
-                sc.next(); // Això passa la excepció
-            }
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+                    escriu("Fi de sessió");
+                    break;
+            } // FI MENU PRINCIPAL
+
         } while(opcio!=4);
         
     }
@@ -169,7 +164,7 @@ public class Menu {
 
     private void mostrarMenuP() {
         int i = 1;
-        System.out.println("------------------\n  MENU PRINCIPAL\n------------------");
+        escriu("------------------\n  MENU PRINCIPAL\n------------------");
         for (String s : descMenuPrincipal) {
             System.out.println(i+": "+s);
             i++;
@@ -178,16 +173,69 @@ public class Menu {
     
     private void menuCataleg(String userName) {
         String llistaSeries = this._ctrl.mirarCataleg(userName);
-        escriu(llistaSeries);
+        int numSeries = llistaSeries.split("\n").length + 1;
+        
+        // Creem el menú
+        int opcio = 1;
+        
+        do {
+            // Mostrem les opcions del menú
+            escriu("------------------\n  MENU CATALEG\n------------------");
+            escriu("0 : Tornar Menu Principal");
+            escriu(llistaSeries);
+
+            opcio = llegeixInt();
+
+            if (opcio > 0 && opcio < numSeries) {
+                menuSerie(opcio-1);
+            }
+
+        } while(opcio!=0);
     }
     
-    
-    private void retornMenuSerie() {
+    private void menuSerie(int numSerie) {
+        String llistaTemporades = this._ctrl.mostrarSerie(numSerie);
+        int numTemp = llistaTemporades.split("\n").length - 1;
+        // Creem el menú principal
+        int opcio = 1;
         
+        do {
+            // Mostrem les opcions del menú
+            escriu("------------------\n  MENU SERIE\n------------------");
+            escriu(llistaTemporades);
+
+            //Demanem una opcio
+            opcio = llegeixInt();
+
+            // MENU PRINCIPAL
+            if (opcio > 0 && opcio < numTemp) {
+                menuTemporada(1000*(opcio-1) + numSerie);
+            }
+            
+        } while(opcio!=0);
     }
     
-    private void retornMenuCataleg() {
+    private void menuTemporada(int numTemp) {
+        String llistaCapitols = this._ctrl.mostrarTemporada(numTemp);
+        int numCapitols = llistaCapitols.split("\n").length + 1;
+        // Creem el menú principal
+        int opcio = 1;
         
+        do {
+            // Mostrem les opcions del menú
+            escriu("------------------\n  MENU TEMPORADA\n------------------");
+            escriu("0 : Tornar Menu Serie");
+            escriu(llistaCapitols);
+
+            //Demanem una opcio
+            opcio = llegeixInt();
+            
+            // MENU PRINCIPAL
+            if (opcio > 0 && opcio < numCapitols) {
+                // AQUI VA SELECCIONAR CAPITOL I VISUALITZARLO
+            }
+
+        } while(opcio!=0);
     }
     
 }

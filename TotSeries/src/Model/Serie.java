@@ -112,7 +112,7 @@ public class Serie {
     }
     */
     public String mostrarTemporada(int numTemp){
-        return this._temporades.get(numTemp).toString();
+        return this._temporades.get(numTemp).mostrarTemporada();
     }
     
     @Override

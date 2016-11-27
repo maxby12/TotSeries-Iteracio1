@@ -63,6 +63,16 @@ public class Temporada {
         return _capitols.get(numCap);
     }
     
+    public String mostrarTemporada() {
+        String st = "";
+        int i = 1;
+        for (Capitol c : this._capitols){
+            st = st + i + " : " + c.toString() + "\n";
+            i++;
+        }
+        return st;
+    }
+    
     @Override
     public String toString() {
         return "Temporada{" + "_num=" + _num + ", _nota=" + _nota + '}';

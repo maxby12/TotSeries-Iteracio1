@@ -35,24 +35,34 @@ public class Cataleg {
     @Override
     public String toString() {
         String c = "";
+        int i = 1;
         for (Serie s : this._series) {
-            c = c + s.toString() + "\n";
+            c = c + i + " : " + s.toString() + "\n";
+            i++;
         }
         return c;
     }
-/*
+    
     public Capitol getCapitol(int numCap){
         
     }
     
-    public String mostrarSerie(int numS){
-        
+    public String mostrarTemporada(int numTemp){
+        Serie s = this._series.get(numTemp%1000);
+        return s.mostrarTemporada(numTemp/1000);
     }
     
-    public String mostrarTemporada(int numTemp){
-        
+    public String mostrarSerie(int numSerie) {
+        Serie s = this._series.get(numSerie);
+        String st = s.toString() + "\n0 : Tornar Menu Cataleg\n";
+        int i = 1;
+        for (Temporada t : s.getTemporades()) {
+            st = st + i + " : " + t.toString() + "\n";
+            i++;
+        }
+        return st;
     }
-    */
+    
     public String mostrarTopCap(){
         return this._topCapitols.toString();
     }
