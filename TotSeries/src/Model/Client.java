@@ -6,6 +6,7 @@
 package Model;
 
 import Model.TotSeriesDades.View;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -18,6 +19,7 @@ public class Client {
     private String _password;
     private String _nacionalitat;
     private Date _dataNaixament;
+    private ArrayList<Valoracio> _valoracions;
     private View _viewStatus;
     Factura _factura;
     
@@ -30,6 +32,7 @@ public class Client {
         this._dataNaixament = dataNaixament;
         this._viewStatus = View.NOEMISSIO;
         this._factura = new Factura(0.0f);
+        this._valoracions = new ArrayList<Valoracio>();
     }
     
     public String getNom() {
@@ -97,6 +100,8 @@ public class Client {
         this._factura = _factura;
     }
     
-    
+    public void addValoracio(Valoracio v) {
+        this._valoracions.add(v);
+    }
     
 }

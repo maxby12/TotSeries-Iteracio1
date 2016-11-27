@@ -32,7 +32,7 @@ public class Menu {
     
     public Menu(TotSeries ctrl) {
         this._ctrl = ctrl;
-        this._usuari = "";
+        this._usuari = "ajaleo";
     }
     
     /**
@@ -140,7 +140,7 @@ public class Menu {
             // MENU PRINCIPAL
             switch(opcio) {
                 case 1:
-                    this.menuCataleg(this._usuari);
+                    this.menuCataleg();
                     break;
 
                 case 2:
@@ -148,7 +148,7 @@ public class Menu {
                     break;
 
                 case 3:
-                    this.menuTop(_usuari);
+                    this.menuTop(this._usuari);
                     break;
 
                 case 4:
@@ -162,23 +162,30 @@ public class Menu {
     
     
     // METODES PRIVATS (DE SUPORT)
-
-
+    
+    
     private void mostrarMenuP() {
         int i = 1;
-        escriu("------------------\n  MENU PRINCIPAL\n------------------");
+        String us;
+        if (this._usuari.equals("")) {
+            us = "  No logejat";
+        }
+        else {
+            us = "  Logejat com: " + this._usuari;
+        }
+        escriu("------------------\n  MENU PRINCIPAL\n"+us+"\n------------------");
         for (String s : descMenuPrincipal) {
             System.out.println(i+": "+s);
             i++;
         }
     }
     
-    private void menuCataleg(String userName) {
-        String llistaSeries = this._ctrl.mirarCataleg(userName);
+    private void menuCataleg() {
+        String llistaSeries = this._ctrl.mirarCataleg();
         int numSeries = llistaSeries.split("\n").length + 1;
         
         // Creem el menú
-        int opcio = 1;
+        int numS = 1;
         
         do {
             // Mostrem les opcions del menú
@@ -186,20 +193,20 @@ public class Menu {
             escriu("0 : Tornar Menu Principal");
             escriu(llistaSeries);
 
-            opcio = llegeixInt();
+            numS = llegeixInt();
 
-            if (opcio > 0 && opcio < numSeries) {
-                menuSerie(opcio-1);
+            if (numS > 0 && numS < numSeries) {
+                menuSerie(numS-1);
             }
 
-        } while(opcio!=0);
+        } while(numS!=0);
     }
     
     private void menuSerie(int numSerie) {
         String llistaTemporades = this._ctrl.mostrarSerie(numSerie);
-        int numTemp = llistaTemporades.split("\n").length - 1;
+        int numTemporades = llistaTemporades.split("\n").length - 1;
         // Creem el menú principal
-        int opcio = 1;
+        int numTemp = 1;
         
         do {
             // Mostrem les opcions del menú
@@ -207,37 +214,43 @@ public class Menu {
             escriu(llistaTemporades);
 
             //Demanem una opcio
-            opcio = llegeixInt();
+            numTemp = llegeixInt();
 
             // MENU PRINCIPAL
-            if (opcio > 0 && opcio < numTemp) {
-                menuTemporada(1000*(opcio-1) + numSerie);
+            if (numTemp > 0 && numTemp < numTemporades) {
+                menuTemporada(1000*(numTemp-1) + numSerie);
             }
             
-        } while(opcio!=0);
+        } while(numTemp!=0);
     }
     
     private void menuTemporada(int numTemp) {
-        String llistaCapitols = this._ctrl.mostrarTemporada(numTemp);
-        int numCapitols = llistaCapitols.split("\n").length + 1;
+        String tempStr = this._ctrl.mostrarTemporada(numTemp);
+        int numCapitols = tempStr.split("\n").length + 1;
         // Creem el menú principal
-        int opcio = 1;
+        int numCap = 1;
         
         do {
             // Mostrem les opcions del menú
             escriu("------------------\n  MENU TEMPORADA\n------------------");
             escriu("0 : Tornar Menu Serie");
-            escriu(llistaCapitols);
-
+            escriu(tempStr);
+            
             //Demanem una opcio
-            opcio = llegeixInt();
+            numCap = llegeixInt();
             
             // MENU PRINCIPAL
-            if (opcio > 0 && opcio < numCapitols) {
+            if (numCap > 0 && numCap < numCapitols) {
                 // AQUI VA SELECCIONAR CAPITOL I VISUALITZARLO
+                if (this._usuari.equals("")) {
+                    escriu("Usuari no logejat!");
+                }
+                else {
+                    this.reproduirCapitol(this._usuari, 1000000*(numCap-1)+numTemp);
+                }
             }
 
-        } while(opcio!=0);
+        } while(numCap!=0);
     }
     
     
@@ -293,6 +306,34 @@ public class Menu {
             }
             
         } while(opcio!=0);
+    }
+
+    private void reproduirCapitol(String userName, int numCap) {
+        String status = this._ctrl.reproduirCapitol(userName, numCap);
+        if (status.equals("NOEMISSIO")) {
+            String s = this._ctrl.reprodueixCapitol(userName, numCap);
+            escriu("Visualitzan capítol: "+ s);
+            escriu("...");
+            // AQUI ES FA STREAMING DEL CAPITOL FINS QUE S'ACABA O FINS QUE CLIENT ATURA
+            this._ctrl.aturaCapitol(userName);
+            // SUPOSEM QUE CAPITOL FINALITZA AUTOMATICAMENT JA QUE TREBALLEM AMB INTERFICIE VISUAL DE CONSOLA
+            boolean finished = true;
+            if (finished) {
+                escriu("Vols valorar el capítol? (S/N):");
+                String resposta = llegeixString();
+                if (resposta.equals("S")) {
+                    escriu("Introdueix valoracio (0 al 10):");
+                    int nota = llegeixInt();
+                    this._ctrl.valorarCapitol(userName, numCap, nota);
+                }
+            }
+            else {
+                escriu("Emissio aturada");
+            }
+        }
+        else {
+            escriu("Client esta visualitzant un altre capítol!");
+        }
     }
     
 }

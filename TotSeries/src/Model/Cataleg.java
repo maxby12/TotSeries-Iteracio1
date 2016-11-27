@@ -6,6 +6,7 @@
 package Model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  *
@@ -42,11 +43,14 @@ public class Cataleg {
         }
         return c;
     }
-    /*
-    public Capitol getCapitol(int numCap){
-        
+    
+    public String mostrarCapitol(int numCap){
+        Serie s = this._series.get(numCap%1000);
+        Temporada t = s.getTemporades().get((numCap/1000)%1000);
+        Capitol c = t.getCapitol(numCap/1000000);
+        return c.getNom();
     }
-    */
+    
     public String mostrarTemporada(int numTemp){
         Serie s = this._series.get(numTemp%1000);
         return s.mostrarTemporada(numTemp/1000);
@@ -66,4 +70,38 @@ public class Cataleg {
     public String mostrarTopCap(){
         return this._topCapitols.toString();
     }
+
+    Capitol getCapitol(int numCap) {
+                Serie s = this._series.get(numCap%1000);
+        Temporada t = s.getTemporades().get((numCap/1000)%1000);
+        Capitol c = t.getCapitol(numCap/1000000);
+        return c;
+    }
+    
+    public void actualitzarTopCap() {
+        float notaMin = this._topCapitols.getNotaMin();
+        Capitol entraTop = null;
+        for (Serie s : this._series) {
+            for (Temporada t : s.getTemporades()) {
+                for (Capitol c : t.getCapitols()) {
+                    if (c.getNota() > notaMin) {
+                        Iterator<Capitol> llistaCapitolsIterator = this._topCapitols.getCapitols().iterator();
+                        boolean found = false;
+                        while (llistaCapitolsIterator.hasNext() && !found) {
+                            entraTop = llistaCapitolsIterator.next();
+                            found = (c.getNom().equals(entraTop.getNom()));
+                        }
+                        if (!found) entraTop = c;
+                        else entraTop = null;
+                    }
+                }
+            }
+        }
+        if (entraTop != null) {
+            this._topCapitols.insertCapitol(entraTop);
+            this._topCapitols.sort();
+        }
+        
+    }
+    
 }

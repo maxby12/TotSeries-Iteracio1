@@ -39,7 +39,7 @@ public class TotSeries {
     
     // METODES DE CASSOS D'US
     
-    public String mirarCataleg(String userName) {
+    public String mirarCataleg() {
         return this._data.mostrarCataleg();
     }
     
@@ -51,16 +51,16 @@ public class TotSeries {
         return this._data.registrarUsuari(userName, password, nom, nacionalitat, dataNaixament); 
     }
     
-    public void reproduirCapitol(String userName, int numCap) {
-        
+    public String reproduirCapitol(String userName, int numCap) {
+        return this._data.getViewStatus(userName);
     }
     
-    public void aturaCapitol(String userName, int numCap) {
-        
+    public void aturaCapitol(String userName) {
+        this._data.finalitzarStreaming(userName);
     }
     
-    public void valorarCapitol(String userName, int numCap) {
-        
+    public void valorarCapitol(String userName, int numCap, int nota) {
+        this._data.valorarCapitol(userName, numCap, nota);
     }
 
     public String mostrarTemporada(int numTemp) {
@@ -69,6 +69,10 @@ public class TotSeries {
 
     public String mostrarSerie(int numSerie) {
         return this._data.mostrarSerie(numSerie);
+    }
+    
+    public String reprodueixCapitol(String userName, int numCap) {
+        return this._data.iniciarStreaming(userName, numCap);
     }
     
 }

@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Albert
  */
-public class Capitol {
+public class Capitol implements Comparable<Capitol> {
     
     private String _nom;
     private String _duracio;
@@ -35,15 +35,35 @@ public class Capitol {
     }
 
     public void addValoracio(Valoracio valoracio){
+        // Actualitzem nota mitjana
+        float m = this._nota;
+        m = m * this._llistaValoracions.size();
+        m = m + valoracio.getValor();
+        m = m/(this._llistaValoracions.size()+1);
+        this._nota = m;
+        
         this._llistaValoracions.add(valoracio);
-        //s'ha de fer la nota mitjana
-        //aixo implica funcions extres a temporada i serie
-        //ja ho implementarem a la seguen iteracio
+
+    }
+
+    public float getNota() {
+        return _nota;
+    }
+  
+    public String getNom() {
+        return _nom;
     }
     
     @Override
     public String toString() {
         return "Capitol{" + "_nom=" + _nom + ", _duracio=" + _duracio + ", _idioma=" + _idioma + ", _descripcio=" + _descripcio + ", _nota=" + _nota + '}';
     }
-    
+
+    @Override
+    public int compareTo(Capitol t) {
+        float nota = t.getNota();
+        if (this._nota > nota) return -1;
+        else if (this._nota < nota) return 1;
+        else return 0;
+    }
 }

@@ -8,6 +8,8 @@ package Vista;
 import Controlador.TotSeries;
 import Model.TotSeriesDades;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *

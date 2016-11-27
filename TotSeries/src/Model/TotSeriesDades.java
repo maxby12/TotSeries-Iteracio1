@@ -18,7 +18,7 @@ public class TotSeriesDades {
     private Cataleg _cataleg;
     private ArrayList<Administrador> _administradors;
     private Date _dataPagament;
-    
+
     
     // Definim els possibles estats dels Clients
     protected enum View {
@@ -74,7 +74,7 @@ public class TotSeriesDades {
         
     }
     
-    public View getViewStatus(String userName){
+    public String getViewStatus(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
         View status = null;
@@ -85,10 +85,10 @@ public class TotSeriesDades {
                 found = true;
             }
         }
-        return status;
+        return status.toString();
     }
-
-    public void iniciarStreaming(String userName, int numCap){
+    
+    public String iniciarStreaming(String userName, int numCap){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
         while (llistaClientsIterator.hasNext() && !found) {
@@ -99,10 +99,12 @@ public class TotSeriesDades {
             }
         }
         // Inicia el streaming del capitol numero numCap
+        String cap = this._cataleg.mostrarCapitol(numCap);
+        return cap;
         
     }
     
-    public void finalitzarStreaming(String userName, int numCap){
+    public void finalitzarStreaming(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
         while (llistaClientsIterator.hasNext() && !found) {
@@ -113,10 +115,6 @@ public class TotSeriesDades {
         }
         
         // Finalitza el streaming del capitol numero numCap
-    }
-    
-    public void incrementarFactura(){
-        
     }
     
     public String mostrarCataleg(){
@@ -147,6 +145,25 @@ public class TotSeriesDades {
     
     public String mostrarTopCap(){
         return this._cataleg.getTopCapitols().toString();
+    }
+    
+    
+    public void valorarCapitol(String userName, int numCap, int nota) {
+        Valoracio v = new Valoracio(nota, new Date());
+        Client c = null;
+        Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
+        boolean found = false;
+        while (llistaClientsIterator.hasNext() && !found) {
+            c = llistaClientsIterator.next();
+            found = (c.getUsername()).equals(userName);
+        }
+        // Afegim valoracio al client que l'ha feta
+        c.addValoracio(v);
+        // Afegim valoracio al capitol seleccionat i actualitzem la seva nota
+        Capitol cap = this._cataleg.getCapitol(numCap);
+        cap.addValoracio(v);
+        // Actualitzem el ranking de top capitols
+        this._cataleg.actualitzarTopCap();
     }
     
 }
