@@ -142,7 +142,7 @@ public class Menu {
                     break;
 
                 case 2:
-
+                    this.menuRegistreUsuari();
                     break;
 
                 case 3:
@@ -263,9 +263,15 @@ public class Menu {
         noDuplicat = this._ctrl.registrarUsuari(userName,password,nom,nacionalitat,dataNaixament);
          
         if(noDuplicat){
-            escriu("");
+            escriu("usuari registrat correctament");
+        }else{
+            escriu("Nom d'usuari ja registrat, proces cancel·lat");
         }
       
+    }
+    
+    private void menuTop(){
+        
     }
     
 }

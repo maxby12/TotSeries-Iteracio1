@@ -63,9 +63,15 @@ public class TotSeriesDades {
         this._dataPagament = _diaCobro;
     }
     
-    public void addClient(String userName, String password, String nom, String nacionalitat, Date dataNaixament){
-        Client c = new Client(userName, password, nom, nacionalitat, dataNaixament);
-        this._llistaClients.add(c);
+    public boolean registrarUsuari(String userName, String password, String nom, String nacionalitat, Date dataNaixament){
+        if(!this.comprovarClient(userName)){
+            Client c = new Client(userName, password, nom, nacionalitat, dataNaixament);
+            this._llistaClients.add(c);
+            return false;
+        }else{
+            return true;
+        }
+        
     }
     
     public View getViewStatus(String userName){

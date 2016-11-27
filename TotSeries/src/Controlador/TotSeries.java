@@ -10,6 +10,7 @@ import Model.Cataleg;
 import Model.Client;
 import Model.TotSeriesDades;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.Timer;
@@ -46,8 +47,9 @@ public class TotSeries {
         
     }
     
-    public void registrarUsuari() {
-        
+    public boolean registrarUsuari(String userName,String password,String nom,String nacionalitat,Date dataNaixament) {
+        return this.registrarUsuari(userName, password, nom, nacionalitat, dataNaixament);
+     
     }
     
     public void reproduirCapitol(String userName, int numCap) {
