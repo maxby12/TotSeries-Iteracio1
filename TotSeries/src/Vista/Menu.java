@@ -109,11 +109,11 @@ public class Menu {
     
     public Date llegeixDataNaixament() {
         System.out.print("Introdueix el dia: ");
-        int dia = sc.nextInt();
+        int dia = llegeixInt();
         System.out.print("Introdueix el mes: ");
-        int mes = sc.nextInt();
+        int mes = llegeixInt();
         System.out.print("Introdueix l'any: ");
-        int any = sc.nextInt();
+        int any = llegeixInt();
         Date d = new Date(dia,mes,any);
         return d;
     }
@@ -262,7 +262,7 @@ public class Menu {
         dataNaixament = llegeixDataNaixament();
         noDuplicat = this._ctrl.registrarUsuari(userName,password,nom,nacionalitat,dataNaixament); 
         if(noDuplicat){
-            escriu("usuari registrat correctament");
+            escriu("Usuari registrat correctament");
         }else{
             escriu("Nom d'usuari ja registrat, proces cancel·lat");
         }

@@ -67,9 +67,9 @@ public class TotSeriesDades {
         if(!this.comprovarClient(userName)){
             Client c = new Client(userName, password, nom, nacionalitat, dataNaixament);
             this._llistaClients.add(c);
-            return false;
-        }else{
             return true;
+        }else{
+            return false;
         }
         
     }
