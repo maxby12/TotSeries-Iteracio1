@@ -19,6 +19,7 @@ public class Menu {
     /** Utilitat per llegir línies senceres de la pantalla */
     private static final Scanner sc = new Scanner(System.in);
     private TotSeries _ctrl;
+    private String _usuari;
     
     
     static private String[] descMenuPrincipal={"Mirar Catàleg",
@@ -31,6 +32,7 @@ public class Menu {
     
     public Menu(TotSeries ctrl) {
         this._ctrl = ctrl;
+        this._usuari = "";
     }
     
     /**
@@ -138,7 +140,7 @@ public class Menu {
             // MENU PRINCIPAL
             switch(opcio) {
                 case 1:
-                    this.menuCataleg("");
+                    this.menuCataleg(this._usuari);
                     break;
 
                 case 2:
@@ -146,7 +148,7 @@ public class Menu {
                     break;
 
                 case 3:
-
+                    this.menuTop(_usuari);
                     break;
 
                 case 4:
@@ -268,8 +270,29 @@ public class Menu {
         }
     }
     
-    private void menuTop(){
+    private void menuTop(String user){
+        String topSeries = this._ctrl.visualitzarTopCapitols(user);
+        int numCapitols = 10;
         
+        
+        // Creem el menú principal
+        int opcio = 1;
+        
+        do {
+            // Mostrem les opcions del menú
+            escriu("------------------\n  TOP SERIES \n------------------");
+            escriu("0 : Tornar Menu Principal");
+            escriu(topSeries);
+
+            //Demanem una opcio
+            opcio = llegeixInt();
+
+            // Seleccionar capitol
+            if (opcio > 0 && opcio < numCapitols) {
+                //aqui es reprodueix el capitol
+            }
+            
+        } while(opcio!=0);
     }
     
 }

@@ -43,8 +43,8 @@ public class TotSeries {
         return this._data.mostrarCataleg();
     }
     
-    public void visualitzarTopCapitols(String userName) {
-        
+    public String visualitzarTopCapitols(String userName) {
+        return this._data.mostrarTopCap();
     }
     
     public boolean registrarUsuari(String userName,String password,String nom,String nacionalitat,Date dataNaixament) {
