@@ -48,8 +48,7 @@ public class TotSeries {
     }
     
     public boolean registrarUsuari(String userName,String password,String nom,String nacionalitat,Date dataNaixament) {
-        return this.registrarUsuari(userName, password, nom, nacionalitat, dataNaixament);
-     
+        return this._data.registrarUsuari(userName, password, nom, nacionalitat, dataNaixament); 
     }
     
     public void reproduirCapitol(String userName, int numCap) {

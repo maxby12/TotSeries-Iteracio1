@@ -260,14 +260,12 @@ public class Menu {
         nacionalitat = llegeixString();
         escriu("data de naixament:");
         dataNaixament = llegeixDataNaixament();
-        noDuplicat = this._ctrl.registrarUsuari(userName,password,nom,nacionalitat,dataNaixament);
-         
+        noDuplicat = this._ctrl.registrarUsuari(userName,password,nom,nacionalitat,dataNaixament); 
         if(noDuplicat){
             escriu("usuari registrat correctament");
         }else{
             escriu("Nom d'usuari ja registrat, proces cancel·lat");
         }
-      
     }
     
     private void menuTop(){
