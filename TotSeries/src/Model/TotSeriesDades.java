@@ -74,7 +74,7 @@ public class TotSeriesDades {
         
     }
     
-    public String getViewStatus(String userName){
+    public boolean getViewStatus(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
         View status = null;
@@ -85,7 +85,7 @@ public class TotSeriesDades {
                 found = true;
             }
         }
-        return status.toString();
+        return status.equals(View.NOEMISSIO);
     }
     
     public String iniciarStreaming(String userName, int numCap){
@@ -144,7 +144,7 @@ public class TotSeriesDades {
     }
     
     public String mostrarTopCap(){
-        return this._cataleg.getTopCapitols().toString();
+        return this._cataleg.mostrarTopCap();
     }
     
     

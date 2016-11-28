@@ -26,7 +26,7 @@ public class Capitol implements Comparable<Capitol> {
     private int _numS;
     
 
-    public Capitol(String _nom, String _duracio, String _idioma, String _descripcio, float _nota, Date _estrena, int _num) {
+    public Capitol(String _nom, String _duracio, String _idioma, String _descripcio, float _nota, Date _estrena, int _num, int _numT, int _numS) {
         this._nom = _nom;
         this._duracio = _duracio;
         this._idioma = _idioma;
@@ -35,6 +35,8 @@ public class Capitol implements Comparable<Capitol> {
         this._nota = _nota;
         this._estrena = _estrena;
         this._num = _num;
+        this._numTemp = _numT;
+        this._numS = _numS;
     }
 
     public int getCodi(){

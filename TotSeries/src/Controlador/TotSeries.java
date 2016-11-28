@@ -51,7 +51,7 @@ public class TotSeries {
         return this._data.registrarUsuari(userName, password, nom, nacionalitat, dataNaixament); 
     }
     
-    public String comprovarStatus(String userName, int numCap) {
+    public boolean comprovarStatus(String userName, int numCap) {
         return this._data.getViewStatus(userName);
     }
     

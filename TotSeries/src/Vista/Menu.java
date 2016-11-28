@@ -231,6 +231,7 @@ public class Menu {
         int numCap = 1;
         
         do {
+            tempStr = this._ctrl.mostrarTemporada(numTemp);
             // Mostrem les opcions del menú
             escriu("------------------\n  MENU TEMPORADA\n------------------");
             escriu("0 : Tornar Menu Serie");
@@ -284,7 +285,7 @@ public class Menu {
     }
     
     private void menuTop(String userName){
-        String topSeries = this._ctrl.visualitzarTopCapitols(userName);
+        String topSeries;
         int numCapitols = 10;
         int numCap;
         
@@ -292,6 +293,7 @@ public class Menu {
         int opcio = 1;
         
         do {
+            topSeries = this._ctrl.visualitzarTopCapitols(userName);
             // Mostrem les opcions del menú
             escriu("------------------\n  TOP SERIES \n------------------");
             escriu("0 : Tornar Menu Principal");
@@ -302,7 +304,7 @@ public class Menu {
 
             // Seleccionar capitol
             if (opcio > 0 && opcio < numCapitols) {
-                numCap = this._ctrl.getCodi(opcio);
+                numCap = this._ctrl.getCodi(opcio-1);
                 this.reproduirCapitol(userName, numCap);
             }
             
@@ -313,10 +315,10 @@ public class Menu {
     
     
     private void reproduirCapitol(String userName, int numCap) {
-        String status = this._ctrl.comprovarStatus(userName, numCap);
-        if (status.equals("NOEMISSIO")) {
+        boolean status = this._ctrl.comprovarStatus(userName, numCap);
+        if (status) {
             String s = this._ctrl.reprodueixCapitol(userName, numCap);
-            escriu("Visualitzan capítol: "+ s);
+            escriu("Visualitzant capítol: "+ s);
             escriu("...");
             // AQUI ES FA STREAMING DEL CAPITOL FINS QUE S'ACABA O FINS QUE CLIENT ATURA
             this._ctrl.aturaCapitol(userName);

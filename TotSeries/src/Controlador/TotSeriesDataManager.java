@@ -136,7 +136,7 @@ public class TotSeriesDataManager {
             this._numCapitol++;
             String[] parts = data.split("/");
             Date d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
-            Capitol c = new Capitol(title, duration, idioma, description, 0f, d, this._numCapitol);
+            Capitol c = new Capitol(title, duration, idioma, description, 0f, d, this._numCapitol, this._codiTemporada, this._codiSerie);
             this._tempActual.addCapitol(c);
             
             /*
