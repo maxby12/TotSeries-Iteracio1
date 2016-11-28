@@ -21,7 +21,10 @@ public class Capitol implements Comparable<Capitol> {
     private ArrayList<Valoracio> _llistaValoracions;
     private float _nota;
     private Date _estrena;
-    private int _num;
+    private int _num; //numCap
+    private int _numTemp;
+    private int _numS;
+    
 
     public Capitol(String _nom, String _duracio, String _idioma, String _descripcio, float _nota, Date _estrena, int _num) {
         this._nom = _nom;
@@ -34,6 +37,10 @@ public class Capitol implements Comparable<Capitol> {
         this._num = _num;
     }
 
+    public int getCodi(){
+        return  (1000*(this._numTemp) + this._numS);
+    }
+    
     public void addValoracio(Valoracio valoracio){
         // Actualitzem nota mitjana
         float m = this._nota;

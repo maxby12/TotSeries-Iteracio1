@@ -51,7 +51,7 @@ public class TotSeries {
         return this._data.registrarUsuari(userName, password, nom, nacionalitat, dataNaixament); 
     }
     
-    public String reproduirCapitol(String userName, int numCap) {
+    public String comprovarStatus(String userName, int numCap) {
         return this._data.getViewStatus(userName);
     }
     
@@ -73,6 +73,10 @@ public class TotSeries {
     
     public String reprodueixCapitol(String userName, int numCap) {
         return this._data.iniciarStreaming(userName, numCap);
+    }
+    
+    public int getCodi(int numCap){
+        return this._data.getCataleg().getTopCapitols().getCapitols().get(numCap).getCodi()+1000000*numCap;
     }
     
 }

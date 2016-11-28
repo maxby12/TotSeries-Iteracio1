@@ -283,10 +283,10 @@ public class Menu {
         }
     }
     
-    private void menuTop(String user){
-        String topSeries = this._ctrl.visualitzarTopCapitols(user);
+    private void menuTop(String userName){
+        String topSeries = this._ctrl.visualitzarTopCapitols(userName);
         int numCapitols = 10;
-        
+        int numCap;
         
         // Creem el menú principal
         int opcio = 1;
@@ -302,14 +302,18 @@ public class Menu {
 
             // Seleccionar capitol
             if (opcio > 0 && opcio < numCapitols) {
-                //aqui es reprodueix el capitol
+                numCap = this._ctrl.getCodi(opcio);
+                this.reproduirCapitol(userName, numCap);
             }
             
         } while(opcio!=0);
     }
 
+    
+    
+    
     private void reproduirCapitol(String userName, int numCap) {
-        String status = this._ctrl.reproduirCapitol(userName, numCap);
+        String status = this._ctrl.comprovarStatus(userName, numCap);
         if (status.equals("NOEMISSIO")) {
             String s = this._ctrl.reprodueixCapitol(userName, numCap);
             escriu("Visualitzan capítol: "+ s);

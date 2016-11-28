@@ -71,8 +71,8 @@ public class Cataleg {
         return this._topCapitols.toString();
     }
 
-    Capitol getCapitol(int numCap) {
-                Serie s = this._series.get(numCap%1000);
+    public Capitol getCapitol(int numCap) {
+        Serie s = this._series.get(numCap%1000);
         Temporada t = s.getTemporades().get((numCap/1000)%1000);
         Capitol c = t.getCapitol(numCap/1000000);
         return c;
