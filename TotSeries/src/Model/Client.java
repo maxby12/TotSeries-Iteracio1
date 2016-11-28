@@ -21,7 +21,7 @@ public class Client {
     private Date _dataNaixament;
     private ArrayList<Valoracio> _valoracions;
     private View _viewStatus;
-    Factura _factura;
+    protected Factura _factura;
     
     
     public Client(String userName, String password, String nom, String nacionalitat, Date dataNaixament) {

@@ -18,7 +18,7 @@ public class TotSeriesDades {
     private Cataleg _cataleg;
     private ArrayList<Administrador> _administradors;
     private Date _dataPagament;
-
+    
     
     // Definim els possibles estats dels Clients
     protected enum View {

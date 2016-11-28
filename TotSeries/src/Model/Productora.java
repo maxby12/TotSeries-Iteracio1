@@ -13,10 +13,10 @@ public class Productora {
     
     private String _nom;
     private String _id;
-    private String _anyCreacio;
+    private int _anyCreacio;
     private String _idSerie;
 
-    public Productora(String _nom, String _id, String _anyCreacio, String _idSerie) {
+    public Productora(String _nom, String _id, int _anyCreacio, String _idSerie) {
         this._nom = _nom;
         this._id = _id;
         this._anyCreacio = _anyCreacio;
@@ -31,7 +31,7 @@ public class Productora {
         return _id;
     }
 
-    public String getAnyCreacio() {
+    public int getAnyCreacio() {
         return _anyCreacio;
     }
 

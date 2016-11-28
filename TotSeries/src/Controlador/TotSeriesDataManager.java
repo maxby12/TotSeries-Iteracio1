@@ -190,7 +190,7 @@ public class TotSeriesDataManager {
 	 */
 	public void crearProductora (String id, String nom, String idSerie) {
             
-            Productora p = new Productora(nom, id, "1990", idSerie);
+            Productora p = new Productora(nom, id, 1990, idSerie);
             this._serieActual.setProductora(p);
             
             /*

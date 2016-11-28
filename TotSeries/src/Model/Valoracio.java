@@ -29,4 +29,11 @@ public class Valoracio {
         return _dataValorat;
     }
 
+    @Override
+    public String toString() {
+        return "Valoracio{" + "_valor=" + _valor + ", _dataValorat=" + _dataValorat + '}';
+    }
+
+    
+    
 }

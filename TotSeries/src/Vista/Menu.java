@@ -7,7 +7,6 @@ package Vista;
 
 import Controlador.TotSeries;
 import java.util.Date;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -213,7 +212,8 @@ public class Menu {
             // Mostrem les opcions del menú
             escriu("------------------\n  MENU SERIE\n------------------");
             escriu(serieStr);
-
+            
+            escriu("Selecciona opció:");
             //Demanem una opcio
             numTemp = llegeixInt();
 
@@ -238,6 +238,7 @@ public class Menu {
             escriu("0 : Tornar Menu Serie");
             escriu(tempStr);
             
+            escriu("Selecciona opció:");
             //Demanem una opcio
             numCap = llegeixInt();
             
@@ -331,10 +332,11 @@ public class Menu {
             if (finished) {
                 escriu("Vols valorar el capítol? (S/N):");
                 String resposta = llegeixString();
-                if (resposta.equals("S")) {
+                if (resposta.equals("S") || resposta.equals("s")) {
                     escriu("Introdueix valoracio (0 al 10):");
                     int nota = llegeixInt();
-                    this._ctrl.valorarCapitol(userName, numCap, nota);
+                    if (nota>=0 && nota<=10) this._ctrl.valorarCapitol(userName, numCap, nota);
+                    else escriu("Nota introduida erronea, procés cancel·lat");
                 }
             }
             else {
