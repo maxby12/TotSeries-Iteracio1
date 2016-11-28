@@ -56,8 +56,8 @@ public class Cataleg {
         return s.mostrarTemporada(numTemp/1000);
     }
     
-    public String mostrarSerie(int numSerie) {
-        Serie s = this._series.get(numSerie);
+    public String mostrarSerie(int numS) {
+        Serie s = this._series.get(numS);
         String st = s.toString() + "\n0 : Tornar Menu Cataleg\n";
         int i = 1;
         for (Temporada t : s.getTemporades()) {

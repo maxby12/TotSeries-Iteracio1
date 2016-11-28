@@ -67,8 +67,8 @@ public class TotSeries {
         return this._data.mostrarTemporada(numTemp);
     }
 
-    public String mostrarSerie(int numSerie) {
-        return this._data.mostrarSerie(numSerie);
+    public String mostrarSerie(int numS) {
+        return this._data.mostrarSerie(numS);
     }
     
     public String reprodueixCapitol(String userName, int numCap) {

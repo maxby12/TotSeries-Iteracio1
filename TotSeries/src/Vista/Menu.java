@@ -192,7 +192,8 @@ public class Menu {
             escriu("------------------\n  MENU CATALEG\n------------------");
             escriu("0 : Tornar Menu Principal");
             escriu(llistaSeries);
-
+            
+            escriu("Selecciona opció:");
             numS = llegeixInt();
 
             if (numS > 0 && numS < numSeries) {
@@ -202,23 +203,23 @@ public class Menu {
         } while(numS!=0);
     }
     
-    private void menuSerie(int numSerie) {
-        String llistaTemporades = this._ctrl.mostrarSerie(numSerie);
-        int numTemporades = llistaTemporades.split("\n").length - 1;
+    private void menuSerie(int numS) {
+        String serieStr = this._ctrl.mostrarSerie(numS);
+        int numTemporades = serieStr.split("\n").length - 1;
         // Creem el menú principal
         int numTemp = 1;
         
         do {
             // Mostrem les opcions del menú
             escriu("------------------\n  MENU SERIE\n------------------");
-            escriu(llistaTemporades);
+            escriu(serieStr);
 
             //Demanem una opcio
             numTemp = llegeixInt();
 
             // MENU PRINCIPAL
             if (numTemp > 0 && numTemp < numTemporades) {
-                menuTemporada(1000*(numTemp-1) + numSerie);
+                menuTemporada(1000*(numTemp-1) + numS);
             }
             
         } while(numTemp!=0);
@@ -285,30 +286,33 @@ public class Menu {
     }
     
     private void menuTop(String userName){
-        String topSeries;
+        String topCap;
         int numCapitols = 10;
-        int numCap;
+        int numCap = 1;
         
-        // Creem el menú principal
-        int opcio = 1;
         
         do {
-            topSeries = this._ctrl.visualitzarTopCapitols(userName);
+            topCap = this._ctrl.visualitzarTopCapitols(userName);
             // Mostrem les opcions del menú
             escriu("------------------\n  TOP SERIES \n------------------");
             escriu("0 : Tornar Menu Principal");
-            escriu(topSeries);
+            escriu(topCap);
 
             //Demanem una opcio
-            opcio = llegeixInt();
+            escriu("Selecciona opció:");
+            numCap = llegeixInt();
 
             // Seleccionar capitol
-            if (opcio > 0 && opcio < numCapitols) {
-                numCap = this._ctrl.getCodi(opcio-1);
-                this.reproduirCapitol(userName, numCap);
+            if (numCap > 0 && numCap < numCapitols) {
+                if (this._usuari.equals("")) {
+                    escriu("Usuari no logejat!");
+                }else{
+                    numCap = this._ctrl.getCodi(numCap-1);
+                    this.reproduirCapitol(userName, numCap);
+                }
             }
             
-        } while(opcio!=0);
+        } while(numCap!=0);
     }
 
     
