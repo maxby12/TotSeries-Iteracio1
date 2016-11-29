@@ -46,11 +46,12 @@ public class TotSeriesTest {
     
     @BeforeClass
     public static void setUpClass() {
-        System.out.println("Executant Test del controlador TotSeries");
+        System.out.println("----------- Test del controlador ----------");
     }
     
     @AfterClass
     public static void tearDownClass() {
+        System.out.println("----------- Fi test controlador -----------");
     }
     
 
@@ -59,6 +60,7 @@ public class TotSeriesTest {
      */
     @Test
     public void testRegistrarUsuari() {
+        // Usuari ja registrat
         System.out.println("Test de registrarUsuari");
         String userName = "ajaleo";
         String password = "a";
@@ -69,6 +71,7 @@ public class TotSeriesTest {
         boolean result = this._data.registrarUsuari(userName, password, nom, nacionalitat, dataNaixament);
         assertEquals(expResult, result);
         
+        // Usuari no registrat
         userName = "test";
         password = "b";
         nom = "b";
@@ -85,6 +88,7 @@ public class TotSeriesTest {
      */
     @Test
     public void testComprovarStatus() {
+        // Usuari no esta veient cap capitol
         System.out.println("Test de comprovarStatus");
         String userName = "ajaleo";
         boolean expResult = true;
@@ -97,6 +101,7 @@ public class TotSeriesTest {
      */
     @Test
     public void testGetCodi() {
+        // Obtenció del codi del capitol numero 3 del topCapitols
         System.out.println("Test de getCodi");
         int numCap = 2;
         int expResult = 1000002;

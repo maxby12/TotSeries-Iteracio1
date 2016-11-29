@@ -103,5 +103,9 @@ public class Client {
     public void addValoracio(Valoracio v) {
         this._valoracions.add(v);
     }
+
+    public ArrayList<Valoracio> getValoracions() {
+        return _valoracions;
+    }
     
 }

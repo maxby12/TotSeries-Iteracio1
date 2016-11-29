@@ -99,9 +99,8 @@ public class Cataleg {
         }
         if (entraTop != null) {
             this._topCapitols.insertCapitol(entraTop);
-            this._topCapitols.sort();
         }
-        
+        this._topCapitols.sort();
     }
     
 }

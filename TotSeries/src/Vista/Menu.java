@@ -97,7 +97,7 @@ public class Menu {
     public static String llegeixString() {
         return sc.nextLine();
     }
-
+    
     /**
      * Obtenir la data actual segons el sistema.
      *
@@ -288,12 +288,13 @@ public class Menu {
     
     private void menuTop(String userName){
         String topCap;
-        int numCapitols = 10;
+        int numCapitols;
         int numCap;
         
         
         do {
             topCap = this._ctrl.visualitzarTopCapitols(userName);
+            numCapitols = topCap.split("\n").length;
             // Mostrem les opcions del menú
             escriu("------------------\n  TOP SERIES \n------------------");
             escriu("0 : Tornar Menu Principal");
