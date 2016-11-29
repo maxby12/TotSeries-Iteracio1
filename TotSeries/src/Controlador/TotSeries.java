@@ -48,7 +48,7 @@ public class TotSeries {
         return this._data.registrarUsuari(userName, password, nom, nacionalitat, dataNaixament); 
     }
     
-    public boolean comprovarStatus(String userName, int numCap) {
+    public boolean comprovarStatus(String userName) {
         return this._data.getViewStatus(userName);
     }
     
@@ -73,7 +73,7 @@ public class TotSeries {
     }
     
     public int getCodi(int numCap){
-        return this._data.getCataleg().getTopCapitols().getCapitols().get(numCap).getCodi()+1000000*numCap;
+        return this._data.getCataleg().getTopCapitols().getCapitols().get(numCap).getCodi();
     }
     
 }

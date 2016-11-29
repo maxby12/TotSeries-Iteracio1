@@ -70,7 +70,7 @@ public class Cataleg {
     public String mostrarTopCap(){
         return this._topCapitols.toString();
     }
-
+    
     public Capitol getCapitol(int numCap) {
         Serie s = this._series.get(numCap%1000);
         Temporada t = s.getTemporades().get((numCap/1000)%1000);

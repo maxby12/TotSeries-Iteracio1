@@ -40,7 +40,7 @@ public class Capitol implements Comparable<Capitol> {
     }
 
     public int getCodi(){
-        return  (1000*(this._numTemp) + this._numS);
+        return  1000000*this._num+(1000*(this._numTemp) + this._numS);
     }
     
     public void addValoracio(Valoracio valoracio){

@@ -289,7 +289,7 @@ public class Menu {
     private void menuTop(String userName){
         String topCap;
         int numCapitols = 10;
-        int numCap = 1;
+        int numCap;
         
         
         do {
@@ -320,7 +320,7 @@ public class Menu {
     
     
     private void reproduirCapitol(String userName, int numCap) {
-        boolean status = this._ctrl.comprovarStatus(userName, numCap);
+        boolean status = this._ctrl.comprovarStatus(userName);
         if (status) {
             String s = this._ctrl.reprodueixCapitol(userName, numCap);
             escriu("Visualitzant capítol: "+ s);
