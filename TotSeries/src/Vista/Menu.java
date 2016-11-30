@@ -294,23 +294,23 @@ public class Menu {
         
         do {
             topCap = this._ctrl.visualitzarTopCapitols(userName);
-            numCapitols = topCap.split("\n").length;
+            numCapitols = topCap.split("\n").length + 1;
             // Mostrem les opcions del menú
             escriu("------------------\n  TOP SERIES \n------------------");
             escriu("0 : Tornar Menu Principal");
             escriu(topCap);
-
+            
             //Demanem una opcio
             escriu("Selecciona opció:");
             numCap = llegeixInt();
-
+            
             // Seleccionar capitol
             if (numCap > 0 && numCap < numCapitols) {
                 if (this._usuari.equals("")) {
                     escriu("Usuari no logejat!");
                 }else{
-                    numCap = this._ctrl.getCodi(numCap-1);
-                    this.reproduirCapitol(userName, numCap);
+                    int codiCap = this._ctrl.getCodi(numCap-1);
+                    this.reproduirCapitol(userName, codiCap);
                 }
             }
             
