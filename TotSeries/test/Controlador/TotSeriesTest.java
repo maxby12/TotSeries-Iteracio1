@@ -41,6 +41,7 @@ public class TotSeriesTest {
         
         this._data.valorarCapitol("ajaleo", 1000000, 10);
         this._data.valorarCapitol("ajaleo", 1000001, 6);
+        // Seguent capitol serà utilitzat a testGetCodi()
         this._data.valorarCapitol("ajaleo", 1000002, 5);
     }
     
@@ -54,7 +55,36 @@ public class TotSeriesTest {
         System.out.println("----------- Fi test controlador -----------");
     }
     
-
+    /**
+     * Test of valorarCapitol method, of class TotSeries
+     */
+    @Test
+    public void testValorarCapitol() {
+        System.out.println("Test de valorar Capitol");
+        String userName = "ajaleo";
+        int numCap = 1003002;
+        // Valorem capitol 2 de la temporada 4 de la serie numero 3 amb un 5
+        
+        this._data.valorarCapitol(userName, numCap, 5);
+        float expResult = 5f;
+        float result = this._data.getCataleg().getCapitol(numCap).getNota();
+        assertEquals(expResult, result,0);
+        
+        // Valorem el mateix capitol amb un 9
+        this._data.valorarCapitol(userName, numCap, 9);
+        expResult = (5+9)/2;
+        result = this._data.getCataleg().getCapitol(numCap).getNota();
+        assertEquals(expResult, result,0);
+        
+        // Valorem el mateix capitol amb un 0
+        this._data.valorarCapitol(userName, numCap, 0);
+        expResult = (5+9+0)/3f;
+        result = this._data.getCataleg().getCapitol(numCap).getNota();
+        assertEquals(expResult, result,0);
+        
+    }
+    
+    
     /**
      * Test of registrarUsuari method, of class TotSeries.
      */
@@ -103,6 +133,7 @@ public class TotSeriesTest {
     public void testGetCodi() {
         // Obtenció del codi del capitol numero 3 del topCapitols
         System.out.println("Test de getCodi");
+        // Agafem el capitol numero 3 de la llista de top capitols (que hem inicialitzat)
         int numCap = 2;
         int expResult = 1000002;
         int result = this._data.getCataleg().getTopCapitols().getCapitols().get(numCap).getCodi();
