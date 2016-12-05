@@ -15,11 +15,13 @@ import java.util.logging.Logger;
  *
  * @author Albert
  */
+/*
 public class TotSeriesApp {
-
+*/
     /**
      * @param args the command line arguments
      */
+/*
     public static void main(String[] args) {
         
         // Creem data actual i calculem el mes següent, serà la data de pagament
@@ -37,5 +39,6 @@ public class TotSeriesApp {
         vista.show();
         
     }
-    
+ 
 }
+   */
