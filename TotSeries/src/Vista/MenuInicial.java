@@ -95,6 +95,7 @@ public class MenuInicial extends javax.swing.JFrame {
 
     private void btnSorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSorActionPerformed
         // TODO add your handling code here:
+        System.exit(0);
     }//GEN-LAST:event_btnSorActionPerformed
 
     private void btnRegActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegActionPerformed

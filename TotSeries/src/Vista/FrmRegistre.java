@@ -5,6 +5,9 @@
  */
 package Vista;
 
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+
 /**
  *
  * @author mat.aules
@@ -26,6 +29,163 @@ public class FrmRegistre extends javax.swing.JDialog {
         this._canviMes = false;
         this._canviAny = false;
         initComponents();
+        
+        
+        txtUser.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                _canviUser = !txtUser.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                _canviUser = !txtUser.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+            // implement the methods
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                _canviUser = !txtUser.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+        });
+        
+        
+        txtPas.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                _canviPas = !txtPas.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                _canviPas = !txtPas.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+            // implement the methods
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                _canviPas = !txtPas.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+        });
+        
+        
+        txtNom.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                _canviNom = !txtNom.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                _canviNom = !txtNom.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+            // implement the methods
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                _canviNom = !txtNom.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+        });
+        
+        txtNac.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                _canviNac = !txtNac.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                _canviNac = !txtNac.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+            // implement the methods
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                _canviNac = !txtNac.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+        });
+        
+        txtAny.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                _canviAny = !txtAny.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                _canviAny = !txtAny.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+            // implement the methods
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                _canviAny = !txtAny.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+        });
+        
+        txtMes.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                _canviMes = !txtMes.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                _canviMes = !txtMes.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+            // implement the methods
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                _canviMes = !txtMes.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+        });
+        
+        txtDia.getDocument().addDocumentListener(new DocumentListener() {
+
+            @Override
+            public void removeUpdate(DocumentEvent de) {
+                _canviDia = !txtDia.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent de) {
+                _canviDia = !txtDia.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+            // implement the methods
+
+            @Override
+            public void insertUpdate(DocumentEvent de) {
+                _canviDia = !txtDia.getText().equals("");
+                btnOk.setEnabled(_canviUser && _canviPas && _canviNom && _canviNac && _canviDia && _canviMes && _canviAny);
+            }
+        });
     }
 
     /**
@@ -47,172 +207,140 @@ public class FrmRegistre extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         btnOk = new javax.swing.JButton();
         btnCan = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        txtUser.setText("Nom d'usuari");
-        txtUser.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtUserPropertyChange(evt);
-            }
-        });
-
-        txtPas.setText("Password");
-        txtPas.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtPasPropertyChange(evt);
-            }
-        });
-
-        txtNom.setText("Nom");
-        txtNom.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtNomPropertyChange(evt);
-            }
-        });
-
-        txtNac.setText("Nacionalitat");
-        txtNac.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtNacPropertyChange(evt);
-            }
-        });
-
-        txtDia.setText("Dia");
-        txtDia.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtDiaPropertyChange(evt);
-            }
-        });
-
-        txtMes.setText("Mes");
-        txtMes.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtMesPropertyChange(evt);
-            }
-        });
-
-        txtAny.setText("Any");
-        txtAny.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                txtAnyPropertyChange(evt);
-            }
-        });
 
         jLabel1.setText("Data de naixament");
 
         btnOk.setText("Registrar-se");
         btnOk.setEnabled(false);
+        btnOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOkActionPerformed(evt);
+            }
+        });
 
         btnCan.setText("Cancel·lar");
+        btnCan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCanActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Nom d'Usuari");
+
+        jLabel3.setText("Password");
+
+        jLabel4.setText("Nom");
+
+        jLabel5.setText("Nacionalitat");
+
+        jLabel6.setText("Dia");
+
+        jLabel7.setText("Més");
+
+        jLabel8.setText("Any");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtNac)
-                    .addComponent(txtNom)
-                    .addComponent(txtUser)
-                    .addComponent(txtPas))
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtAny, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(txtPas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                                .addComponent(txtNom, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtNac, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtUser, javax.swing.GroupLayout.Alignment.LEADING)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txtAny, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(txtDia, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
+                                                .addComponent(txtMes, javax.swing.GroupLayout.Alignment.LEADING)))))
+                                .addGap(78, 78, 78))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(btnOk)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnCan, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(95, 95, 95)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnCan, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(102, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtPas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtAny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnOk)
-                        .addGap(5, 5, 5)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(30, 30, 30)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtDia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtAny, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNac, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCan))
-                .addContainerGap(57, Short.MAX_VALUE))
+                    .addComponent(btnCan)
+                    .addComponent(btnOk))
+                .addGap(20, 20, 20))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtUserPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtUserPropertyChange
+    private void btnCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanActionPerformed
         // TODO add your handling code here:
-        this._canviUser = !this.txtUser.getText().equals("Nom d'usuari");
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_btnCanActionPerformed
 
-        if(this._canviUser && this._canviPas && this._canviNom && this._canviNac && this._canviDia && this._canviMes && this._canviAny) this.btnOk.setEnabled(true);
-    }//GEN-LAST:event_txtUserPropertyChange
-
-    private void txtPasPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtPasPropertyChange
+    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-        this._canviPas = !this.txtUser.getText().equals("Password");
-
-        if(this._canviUser && this._canviPas && this._canviNom && this._canviNac && this._canviDia && this._canviMes && this._canviAny) this.btnOk.setEnabled(true);
-    }//GEN-LAST:event_txtPasPropertyChange
-
-    private void txtNomPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtNomPropertyChange
-        // TODO add your handling code here:
-        this._canviNom = !this.txtUser.getText().equals("Nom");
-        if(this._canviUser && this._canviPas && this._canviNom && this._canviNac && this._canviDia && this._canviMes && this._canviAny) this.btnOk.setEnabled(true);
-    }//GEN-LAST:event_txtNomPropertyChange
-
-    private void txtNacPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtNacPropertyChange
-        // TODO add your handling code here:
-        this._canviNac = !this.txtUser.getText().equals("Nacionalitat");
-
-        if(this._canviUser && this._canviPas && this._canviNom && this._canviNac && this._canviDia && this._canviMes && this._canviAny) this.btnOk.setEnabled(true);
-    }//GEN-LAST:event_txtNacPropertyChange
-
-    private void txtDiaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtDiaPropertyChange
-        // TODO add your handling code here:
-        this._canviDia = !this.txtUser.getText().equals("Dia");
-        System.out.println("hola");
-        if(this._canviUser && this._canviPas && this._canviNom && this._canviNac && this._canviDia && this._canviMes && this._canviAny) this.btnOk.setEnabled(true);
-    }//GEN-LAST:event_txtDiaPropertyChange
-
-    private void txtMesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtMesPropertyChange
-        // TODO add your handling code here:
-        this._canviMes = !this.txtUser.getText().equals("Mes");
-
-        if(this._canviUser && this._canviPas && this._canviNom && this._canviNac && this._canviDia && this._canviMes && this._canviAny) this.btnOk.setEnabled(true);
-    }//GEN-LAST:event_txtMesPropertyChange
-
-    private void txtAnyPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_txtAnyPropertyChange
-        // TODO add your handling code here:
-        this._canviAny = !this.txtUser.getText().equals("Any");
-
-        if(this._canviUser && this._canviPas && this._canviNom && this._canviNac && this._canviDia && this._canviMes && this._canviAny) this.btnOk.setEnabled(true);
-    }//GEN-LAST:event_txtAnyPropertyChange
+        
+    }//GEN-LAST:event_btnOkActionPerformed
 
   public String[] showDialog(){
       String [] s = new String[7];
@@ -224,6 +352,13 @@ public class FrmRegistre extends javax.swing.JDialog {
     private javax.swing.JButton btnCan;
     private javax.swing.JButton btnOk;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JTextField txtAny;
     private javax.swing.JTextField txtDia;
     private javax.swing.JTextField txtMes;

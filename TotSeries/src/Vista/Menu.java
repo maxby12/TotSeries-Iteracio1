@@ -294,7 +294,8 @@ public class Menu {
         
         do {
             topCap = this._ctrl.visualitzarTopCapitols(userName);
-            numCapitols = topCap.split("\n").length + 1;
+            if (topCap.equals("")) numCapitols = 0;
+            else numCapitols = topCap.split("\n").length + 1;
             // Mostrem les opcions del menú
             escriu("------------------\n  TOP SERIES \n------------------");
             escriu("0 : Tornar Menu Principal");
