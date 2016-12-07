@@ -34,8 +34,10 @@ public class FrmRegistre extends javax.swing.JDialog {
         this._canviDia = false;
         this._canviMes = false;
         this._canviAny = false;
-        this.res = new String[7];
+        this.res = null;
+        
         initComponents();
+        this.setLocationRelativeTo(null);
         
         PlainDocument doc1 = (PlainDocument) txtDia.getDocument();
         doc1.setDocumentFilter(new MyIntFilter());
@@ -229,6 +231,7 @@ public class FrmRegistre extends javax.swing.JDialog {
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Registrar Nou Client");
 
         jLabel1.setText("Data de naixament");
 
@@ -346,13 +349,13 @@ public class FrmRegistre extends javax.swing.JDialog {
 
     private void btnCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanActionPerformed
         // TODO add your handling code here:
-        res = null;
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btnCanActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
+        this.res = new String[7];
         res[0] = txtUser.getText();
         res[1] = txtPas.getText();
         res[2] = txtNom.getText();

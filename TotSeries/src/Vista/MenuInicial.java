@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.TotSeries;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,6 +27,7 @@ public class MenuInicial extends javax.swing.JFrame {
 
     public MenuInicial(TotSeries controlador) {
         initComponents();
+        this.setLocationRelativeTo(null);
         this._ctrl = controlador;
     }
     
@@ -39,13 +41,26 @@ public class MenuInicial extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        titol = new javax.swing.JLabel();
+        userName = new javax.swing.JLabel();
         btnReg = new javax.swing.JButton();
         btnLog = new javax.swing.JButton();
         btnCat = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         btnSor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("TotSeries Aplicació");
+
+        titol.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        titol.setForeground(new java.awt.Color(51, 0, 255));
+        titol.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titol.setText("TOT SERIES");
+        titol.setToolTipText("");
+
+        userName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        userName.setText("Usuari no logejat");
+        userName.setFocusable(false);
 
         btnReg.setText("Registrar-se");
         btnReg.addActionListener(new java.awt.event.ActionListener() {
@@ -55,10 +70,9 @@ public class MenuInicial extends javax.swing.JFrame {
         });
 
         btnLog.setText("Logejar-se");
+        btnLog.setPreferredSize(new java.awt.Dimension(91, 23));
 
         btnCat.setText("Mostrar catàleg");
-
-        jLabel1.setText("    TOT SERIES");
 
         btnSor.setText("Sortir");
         btnSor.addActionListener(new java.awt.event.ActionListener() {
@@ -67,39 +81,48 @@ public class MenuInicial extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(98, 98, 98)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSor, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCat)
+                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReg, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titol, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(95, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(titol, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(userName)
+                .addGap(18, 18, 18)
+                .addComponent(btnReg)
+                .addGap(18, 18, 18)
+                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCat)
+                .addGap(18, 18, 18)
+                .addComponent(btnSor)
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnReg, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnCat)
-                            .addComponent(btnSor, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 51, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(btnReg)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCat)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSor)
-                .addContainerGap(81, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -117,7 +140,13 @@ public class MenuInicial extends javax.swing.JFrame {
         String[] s = frmRegistre.showDialog();
         
         if (s != null) {
-            System.out.println(s[0]+s[1]+s[2]+s[3]+s[4]+s[5]+s[6]);
+            this._ctrl.registrarUsuari(s[0], s[1], s[2], s[3], s[4], s[5], s[6]);
+        }
+        else {
+            JOptionPane.showMessageDialog(this,
+            "No s'ha completat el registre.",
+            "Procés Cancel·lat",
+            JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRegActionPerformed
 
@@ -127,6 +156,8 @@ public class MenuInicial extends javax.swing.JFrame {
     private javax.swing.JButton btnLog;
     private javax.swing.JButton btnReg;
     private javax.swing.JButton btnSor;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel titol;
+    private javax.swing.JLabel userName;
     // End of variables declaration//GEN-END:variables
 }
