@@ -20,7 +20,8 @@ import javax.swing.text.PlainDocument;
 public class FrmRegistre extends javax.swing.JDialog {
     
     private boolean _canviUser, _canviPas, _canviNom, _canviNac, _canviDia, _canviMes, _canviAny;
-
+    private String [] res;
+    
     /**
      * Creates new form FrmRegistre
      */
@@ -33,6 +34,7 @@ public class FrmRegistre extends javax.swing.JDialog {
         this._canviDia = false;
         this._canviMes = false;
         this._canviAny = false;
+        this.res = new String[7];
         initComponents();
         
         PlainDocument doc1 = (PlainDocument) txtDia.getDocument();
@@ -198,7 +200,7 @@ public class FrmRegistre extends javax.swing.JDialog {
             }
         });
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -344,20 +346,26 @@ public class FrmRegistre extends javax.swing.JDialog {
 
     private void btnCanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCanActionPerformed
         // TODO add your handling code here:
+        res = null;
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btnCanActionPerformed
 
     private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
         // TODO add your handling code here:
-        
+        res[0] = txtUser.getText();
+        res[1] = txtPas.getText();
+        res[2] = txtNom.getText();
+        res[3] = txtNac.getText();
+        res[4] = txtDia.getText();
+        res[5] = txtMes.getText();
+        res[6] = txtAny.getText();
+        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_btnOkActionPerformed
 
   public String[] showDialog(){
-      String [] s = new String[7];
-      this.setVisible(false);
-      this.dispose();
-      return s;
+      return res;
   }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCan;

@@ -104,6 +104,9 @@ public class MenuInicial extends javax.swing.JFrame {
         frmRegistre.setVisible(true);
         String[] s = frmRegistre.showDialog();
         
+        if (s != null) {
+            System.out.println(s[0]+s[1]+s[2]+s[3]+s[4]+s[5]+s[6]);
+        }
     }//GEN-LAST:event_btnRegActionPerformed
 
     /**
