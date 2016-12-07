@@ -8,6 +8,7 @@ package Model;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,15 +64,18 @@ public class TotSeriesDades {
         this._dataPagament = _diaCobro;
     }
     
-    public boolean registrarUsuari(String userName, String password, String nom, String nacionalitat, Date dataNaixament){
+    public void registrarUsuari(String userName, String password, String nom, String nacionalitat, Date dataNaixament){
         if(!this.comprovarClient(userName)){
             Client c = new Client(userName, password, nom, nacionalitat, dataNaixament);
             this._llistaClients.add(c);
-            return true;
+            JOptionPane.showMessageDialog(null,
+            "Usuari registrat correctament.");
         }else{
-            return false;
+            JOptionPane.showMessageDialog(null,
+            "Nom d'usuari ja registrat.\nProcés cancel·lat.",
+            "Procés cancel·lat",
+            JOptionPane.ERROR_MESSAGE);
         }
-        
     }
     
     public boolean getViewStatus(String userName){
@@ -133,7 +137,7 @@ public class TotSeriesDades {
         
     }
     */
-    public boolean comprovarClient(String userName){
+    private boolean comprovarClient(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
         while (llistaClientsIterator.hasNext() && !found) {

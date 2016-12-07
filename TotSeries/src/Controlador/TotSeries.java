@@ -98,8 +98,8 @@ public class TotSeries {
         return this._data.mostrarTopCap();
     }
     
-    public boolean registrarUsuari(String userName,String password,String nom,String nacionalitat,String dia, String mes, String any) {
-        return this._data.registrarUsuari(userName, password, nom, nacionalitat, new Date(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(any))); 
+    public void registrarUsuari(String userName,String password,String nom,String nacionalitat,String dia, String mes, String any) {
+        this._data.registrarUsuari(userName, password, nom, nacionalitat, new Date(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(any))); 
     }
     
     public boolean comprovarStatus(String userName) {
