@@ -78,6 +78,16 @@ public class TotSeriesDades {
         }
     }
     
+    public boolean comprovarClientLog(String userName, String password){
+        Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
+        boolean found = false;
+        while (llistaClientsIterator.hasNext() && !found) {
+            Client c = llistaClientsIterator.next();
+            found = (c.getUsername()).equals(userName) ;
+        }
+        return found;
+    }
+    
     public boolean getViewStatus(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;

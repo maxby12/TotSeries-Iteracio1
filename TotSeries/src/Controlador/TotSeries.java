@@ -90,6 +90,10 @@ public class TotSeries {
     
     // METODES DE CASSOS D'US
     
+    public boolean comprovarClientLog(String userName, String password){
+        return this._data.comprovarClientLog(userName, password);
+    }
+    
     public String mirarCataleg() {
         return this._data.mostrarCataleg();
     }

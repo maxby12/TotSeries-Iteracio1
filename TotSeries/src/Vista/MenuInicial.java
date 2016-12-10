@@ -71,6 +71,11 @@ public class MenuInicial extends javax.swing.JFrame {
 
         btnLog.setText("Logejar-se");
         btnLog.setPreferredSize(new java.awt.Dimension(91, 23));
+        btnLog.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogActionPerformed(evt);
+            }
+        });
 
         btnCat.setText("Mostrar catàleg");
 
@@ -149,6 +154,28 @@ public class MenuInicial extends javax.swing.JFrame {
             JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnRegActionPerformed
+
+    private void btnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogActionPerformed
+        // TODO add your handling code here:
+        FrmLogin frmLogin = new FrmLogin(this,true); 
+        frmLogin.setVisible(true);
+        String[] s = frmLogin.showDialog();
+        if(s == null){
+            JOptionPane.showMessageDialog(this,
+                    "Procés Cancel·lat",
+                    "Procés Cancel·lat",
+                    JOptionPane.WARNING_MESSAGE);
+        }else if(this._ctrl.comprovarClientLog(s[0],s[1])){
+            MenuCataleg menuCataleg = new MenuCataleg(this, true);
+            menuCataleg.setVisible(true);   
+        }else{
+            JOptionPane.showMessageDialog(this,
+                    "Nom d'usuari o contrasenya incorrectes",
+                    "Procés Cancel·lat",
+                    JOptionPane.WARNING_MESSAGE);
+        }
+        
+    }//GEN-LAST:event_btnLogActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
