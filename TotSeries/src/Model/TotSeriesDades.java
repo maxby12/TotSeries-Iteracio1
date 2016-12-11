@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Vista.ClientObserver;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -14,12 +15,13 @@ import javax.swing.JOptionPane;
  *
  * @author Albert
  */
-public class TotSeriesDades {
+public class TotSeriesDades implements TotSeriesModelInterface {
     private ArrayList<Client> _llistaClients;
     private Cataleg _cataleg;
     private ArrayList<Administrador> _administradors;
     private Date _dataPagament;
-    
+    private String _client;
+    private ArrayList<ClientObserver> _clientObservers = new ArrayList<ClientObserver>();
     
     // Definim els possibles estats dels Clients
     protected enum View {
@@ -29,7 +31,7 @@ public class TotSeriesDades {
     
     public TotSeriesDades(Date _diaCobro) {
         this._dataPagament = _diaCobro;
-        //hem de decidir com introduim la data
+        this._client = "";
     }
 
     public ArrayList<Administrador> getAdministradors() {
@@ -78,14 +80,36 @@ public class TotSeriesDades {
         }
     }
     
-    public boolean comprovarClientLog(String userName, String password){
+    public void logIn(String userName, String password){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
+        Client c = null;
         boolean found = false;
         while (llistaClientsIterator.hasNext() && !found) {
-            Client c = llistaClientsIterator.next();
+            c = llistaClientsIterator.next();
             found = (c.getUsername()).equals(userName) ;
         }
-        return found;
+        if (found) {
+            if (c.checkPassword(password)) {
+                this._client = userName;
+                this.notifyClientObservers();
+            }
+            else {
+                JOptionPane.showMessageDialog(null,
+                "Contrasenya erronea",
+                "Procés Cancel·lat",
+                JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else {
+            JOptionPane.showMessageDialog(null,
+            "Nom d'usuari no registrat",
+            "Procés Cancel·lat",
+            JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    public void logOut() {
+        this._client = "";
     }
     
     public boolean getViewStatus(String userName){
@@ -178,6 +202,32 @@ public class TotSeriesDades {
         cap.addValoracio(v);
         // Actualitzem el ranking de top capitols
         this._cataleg.actualitzarTopCap();
+    }
+    
+    
+    @Override
+    public String getClient() {
+        return this._client;
+    }
+    
+    @Override
+    public void registerObserver(ClientObserver o) {
+        this._clientObservers.add(o);
+    }
+
+    @Override
+    public void removeObserver(ClientObserver o) {
+        int i = _clientObservers.indexOf(o);
+        if (i >= 0) {
+                _clientObservers.remove(i);
+        }
+    }
+    
+    public void notifyClientObservers() {
+            for(int i = 0; i < _clientObservers.size(); i++) {
+                    ClientObserver observer = (ClientObserver)_clientObservers.get(i);
+                    observer.updateClient();
+            }
     }
     
 }

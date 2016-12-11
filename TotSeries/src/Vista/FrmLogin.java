@@ -15,7 +15,7 @@ import javax.swing.event.DocumentListener;
  * @author Raül
  */
 public class FrmLogin extends javax.swing.JDialog {
-
+    
     private boolean _canviUser, _canviPas;
     private String [] res;
     
@@ -27,10 +27,11 @@ public class FrmLogin extends javax.swing.JDialog {
         this._canviUser = false;
         this._canviPas = false;
         this.res = null;
+
         
         
         initComponents();
-        
+        this.setLocationRelativeTo(null);
         
         txtUser.getDocument().addDocumentListener(new DocumentListener() {
 
@@ -100,7 +101,9 @@ public class FrmLogin extends javax.swing.JDialog {
 
         jLabel2.setText("Contrasenya");
 
-        btnLog.setText("Logejar-se");
+        btnLog.setText("Log In");
+        btnLog.setToolTipText("");
+        btnLog.setEnabled(false);
         btnLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLogActionPerformed(evt);
@@ -124,16 +127,19 @@ public class FrmLogin extends javax.swing.JDialog {
                         .addGap(141, 141, 141)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1))
-                            .addComponent(txtPas, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jLabel1)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(btnLog)
-                        .addGap(38, 38, 38)
+                        .addGap(78, 78, 78)
+                        .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCan)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                .addContainerGap(82, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtPas, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(100, 100, 100))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,15 +148,15 @@ public class FrmLogin extends javax.swing.JDialog {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtUser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel2)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txtPas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLog)
-                    .addComponent(btnCan))
-                .addContainerGap(66, Short.MAX_VALUE))
+                    .addComponent(btnCan)
+                    .addComponent(btnLog))
+                .addGap(35, 35, 35))
         );
 
         pack();

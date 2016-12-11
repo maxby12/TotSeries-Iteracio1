@@ -51,10 +51,6 @@ public class Client {
         this._username = _username;
     }
 
-    public String getPassword() {
-        return _password;
-    }
-
     public void setPassword(String _password) {
         this._password = _password;
     }
@@ -106,6 +102,10 @@ public class Client {
 
     public ArrayList<Valoracio> getValoracions() {
         return _valoracions;
+    }
+
+    public boolean checkPassword(String password) {
+        return this._password.equals(password);
     }
     
 }

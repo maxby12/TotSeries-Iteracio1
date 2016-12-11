@@ -56,7 +56,7 @@ public class TotSeries {
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                MenuInicial main = new MenuInicial(controlador);
+                MenuInicial main = new MenuInicial(controlador, controlador._data);
                 main.setVisible(true);
             }
         });
@@ -90,8 +90,12 @@ public class TotSeries {
     
     // METODES DE CASSOS D'US
     
-    public boolean comprovarClientLog(String userName, String password){
-        return this._data.comprovarClientLog(userName, password);
+    public void logIn(String userName, String password){
+        this._data.logIn(userName, password);
+    }
+    
+    public void logOut() {
+        this._data.logOut();
     }
     
     public String mirarCataleg() {

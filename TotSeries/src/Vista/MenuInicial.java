@@ -6,16 +6,19 @@
 package Vista;
 
 import Controlador.TotSeries;
+import Model.TotSeriesDades;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author mat.aules
  */
-public class MenuInicial extends javax.swing.JFrame {
+public class MenuInicial extends javax.swing.JFrame implements ClientObserver {
     
     
     private TotSeries _ctrl;
+    private TotSeriesDades _model;
+    private String _user;
     
     
     /**
@@ -25,10 +28,12 @@ public class MenuInicial extends javax.swing.JFrame {
         initComponents();
     }
 
-    public MenuInicial(TotSeries controlador) {
+    public MenuInicial(TotSeries controlador, TotSeriesDades model) {
         initComponents();
         this.setLocationRelativeTo(null);
         this._ctrl = controlador;
+        this._model = model;
+        _model.registerObserver((ClientObserver) this);
     }
     
 
@@ -48,6 +53,7 @@ public class MenuInicial extends javax.swing.JFrame {
         btnLog = new javax.swing.JButton();
         btnCat = new javax.swing.JButton();
         btnSor = new javax.swing.JButton();
+        btnOut = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TotSeries Aplicació");
@@ -69,7 +75,7 @@ public class MenuInicial extends javax.swing.JFrame {
             }
         });
 
-        btnLog.setText("Logejar-se");
+        btnLog.setText("Log In");
         btnLog.setPreferredSize(new java.awt.Dimension(91, 23));
         btnLog.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +83,7 @@ public class MenuInicial extends javax.swing.JFrame {
             }
         });
 
-        btnCat.setText("Mostrar catàleg");
+        btnCat.setText("Mirar catàleg");
 
         btnSor.setText("Sortir");
         btnSor.addActionListener(new java.awt.event.ActionListener() {
@@ -86,20 +92,34 @@ public class MenuInicial extends javax.swing.JFrame {
             }
         });
 
+        btnOut.setText("Log Out");
+        btnOut.setEnabled(false);
+        btnOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(98, 98, 98)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnSor, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCat)
-                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnReg, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(titol, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(95, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(98, 98, 98)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnSor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnCat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(userName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(titol, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnOut, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnReg, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -109,9 +129,11 @@ public class MenuInicial extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(userName)
                 .addGap(18, 18, 18)
-                .addComponent(btnReg)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnReg)
+                    .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnLog, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnOut)
                 .addGap(18, 18, 18)
                 .addComponent(btnCat)
                 .addGap(18, 18, 18)
@@ -165,26 +187,40 @@ public class MenuInicial extends javax.swing.JFrame {
                     "Procés Cancel·lat",
                     "Procés Cancel·lat",
                     JOptionPane.WARNING_MESSAGE);
-        }else if(this._ctrl.comprovarClientLog(s[0],s[1])){
-            MenuCataleg menuCataleg = new MenuCataleg(this, true);
-            menuCataleg.setVisible(true);   
         }else{
-            JOptionPane.showMessageDialog(this,
-                    "Nom d'usuari o contrasenya incorrectes",
-                    "Procés Cancel·lat",
-                    JOptionPane.WARNING_MESSAGE);
+            this._ctrl.logIn(s[0], s[1]);
         }
         
     }//GEN-LAST:event_btnLogActionPerformed
+
+    private void btnOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOutActionPerformed
+        // TODO add your handling code here:
+        this._ctrl.logOut();
+        this._user = "";
+        this.userName.setText("Usuari no logejat");
+        this.btnOut.setEnabled(false);
+        this.btnLog.setEnabled(true);
+        this.btnReg.setEnabled(true);
+    }//GEN-LAST:event_btnOutActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCat;
     private javax.swing.JButton btnLog;
+    private javax.swing.JButton btnOut;
     private javax.swing.JButton btnReg;
     private javax.swing.JButton btnSor;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel titol;
     private javax.swing.JLabel userName;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void updateClient() {
+        this._user = this._model.getClient();
+        this.userName.setText("Logejat com: "+ this._user);
+        this.btnOut.setEnabled(true);
+        this.btnLog.setEnabled(false);
+        this.btnReg.setEnabled(false);
+    }
 }
