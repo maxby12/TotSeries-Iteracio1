@@ -129,6 +129,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Mirar cat&#xe0;leg"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCatActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnSor">
           <Properties>

@@ -20,23 +20,16 @@ public class MenuInicial extends javax.swing.JFrame implements ClientObserver {
     private TotSeriesDades _model;
     private String _user;
     
-    
-    /**
-     * Creates new form MenuInicial
-     */
-    public MenuInicial() {
-        initComponents();
-    }
 
     public MenuInicial(TotSeries controlador, TotSeriesDades model) {
         initComponents();
         this.setLocationRelativeTo(null);
         this._ctrl = controlador;
         this._model = model;
-        _model.registerObserver((ClientObserver) this);
+        _model.registerClientObserver((ClientObserver) this);
     }
     
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -84,6 +77,11 @@ public class MenuInicial extends javax.swing.JFrame implements ClientObserver {
         });
 
         btnCat.setText("Mirar catàleg");
+        btnCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCatActionPerformed(evt);
+            }
+        });
 
         btnSor.setText("Sortir");
         btnSor.addActionListener(new java.awt.event.ActionListener() {
@@ -182,13 +180,13 @@ public class MenuInicial extends javax.swing.JFrame implements ClientObserver {
         FrmLogin frmLogin = new FrmLogin(this,true); 
         frmLogin.setVisible(true);
         String[] s = frmLogin.showDialog();
-        if(s == null){
-            JOptionPane.showMessageDialog(this,
-                    "Procés Cancel·lat",
-                    "Procés Cancel·lat",
-                    JOptionPane.WARNING_MESSAGE);
-        }else{
+        if(s != null){
             this._ctrl.logIn(s[0], s[1]);
+        }else{
+            JOptionPane.showMessageDialog(this,
+            "Procés Cancel·lat",
+            "Procés Cancel·lat",
+            JOptionPane.WARNING_MESSAGE);
         }
         
     }//GEN-LAST:event_btnLogActionPerformed
@@ -202,6 +200,12 @@ public class MenuInicial extends javax.swing.JFrame implements ClientObserver {
         this.btnLog.setEnabled(true);
         this.btnReg.setEnabled(true);
     }//GEN-LAST:event_btnOutActionPerformed
+
+    private void btnCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCatActionPerformed
+        // TODO add your handling code here:
+        MenuCataleg mc = new MenuCataleg(this,true,this._ctrl,this._model,this._user);
+        mc.setVisible(true);
+    }//GEN-LAST:event_btnCatActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

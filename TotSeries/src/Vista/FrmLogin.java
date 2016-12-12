@@ -96,6 +96,7 @@ public class FrmLogin extends javax.swing.JDialog {
         btnCan = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Inici de Sessió");
 
         jLabel1.setText("Nom d'usuari");
 

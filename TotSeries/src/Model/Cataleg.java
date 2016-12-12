@@ -44,6 +44,14 @@ public class Cataleg {
         return c;
     }
     
+    public ArrayList<String> getSeries() {
+        ArrayList<String> c = new ArrayList<>();
+        for (Serie s : this._series) {
+            c.add(s.getTitol());
+        }
+        return c;
+    }
+    
     public String mostrarCapitol(int numCap){
         Serie s = this._series.get(numCap%1000);
         Temporada t = s.getTemporades().get((numCap/1000)%1000);

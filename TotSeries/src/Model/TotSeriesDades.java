@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+import Vista.SeriesObserver;
 
 /**
  *
@@ -22,7 +23,8 @@ public class TotSeriesDades implements TotSeriesModelInterface {
     private Date _dataPagament;
     private String _client;
     private ArrayList<ClientObserver> _clientObservers = new ArrayList<ClientObserver>();
-    
+    private ArrayList<SeriesObserver> _seriesObservers = new ArrayList<SeriesObserver>();
+
     // Definim els possibles estats dels Clients
     protected enum View {
         EMISSIO, NOEMISSIO
@@ -204,6 +206,10 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         this._cataleg.actualitzarTopCap();
     }
     
+    @Override
+    public ArrayList<String> getSeries() {
+        return this._cataleg.getSeries();
+    }
     
     @Override
     public String getClient() {
@@ -211,22 +217,44 @@ public class TotSeriesDades implements TotSeriesModelInterface {
     }
     
     @Override
-    public void registerObserver(ClientObserver o) {
+    public void registerClientObserver(ClientObserver o) {
         this._clientObservers.add(o);
     }
 
     @Override
-    public void removeObserver(ClientObserver o) {
+    public void removeClientObserver(ClientObserver o) {
         int i = _clientObservers.indexOf(o);
         if (i >= 0) {
                 _clientObservers.remove(i);
         }
     }
     
+    @Override
     public void notifyClientObservers() {
             for(int i = 0; i < _clientObservers.size(); i++) {
                     ClientObserver observer = (ClientObserver)_clientObservers.get(i);
                     observer.updateClient();
+            }
+    }
+    
+    @Override
+    public void registerSeriesObserver(SeriesObserver o) {
+        this._seriesObservers.add(o);
+    }
+
+    @Override
+    public void removeSeriesObserver(SeriesObserver o) {
+        int i = _seriesObservers.indexOf(o);
+        if (i >= 0) {
+                _seriesObservers.remove(i);
+        }
+    }
+    
+    @Override
+    public void notifySeriesObservers() {
+            for(int i = 0; i < _seriesObservers.size(); i++) {
+                    SeriesObserver observer = (SeriesObserver)_seriesObservers.get(i);
+                    observer.updateSeries();
             }
     }
     

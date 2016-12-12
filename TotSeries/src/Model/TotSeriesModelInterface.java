@@ -6,6 +6,8 @@
 package Model;
 
 import Vista.ClientObserver;
+import Vista.SeriesObserver;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,7 +16,13 @@ import Vista.ClientObserver;
 public interface TotSeriesModelInterface {
     
     String getClient();
-    void registerObserver(ClientObserver o);
-    void removeObserver(ClientObserver o);
+    void registerClientObserver(ClientObserver o);
+    void removeClientObserver(ClientObserver o);
+    void notifyClientObservers();
+    
+    ArrayList<String> getSeries();
+    void registerSeriesObserver(SeriesObserver o);
+    void removeSeriesObserver(SeriesObserver o);
+    void notifySeriesObservers();
     
 }

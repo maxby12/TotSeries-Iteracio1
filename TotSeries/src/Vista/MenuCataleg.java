@@ -1,5 +1,10 @@
 package Vista;
 
+import Controlador.TotSeries;
+import Model.TotSeriesDades;
+import java.util.ArrayList;
+import javax.swing.AbstractListModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -10,14 +15,31 @@ package Vista;
  *
  * @author Raül
  */
-public class MenuCataleg extends javax.swing.JDialog {
-
+public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
+    
+    private TotSeries _ctrl;
+    private TotSeriesDades _model;
+    private String _user;
+    
     /**
      * Creates new form MenuCataleg
      */
-    public MenuCataleg(java.awt.Frame parent, boolean modal) {
+    public MenuCataleg(java.awt.Frame parent, boolean modal, TotSeries ctrl, TotSeriesDades model, String us) {
         super(parent, modal);
         initComponents();
+        this.setLocationRelativeTo(null);
+        this._ctrl = ctrl;
+        this._model = model;
+        this._user = us;
+        _model.registerSeriesObserver((SeriesObserver) this);
+        ArrayList<String> series = _model.getSeries();
+        this.lstCataleg.setModel(new SeriesListModel(_model.getSeries()));
+        
+    }
+    
+    @Override
+    public void updateSeries() {
+        this.lstCataleg.setModel(new SeriesListModel(_model.getSeries()));
     }
 
     /**
@@ -41,17 +63,20 @@ public class MenuCataleg extends javax.swing.JDialog {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Catàleg");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setText("Catàleg");
 
-        jLabel2.setText("Els + vistos");
+        jLabel2.setText("Top vistos");
 
-        jLabel3.setText("Els + Valorats");
+        jLabel3.setText("Top Valorats");
 
-        lstCataleg.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
+        lstCataleg.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstCataleg.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstCatalegValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(lstCataleg);
 
@@ -60,6 +85,7 @@ public class MenuCataleg extends javax.swing.JDialog {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        lstVistos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(lstVistos);
 
         lstValorats.setModel(new javax.swing.AbstractListModel() {
@@ -67,6 +93,7 @@ public class MenuCataleg extends javax.swing.JDialog {
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
+        lstValorats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane3.setViewportView(lstValorats);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -81,16 +108,16 @@ public class MenuCataleg extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(76, 76, 76)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel2)
-                .addGap(131, 131, 131)
+                .addGap(139, 139, 139)
                 .addComponent(jLabel3)
                 .addGap(69, 69, 69))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -119,6 +146,17 @@ public class MenuCataleg extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void lstCatalegValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstCatalegValueChanged
+        // TODO add your handling code here:
+        if (!evt.getValueIsAdjusting()) {
+            int i = this.lstCataleg.getSelectedIndex();
+            if (i>=0) {
+                String serie = (String)this.lstCataleg.getModel().getElementAt(i);
+                
+            }
+        }
+    }//GEN-LAST:event_lstCatalegValueChanged
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
@@ -132,4 +170,36 @@ public class MenuCataleg extends javax.swing.JDialog {
     private javax.swing.JList lstValorats;
     private javax.swing.JList lstVistos;
     // End of variables declaration//GEN-END:variables
+}
+
+
+
+
+class SeriesListModel extends AbstractListModel {
+    
+    private ArrayList<String> list = new ArrayList<String>();
+    
+    public SeriesListModel (ArrayList<String> series) {
+        super();
+        this.list = series;
+    }
+    
+    @Override
+    public int getSize() {
+        return list.size();
+    }
+
+    @Override
+    public Object getElementAt(int index) {
+        return list.get(index);
+    }
+    
+    public void add(String o) {
+        list.add(o);
+    }
+    
+    public void remove(int index) {
+        list.remove(index);
+    }
+    
 }
