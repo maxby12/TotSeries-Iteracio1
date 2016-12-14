@@ -2,8 +2,16 @@ package Vista;
 
 import Controlador.TotSeries;
 import Model.TotSeriesDades;
+import java.awt.BorderLayout;
+import java.awt.Container;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.AbstractListModel;
+import javax.swing.*;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -559,7 +567,21 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
 
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
-        
+        JFrame f = new JFrame();
+        final JDialog dialog = new JDialog(f, "Test", true);
+        Timer timer = new Timer(2000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.setVisible(false);
+                dialog.dispose();
+            }
+        });
+        timer.setRepeats(false);
+        timer.start();
+
+        dialog.setVisible(true); // if modal, application will pause here
+
+        System.out.println("Dialog closed");
     }//GEN-LAST:event_btnViewActionPerformed
 
     
@@ -649,3 +671,4 @@ class ItemListModel extends AbstractListModel {
     }
     
 }
+
