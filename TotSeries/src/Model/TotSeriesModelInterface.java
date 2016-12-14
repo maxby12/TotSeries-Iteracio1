@@ -17,9 +17,11 @@ public interface TotSeriesModelInterface {
     
     String getClient();
     ArrayList<String> mostrarSeries();
-    ArrayList<String> mostrarTemporada(int numTemp);
-    ArrayList<String> infoSerie(int numS);
     int getNumTemp(int numS);
+    ArrayList<String> mostrarTemporada(int numTemp);
+    ArrayList<String> infoCapitol(int numC);
+    ArrayList<String> infoSerie(int numS);
+
     
     
     void registerClientObserver(ClientObserver o);

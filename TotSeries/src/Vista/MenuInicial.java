@@ -26,6 +26,7 @@ public class MenuInicial extends javax.swing.JFrame implements ClientObserver {
         this.setLocationRelativeTo(null);
         this._ctrl = controlador;
         this._model = model;
+        this._user = "";
         _model.registerClientObserver((ClientObserver) this);
     }
     

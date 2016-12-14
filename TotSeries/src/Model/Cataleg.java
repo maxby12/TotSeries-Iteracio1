@@ -93,6 +93,20 @@ public class Cataleg {
         return c;
     }
     
+    public ArrayList<String> infoCapitol(int numCap) {
+        Serie s = this._series.get(numCap%1000);
+        Temporada t = s.getTemporades().get((numCap/1000)%1000);
+        Capitol c = t.getCapitol(numCap/1000000);
+        
+        ArrayList<String> info = new ArrayList<>();
+        info.add(Float.toString(c.getNota()));
+        info.add(c.getNom());
+        info.add(c.getDuracio());
+        info.add(c.getIdioma());
+        info.add(c.getDescripcio());
+        return info;
+    }
+    
     public void actualitzarTopCap() {
         float notaMin = this._topCapitols.getNotaMin();
         Capitol entraTop = null;

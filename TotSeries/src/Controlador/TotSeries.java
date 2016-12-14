@@ -126,4 +126,8 @@ public class TotSeries {
         return this._data.getCataleg().getTopCapitols().getCapitols().get(numCap).getCodi();
     }
     
+    public boolean isAdmin(String userName) {
+        return _data.isAdmin(userName);
+    }
+    
 }

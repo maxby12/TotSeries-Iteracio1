@@ -20,6 +20,10 @@ public class Administrador {
         this._password = _password;
     }
 
+    public String getUserName() {
+        return _userName;
+    }
+
     @Override
     public String toString() {
         return "Administrador{" + "_nom=" + _nom + ", _userName=" + _userName + '}';

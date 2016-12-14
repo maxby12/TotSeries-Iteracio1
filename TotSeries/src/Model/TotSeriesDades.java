@@ -157,9 +157,24 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         // Finalitza el streaming del capitol numero numCap
     }
     
+    public boolean isAdmin(String userName) {
+        Iterator<Administrador> llistaAdmins = _administradors.iterator();
+        boolean found = false;
+        while (llistaAdmins.hasNext() && !found) {
+            Administrador a = llistaAdmins.next();
+            found = a.getUserName().equals(userName);
+        }
+        return found;
+    }
+    
     @Override
     public ArrayList<String> infoSerie(int numS){
         return this._cataleg.infoSerie(numS);
+    }
+    
+    @Override
+    public ArrayList<String> infoCapitol(int numC) {
+        return this._cataleg.infoCapitol(numC);
     }
     
     @Override
@@ -203,6 +218,7 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         this._cataleg.actualitzarTopCap();
     }
     
+    @Override
     public int getNumTemp(int numS) {
         return this._cataleg.getNumTemp(numS);
     }

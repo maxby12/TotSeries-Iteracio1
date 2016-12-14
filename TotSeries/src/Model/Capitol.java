@@ -55,6 +55,18 @@ public class Capitol implements Comparable<Capitol> {
 
     }
 
+    public String getDuracio() {
+        return _duracio;
+    }
+
+    public String getIdioma() {
+        return _idioma;
+    }
+
+    public String getDescripcio() {
+        return _descripcio;
+    }
+
     public float getNota() {
         return _nota;
     }
