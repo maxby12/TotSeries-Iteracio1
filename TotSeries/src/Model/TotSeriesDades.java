@@ -157,15 +157,13 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         // Finalitza el streaming del capitol numero numCap
     }
     
-    public String mostrarCataleg(){
-        return this._cataleg.toString();
+    @Override
+    public ArrayList<String> infoSerie(int numS){
+        return this._cataleg.infoSerie(numS);
     }
     
-    public String mostrarSerie(int numS){
-        return this._cataleg.mostrarSerie(numS);
-    }
-    
-    public String mostrarTemporada(int numTemp){
+    @Override
+    public ArrayList<String> mostrarTemporada(int numTemp){
         return this._cataleg.mostrarTemporada(numTemp);
     }
     /*
@@ -187,7 +185,6 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         return this._cataleg.mostrarTopCap();
     }
     
-    
     public void valorarCapitol(String userName, int numCap, int nota) {
         Valoracio v = new Valoracio(nota, new Date());
         Client c = null;
@@ -206,9 +203,13 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         this._cataleg.actualitzarTopCap();
     }
     
+    public int getNumTemp(int numS) {
+        return this._cataleg.getNumTemp(numS);
+    }
+    
     @Override
-    public ArrayList<String> getSeries() {
-        return this._cataleg.getSeries();
+    public ArrayList<String> mostrarSeries() {
+        return this._cataleg.mostrarSeries();
     }
     
     @Override

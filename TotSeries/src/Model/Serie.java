@@ -111,7 +111,7 @@ public class Serie {
        // return this._temporades.get(numTemp).getCapitol(numCap);
     }
     */
-    public String mostrarTemporada(int numTemp){
+    public ArrayList<String> mostrarTemporada(int numTemp){
         return this._temporades.get(numTemp).mostrarTemporada();
     }
     

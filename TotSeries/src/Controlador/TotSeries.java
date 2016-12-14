@@ -98,10 +98,6 @@ public class TotSeries {
         this._data.logOut();
     }
     
-    public String mirarCataleg() {
-        return this._data.mostrarCataleg();
-    }
-    
     public String visualitzarTopCapitols(String userName) {
         return this._data.mostrarTopCap();
     }
@@ -120,14 +116,6 @@ public class TotSeries {
     
     public void valorarCapitol(String userName, int numCap, int nota) {
         this._data.valorarCapitol(userName, numCap, nota);
-    }
-
-    public String mostrarTemporada(int numTemp) {
-        return this._data.mostrarTemporada(numTemp);
-    }
-
-    public String mostrarSerie(int numS) {
-        return this._data.mostrarSerie(numS);
     }
     
     public String reprodueixCapitol(String userName, int numCap) {

@@ -63,12 +63,10 @@ public class Temporada {
         return _capitols.get(numCap);
     }
     
-    public String mostrarTemporada() {
-        String st = "";
-        int i = 1;
+    public ArrayList<String> mostrarTemporada() {
+        ArrayList<String> st = new ArrayList<>();
         for (Capitol c : this._capitols){
-            st = st + i + " : " + c.toString() + "\n";
-            i++;
+            st.add(c.getNom());
         }
         return st;
     }

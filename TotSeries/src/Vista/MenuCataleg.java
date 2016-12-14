@@ -4,7 +4,6 @@ import Controlador.TotSeries;
 import Model.TotSeriesDades;
 import java.util.ArrayList;
 import javax.swing.AbstractListModel;
-import javax.swing.text.Document;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,6 +20,8 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
     private TotSeries _ctrl;
     private TotSeriesDades _model;
     private String _user;
+    private int numS;
+    private int numT;
     
     /**
      * Creates new form MenuCataleg
@@ -33,15 +34,14 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         this._model = model;
         this._user = us;
         _model.registerSeriesObserver((SeriesObserver) this);
-        ArrayList<String> series = _model.getSeries();
-        this.lstCataleg.setModel(new SeriesListModel(_model.getSeries()));
-        this.descricpioS.setDocument();
+        ArrayList<String> series = _model.mostrarSeries();
+        this.lstCataleg.setModel(new ItemListModel(series));
         
     }
     
     @Override
     public void updateSeries() {
-        this.lstCataleg.setModel(new SeriesListModel(_model.getSeries()));
+        this.lstCataleg.setModel(new ItemListModel(_model.mostrarSeries()));
     }
 
     /**
@@ -65,16 +65,24 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         jLabel4 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         lstCap = new javax.swing.JList();
-        jLabel5 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        descrSerie = new javax.swing.JTextArea();
+        jLabel9 = new javax.swing.JLabel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        nomSerie = new javax.swing.JTextArea();
+        directorSerie = new javax.swing.JScrollPane();
+        dirSerie = new javax.swing.JTextArea();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        actorsSerie = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         lstValorats = new javax.swing.JList();
         jLabel6 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Catàleg");
@@ -95,6 +103,11 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         jScrollPane1.setViewportView(lstCataleg);
 
         lstTemp.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstTemp.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstTempValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(lstTemp);
 
         lstVistos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
@@ -107,20 +120,55 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         lstCap.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane4.setViewportView(lstCap);
 
-        jLabel5.setText("Capítols");
-
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Informació Série"));
 
         jLabel7.setText("Descripció:");
 
         jLabel8.setText("Director:");
 
-        jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        descrSerie.setEditable(false);
+        descrSerie.setColumns(20);
+        descrSerie.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        descrSerie.setLineWrap(true);
+        descrSerie.setRows(5);
+        descrSerie.setWrapStyleWord(true);
+        descrSerie.setFocusable(false);
+        jScrollPane7.setViewportView(descrSerie);
 
-        jTextPane1.setEditable(false);
-        jTextPane1.setText("sasasssssssssssssssssssssssssssssafaddddddddddddddddddddddsadxxxxxxxxxxx");
-        jTextPane1.setFocusable(false);
-        jScrollPane6.setViewportView(jTextPane1);
+        jLabel9.setText("Série:");
+
+        jScrollPane6.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane6.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        nomSerie.setColumns(20);
+        nomSerie.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        nomSerie.setRows(5);
+        nomSerie.setFocusable(false);
+        jScrollPane6.setViewportView(nomSerie);
+
+        directorSerie.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        directorSerie.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        dirSerie.setColumns(20);
+        dirSerie.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        dirSerie.setRows(5);
+        dirSerie.setFocusable(false);
+        directorSerie.setViewportView(dirSerie);
+
+        jLabel10.setText("Actors:");
+
+        jScrollPane8.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane8.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+
+        actorsSerie.setEditable(false);
+        actorsSerie.setColumns(20);
+        actorsSerie.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        actorsSerie.setLineWrap(true);
+        actorsSerie.setRows(5);
+        actorsSerie.setWrapStyleWord(true);
+        actorsSerie.setFocusable(false);
+        actorsSerie.setPreferredSize(new java.awt.Dimension(166, 74));
+        jScrollPane8.setViewportView(actorsSerie);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -129,25 +177,47 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jScrollPane7)
+                                .addComponent(jScrollPane6))
+                            .addComponent(directorSerie, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addComponent(jLabel9)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE))
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
-                .addGap(51, 51, 51))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel8)
+                    .addComponent(directorSerie, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel10)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Informació Capítol"));
@@ -168,6 +238,8 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
 
         jLabel6.setText("Top Valorats");
 
+        jLabel5.setText("Capítols");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -177,7 +249,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                 .addComponent(jLabel4)
                 .addGap(442, 442, 442))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,30 +262,31 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(80, 80, 80)
                                 .addComponent(jLabel5)))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(18, 18, 18))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
+                        .addGap(82, 82, 82)
                         .addComponent(jLabel1)
-                        .addGap(137, 137, 137)
-                        .addComponent(jLabel2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 9, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(81, 81, 81)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addGap(68, 68, 68)))
+                        .addGap(66, 66, 66)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addGap(73, 73, 73))))
+                        .addGap(74, 74, 74))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,32 +296,35 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel6))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 398, Short.MAX_VALUE)
-                                    .addComponent(jScrollPane3)
-                                    .addComponent(jScrollPane5)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 11, Short.MAX_VALUE))
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 398, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane3))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(21, 21, 21))))
         );
 
         pack();
@@ -260,14 +336,43 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
             int i = this.lstCataleg.getSelectedIndex();
             if (i>=0) {
                 String serie = (String)this.lstCataleg.getModel().getElementAt(i);
-                
+                ArrayList<String> infoSerie = _model.infoSerie(i);
+                this.nomSerie.setText(serie);
+                this.descrSerie.setText(infoSerie.get(0));
+                this.dirSerie.setText(infoSerie.get(1));
+                this.actorsSerie.setText(infoSerie.get(2));
+                int n = _model.getNumTemp(i);
+                numS = i;
+                if (n>0) {
+                    ArrayList<String> temp = new ArrayList<>();
+                    for (int j = 0; j < n; j++) {
+                        temp.add("Temporada "+ (j+1) );
+                    }
+                    this.lstTemp.setModel(new ItemListModel(temp));
+                }
             }
         }
     }//GEN-LAST:event_lstCatalegValueChanged
 
+    private void lstTempValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstTempValueChanged
+        // TODO add your handling code here:
+        if (!evt.getValueIsAdjusting()) {
+            int i = this.lstTemp.getSelectedIndex();
+            if (i>=0) {
+                numT = i;
+                this.lstCap.setModel(new ItemListModel(_model.mostrarTemporada(1000*numT+numS)));
+            }
+        }
+    }//GEN-LAST:event_lstTempValueChanged
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextArea actorsSerie;
+    private javax.swing.JTextArea descrSerie;
+    private javax.swing.JTextArea dirSerie;
+    private javax.swing.JScrollPane directorSerie;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -275,6 +380,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
@@ -283,23 +389,25 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTextPane jTextPane1;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JList lstCap;
     private javax.swing.JList lstCataleg;
     private javax.swing.JList lstTemp;
     private javax.swing.JList lstValorats;
     private javax.swing.JList lstVistos;
+    private javax.swing.JTextArea nomSerie;
     // End of variables declaration//GEN-END:variables
 }
 
 
 
 
-class SeriesListModel extends AbstractListModel {
+class ItemListModel extends AbstractListModel {
     
     private ArrayList<String> list = new ArrayList<String>();
     
-    public SeriesListModel (ArrayList<String> series) {
+    public ItemListModel (ArrayList<String> series) {
         super();
         this.list = series;
     }

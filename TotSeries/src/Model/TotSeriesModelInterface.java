@@ -16,11 +16,16 @@ import java.util.ArrayList;
 public interface TotSeriesModelInterface {
     
     String getClient();
+    ArrayList<String> mostrarSeries();
+    ArrayList<String> mostrarTemporada(int numTemp);
+    ArrayList<String> infoSerie(int numS);
+    int getNumTemp(int numS);
+    
+    
     void registerClientObserver(ClientObserver o);
     void removeClientObserver(ClientObserver o);
     void notifyClientObservers();
     
-    ArrayList<String> getSeries();
     void registerSeriesObserver(SeriesObserver o);
     void removeSeriesObserver(SeriesObserver o);
     void notifySeriesObservers();

@@ -44,7 +44,7 @@ public class Cataleg {
         return c;
     }
     
-    public ArrayList<String> getSeries() {
+    public ArrayList<String> mostrarSeries() {
         ArrayList<String> c = new ArrayList<>();
         for (Serie s : this._series) {
             c.add(s.getTitol());
@@ -59,20 +59,27 @@ public class Cataleg {
         return c.getNom();
     }
     
-    public String mostrarTemporada(int numTemp){
+    public ArrayList<String> mostrarTemporada(int numTemp){
         Serie s = this._series.get(numTemp%1000);
         return s.mostrarTemporada(numTemp/1000);
     }
     
-    public String mostrarSerie(int numS) {
+    public ArrayList<String> infoSerie(int numS) {
         Serie s = this._series.get(numS);
-        String st = s.toString() + "\n0 : Tornar Menu Cataleg\n";
-        int i = 1;
-        for (Temporada t : s.getTemporades()) {
-            st = st + i + " : " + t.toString() + "\n";
-            i++;
+        ArrayList<String> info = new ArrayList<>();
+        info.add(s.getDespcripcio());
+        info.add(s.getDirector().getNom());
+        String actors = "";
+        for (Actor a : s.getActors()) {
+            actors += a.getNom() + "  ";
         }
-        return st;
+        info.add(actors);
+        return info;
+    }
+    
+    public int getNumTemp (int numS) {
+        Serie s = this._series.get(numS);
+        return s.getnTemporades();
     }
     
     public String mostrarTopCap(){
