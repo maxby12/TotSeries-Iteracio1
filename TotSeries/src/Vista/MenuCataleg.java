@@ -2,15 +2,9 @@ package Vista;
 
 import Controlador.TotSeries;
 import Model.TotSeriesDades;
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.AbstractListModel;
 import javax.swing.*;
 
 /*
@@ -28,6 +22,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
     private TotSeries _ctrl;
     private TotSeriesDades _model;
     private String _user;
+    private String _ultimCapVist;
     private int numS;
     private int numT;
     private int numCap;
@@ -47,7 +42,8 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         ArrayList<String> series = _model.mostrarSeries();
         this.lstCataleg.setModel(new ItemListModel(series));
         this.admin = _ctrl.isAdmin(_user);
-        this.btnView.setEnabled(!admin && !_user.equals(""));
+        //this.btnView.setEnabled(!admin && !_user.equals(""));
+        this.btnView.setEnabled(false);
         this.btnRate.setEnabled(false);
     }
     
@@ -381,7 +377,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
 
         jLabel5.setText("Capítols");
 
-        btnView.setText("Visualitzar");
+        btnView.setText("Reproduir");
         btnView.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnViewActionPerformed(evt);
@@ -508,6 +504,8 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                 this.idiomaCap.setText("");
                 this.descCap.setText("");
                 this.lstCap.setModel(new ItemListModel());
+                this.btnView.setEnabled(false);
+                
                 String serie = (String)this.lstCataleg.getModel().getElementAt(i);
                 ArrayList<String> infoSerie = _model.infoSerie(i);
                 this.nomSerie.setText(serie);
@@ -539,6 +537,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                 this.duracioCap.setText("");
                 this.idiomaCap.setText("");
                 this.descCap.setText("");
+                this.btnView.setEnabled(false);
             }
         }
     }//GEN-LAST:event_lstTempValueChanged
@@ -555,34 +554,57 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                 this.duracioCap.setText(infoCap.get(2));
                 this.idiomaCap.setText(infoCap.get(3));
                 this.descCap.setText(infoCap.get(4));
-                if (admin) btnRate.setEnabled(true);
+                this.btnRate.setEnabled(admin);
+                this.btnView.setEnabled(!admin && !_user.equals(""));
             }
         }
     }//GEN-LAST:event_lstCapValueChanged
 
     private void btnRateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRateActionPerformed
         // TODO add your handling code here:
-        
+        if (!admin) {
+            Valoracio v = new Valoracio(new JFrame(), true);
+            v.setVisible(true);
+            int nota = v.showDialog();
+            
+            this.btnRate.setEnabled(false);
+            if (nota != -1) {
+                // Aqui s'ha de cridar a controlador i valorar
+                
+            }
+        }
+        else {
+            // Aqui admin modifica valoracio del capítol
+        }
     }//GEN-LAST:event_btnRateActionPerformed
-
+    
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
         JFrame f = new JFrame();
-        final JDialog dialog = new JDialog(f, "Reproduint capítol", true);
-        Timer timer = new Timer(5000, new ActionListener() {
+        final Visualitzacio dialog = new Visualitzacio(f, true);
+        
+        Timer timer = new Timer(1000, new ActionListener() {
+            int t = 0;
             @Override
             public void actionPerformed(ActionEvent e) {
-                dialog.setVisible(false);
-                dialog.dispose();
+                t++;
+                if (t<5) {
+                    dialog.incrementaReproduccio();
+                }
+                else {
+                    dialog.setVisible(false);
+                    dialog.dispose();
+                }
             }
         });
-        timer.setRepeats(false);
+        timer.setRepeats(true);
         timer.start();
-        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true); // if modal, application will pause here
         
+        this._ultimCapVist = (String) lstCap.getModel().getElementAt(lstCap.getSelectedIndex());
+        this.btnRate.setEnabled(true);
+        
     }//GEN-LAST:event_btnViewActionPerformed
-
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea actorsSerie;
@@ -640,7 +662,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
 
 class ItemListModel extends AbstractListModel {
     
-    private ArrayList<String> list = new ArrayList<String>();
+    private ArrayList<String> list = new ArrayList<>();
     
     public ItemListModel () {
         super();
@@ -670,4 +692,3 @@ class ItemListModel extends AbstractListModel {
     }
     
 }
-
