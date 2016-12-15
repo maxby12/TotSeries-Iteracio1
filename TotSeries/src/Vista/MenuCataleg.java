@@ -568,8 +568,8 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
         JFrame f = new JFrame();
-        final JDialog dialog = new JDialog(f, "Test", true);
-        Timer timer = new Timer(2000, new ActionListener() {
+        final JDialog dialog = new JDialog(f, "Reproduint capítol", true);
+        Timer timer = new Timer(5000, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 dialog.setVisible(false);
@@ -578,10 +578,9 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         });
         timer.setRepeats(false);
         timer.start();
-
+        dialog.setLocationRelativeTo(null);
         dialog.setVisible(true); // if modal, application will pause here
-
-        System.out.println("Dialog closed");
+        
     }//GEN-LAST:event_btnViewActionPerformed
 
     
