@@ -534,6 +534,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                     }
                     this.lstTemp.setModel(new ItemListModel(temp));
                 }
+                this.lstValorats.clearSelection();
             }
         }
     }//GEN-LAST:event_lstCatalegValueChanged
@@ -551,6 +552,8 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 this.idiomaCap.setText("");
                 this.descCap.setText("");
                 this.btnView.setEnabled(false);
+                
+                this.lstValorats.clearSelection();
             }
         }
     }//GEN-LAST:event_lstTempValueChanged
@@ -569,6 +572,18 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 this.descCap.setText(infoCap.get(4));
                 this.btnRate.setEnabled(admin);
                 this.btnView.setEnabled(!admin && !_user.equals(""));
+                
+                int j = lstCataleg.getSelectedIndex();
+                String serie = (String)this.lstCataleg.getModel().getElementAt(j);
+                ArrayList<String> infoSerie = _model.infoSerie(j);
+                this.nomSerie.setText(serie);
+                this.descrSerie.setText(infoSerie.get(0));
+                this.dirSerie.setText(infoSerie.get(1));
+                this.actorsSerie.setText(infoSerie.get(2));
+                
+                this._ultimCapVist = (String) lstCap.getModel().getElementAt(i);
+                
+                this.lstValorats.clearSelection();
             }
         }
     }//GEN-LAST:event_lstCapValueChanged
@@ -581,12 +596,10 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
             int nota = v.showDialog();
             
             this.btnRate.setEnabled(false);
-            System.out.println("Nota " + nota);
             
             if (nota != -1) {
                 // Aqui s'ha de cridar a controlador i valorar
                 int codi = _ctrl.getCodi(_ultimCapVist);
-                System.out.println("Codi " + codi);
                 if (codi != -1) _ctrl.valorarCapitol(_user, codi, nota);
             }
         }
@@ -620,7 +633,6 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
         dialog.setVisible(true); // if modal, application will pause here
         
         this._ctrl.aturaCapitol(_user);
-        this._ultimCapVist = (String) lstCap.getModel().getElementAt(lstCap.getSelectedIndex());
         this.btnRate.setEnabled(true);
         
     }//GEN-LAST:event_btnViewActionPerformed
@@ -631,26 +643,30 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
             int i = this.lstValorats.getSelectedIndex();
             if (i>=0) {
                 String s = (String) lstValorats.getModel().getElementAt(i);
-                String nomCap = s.split(" || ")[0];
-                int codi = this._ctrl.getCodi(nomCap);
-                System.out.println(s + "  " + nomCap + "  " + codi);
-                ArrayList<String> infoCap = _model.infoCapitol(codi);
+                String[] nomCap = s.split(" -");
+                int codi = this._ctrl.getCodi(nomCap[0]);
                 
-                this.notaCap.setText(infoCap.get(0));
-                this.nomCapitol.setText(infoCap.get(1));
-                this.duracioCap.setText(infoCap.get(2));
-                this.idiomaCap.setText(infoCap.get(3));
-                this.descCap.setText(infoCap.get(4));
-                this.btnRate.setEnabled(admin);
-                this.btnView.setEnabled(!admin && !_user.equals(""));
-                
-                
-                ArrayList<String> infoSerie = _model.infoSerie(codi%1000);
-                this.nomSerie.setText(infoSerie.get(3));
-                this.descrSerie.setText(infoSerie.get(0));
-                this.dirSerie.setText(infoSerie.get(1));
-                this.actorsSerie.setText(infoSerie.get(2));                
+                if (codi != -1) {
+                    ArrayList<String> infoCap = _model.infoCapitol(codi);
+
+                    this.notaCap.setText(infoCap.get(0));
+                    this.nomCapitol.setText(infoCap.get(1));
+                    this.duracioCap.setText(infoCap.get(2));
+                    this.idiomaCap.setText(infoCap.get(3));
+                    this.descCap.setText(infoCap.get(4));
+                    this.btnRate.setEnabled(admin);
+                    this.btnView.setEnabled(!admin && !_user.equals(""));
+
+
+                    ArrayList<String> infoSerie = _model.infoSerie(codi%1000);
+                    this.nomSerie.setText(infoSerie.get(3));
+                    this.descrSerie.setText(infoSerie.get(0));
+                    this.dirSerie.setText(infoSerie.get(1));
+                    this.actorsSerie.setText(infoSerie.get(2));
+                }
+                this._ultimCapVist = ((String) lstValorats.getModel().getElementAt(i)).split(" -")[0];
             }
+            this.lstCap.clearSelection();
         }
     }//GEN-LAST:event_lstValoratsValueChanged
     

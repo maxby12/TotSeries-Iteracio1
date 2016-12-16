@@ -45,7 +45,7 @@
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
-                  <Component id="txtPas" min="-2" pref="133" max="-2" attributes="0"/>
+                  <Component id="txtPas" alignment="1" min="-2" pref="133" max="-2" attributes="0"/>
                   <Component id="txtUser" min="-2" pref="133" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
@@ -86,8 +86,6 @@
     </Component>
     <Component class="javax.swing.JTextField" name="txtUser">
     </Component>
-    <Component class="javax.swing.JTextField" name="txtPas">
-    </Component>
     <Component class="javax.swing.JButton" name="btnLog">
       <Properties>
         <Property name="text" type="java.lang.String" value="Log In"/>
@@ -105,6 +103,8 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCanActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="txtPas">
     </Component>
   </SubComponents>
 </Form>

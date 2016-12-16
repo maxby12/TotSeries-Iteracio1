@@ -91,9 +91,9 @@ public class FrmLogin extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtUser = new javax.swing.JTextField();
-        txtPas = new javax.swing.JTextField();
         btnLog = new javax.swing.JButton();
         btnCan = new javax.swing.JButton();
+        txtPas = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Inici de Sessió");
@@ -186,7 +186,7 @@ public String[] showDialog(){
     private javax.swing.JButton btnLog;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JTextField txtPas;
+    private javax.swing.JPasswordField txtPas;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

@@ -46,7 +46,7 @@ public class RankingCapitols {
     public ArrayList<String> mostrarTop() {
         ArrayList<String> s = new ArrayList<>();
         for (Capitol c : this._capitols) {
-            String st = c.getNom() + " || Nota: " + c.getNota();
+            String st = c.getNom() + " - Nota: " + String.format("%.2f", c.getNota());
             s.add(st);
         }
         return s;

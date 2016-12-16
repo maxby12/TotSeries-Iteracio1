@@ -133,7 +133,6 @@ public class Cataleg implements TopValSubjecte {
             this._topCapitols.insertCapitol(entraTop);
         }
         this._topCapitols.sort();
-        System.out.println(this._topCapitols);
         this.notifyTopValObservers();
     }
     
