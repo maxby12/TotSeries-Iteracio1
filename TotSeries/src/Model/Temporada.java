@@ -41,7 +41,8 @@ public class Temporada implements ElementCataleg {
     }
 
     
-    public ArrayList<ElementCataleg> getCapitols() {
+    @Override
+    public ArrayList<ElementCataleg> getChildren() {
         return _capitols;
     }
 

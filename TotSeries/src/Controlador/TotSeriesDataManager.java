@@ -8,6 +8,7 @@ import Model.Cataleg;
 import Model.Client;
 import Model.ClientVIP;
 import Model.Director;
+import Model.ElementCataleg;
 import Model.Productora;
 import Model.Serie;
 import Model.Temporada;
@@ -84,7 +85,7 @@ public class TotSeriesDataManager {
 	
 	public void crearSerie(String id, String title, String desc) {		
             this._codiSerie++;
-            Serie s = new Serie(title, desc, 0, 0, new ArrayList<Temporada>(), null, new ArrayList<Actor>(), null,this._codiSerie);
+            Serie s = new Serie(title, desc, 0, 0, new ArrayList<ElementCataleg>(), null, new ArrayList<Actor>(), null,this._codiSerie);
             this._serieActual = s;
             this._cataleg.addSerie(s);
             
@@ -110,7 +111,7 @@ public class TotSeriesDataManager {
             this._codiTemporada = nt-1;
             Temporada t = new Temporada(nt, parseInt(numEpisodis), _codiSerie);
             this._tempActual = t;
-            this._serieActual.addTemporada(t);
+            this._serieActual.add(t);
             
 
             /*
@@ -137,7 +138,7 @@ public class TotSeriesDataManager {
             String[] parts = data.split("/");
             Date d = new Date(parseInt(parts[0]), parseInt(parts[1]), parseInt(parts[2]));
             Capitol c = new Capitol(title, duration, idioma, description, 0f, d, this._numCapitol, this._codiTemporada, this._codiSerie);
-            this._tempActual.addCapitol(c);
+            this._tempActual.add(c);
             
             /*
 		System.out.println("\nTitol: " + title);

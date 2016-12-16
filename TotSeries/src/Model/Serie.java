@@ -100,10 +100,11 @@ public class Serie implements ElementCataleg {
         return _temporades.get(i);
     }
 
-    public ArrayList<ElementCataleg> getTemporades() {
+    @Override
+    public ArrayList<ElementCataleg> getChildren() {
         return _temporades;
     }
-
+    
     public void setTemporades(ArrayList<ElementCataleg> _temporades) {
         this._temporades = _temporades;
     }

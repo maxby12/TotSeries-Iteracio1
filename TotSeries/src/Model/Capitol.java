@@ -110,4 +110,9 @@ public class Capitol implements Comparable<Capitol>, ElementCataleg {
     public void remove(ElementCataleg e) {
         
     }
+    
+    @Override
+    public ArrayList<ElementCataleg> getChildren() {
+        return null;
+    }
 }

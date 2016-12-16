@@ -53,7 +53,7 @@ public class Cataleg implements TopValSubjecte {
     
     public ArrayList<String> mostrarTemporada(int numTemp){
         ElementCataleg s = _series.get(numTemp%1000);
-        ElementCataleg t = s.getChild(numTemp%1000);
+        ElementCataleg t = s.getChild(numTemp/1000);
         return t.getInfo();
     }
     
@@ -89,17 +89,17 @@ public class Cataleg implements TopValSubjecte {
     public void actualitzarTopCap() {
         float notaMin = this._topCapitols.getNotaMin();
         Capitol entraTop = null;
-        for (Serie s : this._series) {
-            for (Temporada t : s.getTemporades()) {
-                for (Capitol c : t.getCapitols()) {
-                    if (c.getNota() > notaMin) {
+        for (ElementCataleg s : this._series) {
+            for (ElementCataleg t : s.getChildren()) {
+                for (ElementCataleg c : t.getChildren()) {
+                    if (((Capitol)c).getNota() > notaMin) {
                         Iterator<Capitol> llistaCapitolsIterator = this._topCapitols.getCapitols().iterator();
                         boolean found = false;
                         while (llistaCapitolsIterator.hasNext() && !found) {
                             Capitol temp = llistaCapitolsIterator.next();
                             found = (c.getNom().equals(temp.getNom()));
                         }
-                        if (!found) entraTop = c;
+                        if (!found) entraTop = (Capitol) c;
                     }
                 }
             }
@@ -113,9 +113,9 @@ public class Cataleg implements TopValSubjecte {
     
     public int getCodi(String nomCap) {
         
-        for (Serie s : this._series) {
-            for (Temporada t : s.getTemporades()) {
-                for (Capitol c : t.getCapitols()) {
+        for (ElementCataleg s : this._series) {
+            for (ElementCataleg t : s.getChildren()) {
+                for (ElementCataleg c : t.getChildren()) {
                     if (c.getNom().equals(nomCap)) return c.getCodi();
                 }
             }
