@@ -108,7 +108,7 @@ public class TotSeriesDataManager {
             int nt = parseInt(numTemporada);
             this._numCapitol = -1;
             this._codiTemporada = nt-1;
-            Temporada t = new Temporada(nt, parseInt(numEpisodis));
+            Temporada t = new Temporada(nt, parseInt(numEpisodis), _codiSerie);
             this._tempActual = t;
             this._serieActual.addTemporada(t);
             

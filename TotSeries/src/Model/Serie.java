@@ -11,20 +11,20 @@ import java.util.ArrayList;
  *
  * @author Raül
  */
-public class Serie {
-    private String _titol;
-    private String _despcripcio;
+public class Serie implements ElementCataleg {
+    private String _nom;
+    private String _descripcio;
     private int _nTemporades;
     private float _nota;
-    private ArrayList<Temporada> _temporades;
+    private ArrayList<ElementCataleg> _temporades;
     private Director _director;
     private ArrayList<Actor> _actors;
     private Productora _productora;
     private int _num;
-
-    public Serie(String _titol, String _despcripcio, int _nTemporades, float _nota, ArrayList<Temporada> _temporades, Director _director, ArrayList<Actor> _actors, Productora _productora, int _codi) {
-        this._titol = _titol;
-        this._despcripcio = _despcripcio;
+    
+    public Serie(String _titol, String _despcripcio, int _nTemporades, float _nota, ArrayList<ElementCataleg> _temporades, Director _director, ArrayList<Actor> _actors, Productora _productora, int _codi) {
+        this._nom = _titol;
+        this._descripcio = _despcripcio;
         this._nota = _nota;
         this._temporades = _temporades;
         this._director = _director;
@@ -34,7 +34,7 @@ public class Serie {
         this._nTemporades = this._temporades.size();
     }
     
-    public void addTemporada(Temporada t) {
+    public void add(ElementCataleg t) {
         this._temporades.add(t);
         this._nTemporades++;
     }
@@ -43,20 +43,40 @@ public class Serie {
         this._actors.add(a);
     }
     
-    public String getTitol() {
-        return _titol;
+    @Override
+    public String getNom() {
+        return _nom;
+    }
+    
+    @Override
+    public int getCodi() {
+        return _num;
+    }
+    
+    @Override
+    public ArrayList<String> getInfo() {
+        ArrayList<String> info = new ArrayList<>();
+        info.add(_descripcio);
+        info.add(_director.getNom());
+        String actors = "";
+        for (Actor a : _actors) {
+            actors += a.getNom() + "  ";
+        }
+        info.add(actors);
+        info.add(_nom);
+        return info;
     }
 
-    public void setTitol(String _titol) {
-        this._titol = _titol;
+    public void setNom(String _titol) {
+        this._nom = _titol;
     }
 
-    public String getDespcripcio() {
-        return _despcripcio;
+    public String getDescripcio() {
+        return _descripcio;
     }
 
-    public void setDespcripcio(String _despcripcio) {
-        this._despcripcio = _despcripcio;
+    public void setDescripcio(String _descripcio) {
+        this._descripcio = _descripcio;
     }
 
     public int getnTemporades() {
@@ -74,12 +94,17 @@ public class Serie {
     public void setNota(float _nota) {
         this._nota = _nota;
     }
+    
+    @Override
+    public ElementCataleg getChild (int i) {
+        return _temporades.get(i);
+    }
 
-    public ArrayList<Temporada> getTemporades() {
+    public ArrayList<ElementCataleg> getTemporades() {
         return _temporades;
     }
 
-    public void setTemporades(ArrayList<Temporada> _temporades) {
+    public void setTemporades(ArrayList<ElementCataleg> _temporades) {
         this._temporades = _temporades;
     }
 
@@ -112,12 +137,12 @@ public class Serie {
     }
     */
     public ArrayList<String> mostrarTemporada(int numTemp){
-        return this._temporades.get(numTemp).mostrarTemporada();
-    }
-    
-    @Override
-    public String toString() {
-        return "Serie{" + "_titol=" + _titol + ", _despcripcio=" + _despcripcio + ", _nTemporades=" + _nTemporades + ", _nota=" + _nota + ", _director=" + _director + ", _productora=" + _productora + '}';
+        return this._temporades.get(numTemp).getInfo();
     }
 
+    @Override
+    public void remove(ElementCataleg e) {
+        this._temporades.remove(e);
+    }
+    
 }

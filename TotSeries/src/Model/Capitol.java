@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Albert
  */
-public class Capitol implements Comparable<Capitol> {
+public class Capitol implements Comparable<Capitol>, ElementCataleg {
     
     private String _nom;
     private String _duracio;
@@ -39,6 +39,7 @@ public class Capitol implements Comparable<Capitol> {
         this._numS = _numS;
     }
 
+    @Override
     public int getCodi(){
         return  1000000*this._num+(1000*(this._numTemp) + this._numS);
     }
@@ -71,13 +72,20 @@ public class Capitol implements Comparable<Capitol> {
         return _nota;
     }
   
+    @Override
     public String getNom() {
         return _nom;
     }
     
     @Override
-    public String toString() {
-        return "Capitol{" + "_nom=" + _nom + ", _duracio=" + _duracio + ", _idioma=" + _idioma + ", _descripcio=" + _descripcio + ", _nota=" + _nota + '}';
+    public ArrayList<String> getInfo() {
+        ArrayList<String> info = new ArrayList<>();
+        info.add(Float.toString(_nota));
+        info.add(_nom);
+        info.add(_duracio);
+        info.add(_idioma);
+        info.add(_descripcio);
+        return info;
     }
 
     @Override
@@ -86,5 +94,20 @@ public class Capitol implements Comparable<Capitol> {
         if (this._nota > nota) return -1;
         else if (this._nota < nota) return 1;
         else return 0;
+    }
+
+    @Override
+    public ElementCataleg getChild(int i) {
+        return null;
+    }
+
+    @Override
+    public void add(ElementCataleg e) {
+        
+    }
+
+    @Override
+    public void remove(ElementCataleg e) {
+        
     }
 }

@@ -11,22 +11,24 @@ import java.util.ArrayList;
  *
  * @author Albert
  */
-public class Temporada {
+public class Temporada implements ElementCataleg {
     
-    private ArrayList<Capitol> _capitols;
+    private ArrayList<ElementCataleg> _capitols;
     private int _num;
+    private int _numS;
     private int _nCapTemporada;
     private float _nota;
     
-    public Temporada(int _num, int _numCap) {
-        this._capitols = new ArrayList<Capitol>();
+    public Temporada(int _num, int _numCap, int _numS) {
+        this._capitols = new ArrayList<>();
         this._num = _num;
+        this._numS = _numS;
         this._nCapTemporada = _numCap;
         this._nota = 0.0f;
         
     }
     
-    public void addCapitol(Capitol c) {
+    public void add(ElementCataleg c) {
         this._capitols.add(c);
     }
     
@@ -39,16 +41,17 @@ public class Temporada {
     }
 
     
-    public ArrayList<Capitol> getCapitols() {
+    public ArrayList<ElementCataleg> getCapitols() {
         return _capitols;
     }
 
-    public void setCapitols(ArrayList<Capitol> _capitols) {
+    public void setCapitols(ArrayList<ElementCataleg> _capitols) {
         this._capitols = _capitols;
     }
     
-    public int getNum() {
-        return _num;
+    @Override
+    public int getCodi() {
+        return 1000*_num+_numS;
     }
 
     public float getNota() {
@@ -59,21 +62,28 @@ public class Temporada {
         this._nota = _nota;
     }
     
-    public Capitol getCapitol(int numCap) {
+    @Override
+    public ElementCataleg getChild(int numCap) {
         return _capitols.get(numCap);
     }
     
-    public ArrayList<String> mostrarTemporada() {
+    @Override
+    public ArrayList<String> getInfo() {
         ArrayList<String> st = new ArrayList<>();
-        for (Capitol c : this._capitols){
+        for (ElementCataleg c : this._capitols){
             st.add(c.getNom());
         }
         return st;
     }
     
     @Override
-    public String toString() {
-        return "Temporada{" + "_num=" + _num + ", _nota=" + _nota + '}';
+    public String getNom() {
+        return String.valueOf(_num);
+    }
+
+    @Override
+    public void remove(ElementCataleg e) {
+        this._capitols.remove(e);
     }
     
 }

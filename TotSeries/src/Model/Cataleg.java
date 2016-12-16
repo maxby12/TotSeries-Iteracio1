@@ -14,17 +14,17 @@ import java.util.Iterator;
  * @author Albert
  */
 public class Cataleg implements TopValSubjecte {
-    private ArrayList<Serie> _series;
+    private ArrayList<ElementCataleg> _series;
     private RankingCapitols _topCapitols;
     private RankingSeries _topMillorsSeries;
     private RankingSeries _topPitjorsSeries;
     private ArrayList<TopValObserver> _topValObservers = new ArrayList<TopValObserver>();
-
+    
     public Cataleg() {
         this._topCapitols = new RankingCapitols();
         this._topMillorsSeries = new RankingSeries();
         this._topPitjorsSeries = new RankingSeries();
-        this._series = new ArrayList<Serie>();
+        this._series = new ArrayList<ElementCataleg>();
     }
     
     public void addSerie(Serie s) {
@@ -34,36 +34,27 @@ public class Cataleg implements TopValSubjecte {
     public RankingCapitols getTopCapitols() {
         return _topCapitols;
     }
-    
-    @Override
-    public String toString() {
-        String c = "";
-        int i = 1;
-        for (Serie s : this._series) {
-            c = c + i + " : " + s.toString() + "\n";
-            i++;
-        }
-        return c;
-    }
+
     
     public ArrayList<String> mostrarSeries() {
         ArrayList<String> c = new ArrayList<>();
-        for (Serie s : this._series) {
-            c.add(s.getTitol());
+        for (ElementCataleg s : this._series) {
+            c.add(s.getNom());
         }
         return c;
     }
     
     public String mostrarCapitol(int numCap){
-        Serie s = this._series.get(numCap%1000);
-        Temporada t = s.getTemporades().get((numCap/1000)%1000);
-        Capitol c = t.getCapitol(numCap/1000000);
+        ElementCataleg s = _series.get(numCap%1000);
+        ElementCataleg t = s.getChild((numCap/1000)%1000);
+        ElementCataleg c = t.getChild(numCap/1000000);
         return c.getNom();
     }
     
     public ArrayList<String> mostrarTemporada(int numTemp){
-        Serie s = this._series.get(numTemp%1000);
-        return s.mostrarTemporada(numTemp/1000);
+        ElementCataleg s = _series.get(numTemp%1000);
+        ElementCataleg t = s.getChild(numTemp%1000);
+        return t.getInfo();
     }
     
     public ArrayList<String> mostrarValorats() {
@@ -71,44 +62,28 @@ public class Cataleg implements TopValSubjecte {
     }
     
     public ArrayList<String> infoSerie(int numS) {
-        Serie s = this._series.get(numS);
-        ArrayList<String> info = new ArrayList<>();
-        info.add(s.getDespcripcio());
-        info.add(s.getDirector().getNom());
-        String actors = "";
-        for (Actor a : s.getActors()) {
-            actors += a.getNom() + "  ";
-        }
-        info.add(actors);
-        info.add(s.getTitol());
-        return info;
+        ElementCataleg s = this._series.get(numS);
+        return s.getInfo();
     }
     
     public int getNumTemp (int numS) {
-        Serie s = this._series.get(numS);
+        Serie s = (Serie)this._series.get(numS);
         return s.getnTemporades();
     }
     
     
     public Capitol getCapitol(int numCap) {
-        Serie s = this._series.get(numCap%1000);
-        Temporada t = s.getTemporades().get((numCap/1000)%1000);
-        Capitol c = t.getCapitol(numCap/1000000);
+        ElementCataleg s = this._series.get(numCap%1000);
+        ElementCataleg t = s.getChild((numCap/1000)%1000);
+        Capitol c = (Capitol) t.getChild(numCap/1000000);
         return c;
     }
     
     public ArrayList<String> infoCapitol(int numCap) {
-        Serie s = this._series.get(numCap%1000);
-        Temporada t = s.getTemporades().get((numCap/1000)%1000);
-        Capitol c = t.getCapitol(numCap/1000000);
-        
-        ArrayList<String> info = new ArrayList<>();
-        info.add(Float.toString(c.getNota()));
-        info.add(c.getNom());
-        info.add(c.getDuracio());
-        info.add(c.getIdioma());
-        info.add(c.getDescripcio());
-        return info;
+        ElementCataleg s = _series.get(numCap%1000);
+        ElementCataleg t = s.getChild((numCap/1000)%1000);
+        ElementCataleg c = t.getChild(numCap/1000000);
+        return c.getInfo();
     }
     
     public void actualitzarTopCap() {
