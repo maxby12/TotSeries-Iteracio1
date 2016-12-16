@@ -43,6 +43,15 @@ public class RankingCapitols {
         Collections.sort(this._capitols);
     }
     
+    public ArrayList<String> mostrarTop() {
+        ArrayList<String> s = new ArrayList<>();
+        for (Capitol c : this._capitols) {
+            String st = c.getNom() + " || Nota: " + c.getNota();
+            s.add(st);
+        }
+        return s;
+    }
+    
     @Override
     public String toString() {
         String st = "";

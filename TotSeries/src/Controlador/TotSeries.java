@@ -98,10 +98,6 @@ public class TotSeries {
         this._data.logOut();
     }
     
-    public String visualitzarTopCapitols(String userName) {
-        return this._data.mostrarTopCap();
-    }
-    
     public void registrarUsuari(String userName,String password,String nom,String nacionalitat,String dia, String mes, String any) {
         this._data.registrarUsuari(userName, password, nom, nacionalitat, new Date(Integer.parseInt(dia), Integer.parseInt(mes), Integer.parseInt(any))); 
     }
@@ -118,12 +114,16 @@ public class TotSeries {
         this._data.valorarCapitol(userName, numCap, nota);
     }
     
-    public String reprodueixCapitol(String userName, int numCap) {
-        return this._data.iniciarStreaming(userName, numCap);
+    public void reprodueixCapitol(String userName) {
+        this._data.iniciarStreaming(userName);
     }
     
     public int getCodi(int numCap){
         return this._data.getCataleg().getTopCapitols().getCapitols().get(numCap).getCodi();
+    }
+    
+    public int getCodi(String nomCap) {
+        return this._data.getCataleg().getCodi(nomCap);
     }
     
     public boolean isAdmin(String userName) {

@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
 import Vista.SeriesObserver;
+import Vista.TopValObserver;
 
 /**
  *
@@ -128,7 +129,7 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         return status.equals(View.NOEMISSIO);
     }
     
-    public String iniciarStreaming(String userName, int numCap){
+    public void iniciarStreaming(String userName){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         boolean found = false;
         while (llistaClientsIterator.hasNext() && !found) {
@@ -138,9 +139,6 @@ public class TotSeriesDades implements TotSeriesModelInterface {
                 c.incrementarFactura();
             }
         }
-        // Inicia el streaming del capitol numero numCap
-        String cap = this._cataleg.mostrarCapitol(numCap);
-        return cap;
         
     }
     
@@ -181,6 +179,12 @@ public class TotSeriesDades implements TotSeriesModelInterface {
     public ArrayList<String> mostrarTemporada(int numTemp){
         return this._cataleg.mostrarTemporada(numTemp);
     }
+    
+    @Override
+    public ArrayList<String> mostrarValorats(){
+        return this._cataleg.mostrarValorats();
+    }
+    
     /*
     public String getCapitol(int numCap){
         
@@ -194,10 +198,6 @@ public class TotSeriesDades implements TotSeriesModelInterface {
             found = (c.getUsername()).equals(userName);
         }
         return found;
-    }
-    
-    public String mostrarTopCap(){
-        return this._cataleg.mostrarTopCap();
     }
     
     public void valorarCapitol(String userName, int numCap, int nota) {
@@ -249,7 +249,7 @@ public class TotSeriesDades implements TotSeriesModelInterface {
     @Override
     public void notifyClientObservers() {
             for(int i = 0; i < _clientObservers.size(); i++) {
-                    ClientObserver observer = (ClientObserver)_clientObservers.get(i);
+                    ClientObserver observer = _clientObservers.get(i);
                     observer.updateClient();
             }
     }
@@ -270,9 +270,21 @@ public class TotSeriesDades implements TotSeriesModelInterface {
     @Override
     public void notifySeriesObservers() {
             for(int i = 0; i < _seriesObservers.size(); i++) {
-                    SeriesObserver observer = (SeriesObserver)_seriesObservers.get(i);
+                    SeriesObserver observer = _seriesObservers.get(i);
                     observer.updateSeries();
             }
+    }
+    
+    @Override
+    public void registerTopValObserver(TopValObserver o) {
+        this._cataleg.registerTopValObserver(o);
+    }
+    
+    
+    @Override
+    public void removeTopValObserver(TopValObserver o) {
+        this._cataleg.removeTopValObserver(o);
+        
     }
     
 }

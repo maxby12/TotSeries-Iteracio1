@@ -7,6 +7,7 @@ package Model;
 
 import Vista.ClientObserver;
 import Vista.SeriesObserver;
+import Vista.TopValObserver;
 import java.util.ArrayList;
 
 /**
@@ -19,6 +20,7 @@ public interface TotSeriesModelInterface {
     ArrayList<String> mostrarSeries();
     int getNumTemp(int numS);
     ArrayList<String> mostrarTemporada(int numTemp);
+    ArrayList<String> mostrarValorats();
     ArrayList<String> infoCapitol(int numC);
     ArrayList<String> infoSerie(int numS);
 
@@ -31,5 +33,8 @@ public interface TotSeriesModelInterface {
     void registerSeriesObserver(SeriesObserver o);
     void removeSeriesObserver(SeriesObserver o);
     void notifySeriesObservers();
+    
+    void registerTopValObserver(TopValObserver o);
+    void removeTopValObserver(TopValObserver o);
     
 }

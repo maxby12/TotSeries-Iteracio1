@@ -17,7 +17,7 @@ import javax.swing.*;
  *
  * @author Raül
  */
-public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
+public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, TopValObserver {
     
     private TotSeries _ctrl;
     private TotSeriesDades _model;
@@ -38,11 +38,13 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         this._ctrl = ctrl;
         this._model = model;
         this._user = us;
+        
         _model.registerSeriesObserver((SeriesObserver) this);
+        _model.registerTopValObserver((TopValObserver) this);
+        
         ArrayList<String> series = _model.mostrarSeries();
         this.lstCataleg.setModel(new ItemListModel(series));
         this.admin = _ctrl.isAdmin(_user);
-        //this.btnView.setEnabled(!admin && !_user.equals(""));
         this.btnView.setEnabled(false);
         this.btnRate.setEnabled(false);
     }
@@ -51,7 +53,12 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
     public void updateSeries() {
         this.lstCataleg.setModel(new ItemListModel(_model.mostrarSeries()));
     }
-
+    
+    @Override
+    public void updateTopVal() {
+        this.lstValorats.setModel(new ItemListModel(_model.mostrarValorats()));
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -371,6 +378,11 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         );
 
         lstValorats.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstValorats.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstValoratsValueChanged(evt);
+            }
+        });
         jScrollPane5.setViewportView(lstValorats);
 
         jLabel6.setText("Top Valorats");
@@ -428,20 +440,21 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(69, 69, 69)
-                                .addComponent(jLabel3)))
+                        .addGap(70, 70, 70)
+                        .addComponent(jLabel3)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56))))
+                        .addGap(66, 66, 66))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addContainerGap())))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
@@ -458,7 +471,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 20, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(jLabel6)
@@ -476,17 +489,17 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(btnView)
+                                    .addComponent(btnRate)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnView)
-                            .addComponent(btnRate))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
@@ -548,7 +561,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
             int i = this.lstCap.getSelectedIndex();
             if (i>=0) {
                 numCap = i;
-                ArrayList<String> infoCap = _model.infoCapitol(i);
+                ArrayList<String> infoCap = _model.infoCapitol(1000000*numCap+1000*numT+numS);
                 this.notaCap.setText(infoCap.get(0));
                 this.nomCapitol.setText(infoCap.get(1));
                 this.duracioCap.setText(infoCap.get(2));
@@ -568,9 +581,13 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
             int nota = v.showDialog();
             
             this.btnRate.setEnabled(false);
+            System.out.println("Nota " + nota);
+            
             if (nota != -1) {
                 // Aqui s'ha de cridar a controlador i valorar
-                
+                int codi = _ctrl.getCodi(_ultimCapVist);
+                System.out.println("Codi " + codi);
+                if (codi != -1) _ctrl.valorarCapitol(_user, codi, nota);
             }
         }
         else {
@@ -580,6 +597,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
     
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
+        this._ctrl.reprodueixCapitol(_user);
         JFrame f = new JFrame();
         final Visualitzacio dialog = new Visualitzacio(f, true);
         
@@ -601,10 +619,40 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver {
         timer.start();
         dialog.setVisible(true); // if modal, application will pause here
         
+        this._ctrl.aturaCapitol(_user);
         this._ultimCapVist = (String) lstCap.getModel().getElementAt(lstCap.getSelectedIndex());
         this.btnRate.setEnabled(true);
         
     }//GEN-LAST:event_btnViewActionPerformed
+
+    private void lstValoratsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstValoratsValueChanged
+        // TODO add your handling code here:
+        if (!evt.getValueIsAdjusting()) {
+            int i = this.lstValorats.getSelectedIndex();
+            if (i>=0) {
+                String s = (String) lstValorats.getModel().getElementAt(i);
+                String nomCap = s.split(" || ")[0];
+                int codi = this._ctrl.getCodi(nomCap);
+                System.out.println(s + "  " + nomCap + "  " + codi);
+                ArrayList<String> infoCap = _model.infoCapitol(codi);
+                
+                this.notaCap.setText(infoCap.get(0));
+                this.nomCapitol.setText(infoCap.get(1));
+                this.duracioCap.setText(infoCap.get(2));
+                this.idiomaCap.setText(infoCap.get(3));
+                this.descCap.setText(infoCap.get(4));
+                this.btnRate.setEnabled(admin);
+                this.btnView.setEnabled(!admin && !_user.equals(""));
+                
+                
+                ArrayList<String> infoSerie = _model.infoSerie(codi%1000);
+                this.nomSerie.setText(infoSerie.get(3));
+                this.descrSerie.setText(infoSerie.get(0));
+                this.dirSerie.setText(infoSerie.get(1));
+                this.actorsSerie.setText(infoSerie.get(2));                
+            }
+        }
+    }//GEN-LAST:event_lstValoratsValueChanged
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea actorsSerie;

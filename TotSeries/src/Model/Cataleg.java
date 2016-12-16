@@ -5,6 +5,7 @@
  */
 package Model;
 
+import Vista.TopValObserver;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -12,11 +13,12 @@ import java.util.Iterator;
  *
  * @author Albert
  */
-public class Cataleg {
+public class Cataleg implements TopValSubjecte {
     private ArrayList<Serie> _series;
     private RankingCapitols _topCapitols;
     private RankingSeries _topMillorsSeries;
     private RankingSeries _topPitjorsSeries;
+    private ArrayList<TopValObserver> _topValObservers = new ArrayList<TopValObserver>();
 
     public Cataleg() {
         this._topCapitols = new RankingCapitols();
@@ -64,6 +66,10 @@ public class Cataleg {
         return s.mostrarTemporada(numTemp/1000);
     }
     
+    public ArrayList<String> mostrarValorats() {
+        return this._topCapitols.mostrarTop();
+    }
+    
     public ArrayList<String> infoSerie(int numS) {
         Serie s = this._series.get(numS);
         ArrayList<String> info = new ArrayList<>();
@@ -74,6 +80,7 @@ public class Cataleg {
             actors += a.getNom() + "  ";
         }
         info.add(actors);
+        info.add(s.getTitol());
         return info;
     }
     
@@ -82,9 +89,6 @@ public class Cataleg {
         return s.getnTemporades();
     }
     
-    public String mostrarTopCap(){
-        return this._topCapitols.toString();
-    }
     
     public Capitol getCapitol(int numCap) {
         Serie s = this._series.get(numCap%1000);
@@ -117,11 +121,10 @@ public class Cataleg {
                         Iterator<Capitol> llistaCapitolsIterator = this._topCapitols.getCapitols().iterator();
                         boolean found = false;
                         while (llistaCapitolsIterator.hasNext() && !found) {
-                            entraTop = llistaCapitolsIterator.next();
-                            found = (c.getNom().equals(entraTop.getNom()));
+                            Capitol temp = llistaCapitolsIterator.next();
+                            found = (c.getNom().equals(temp.getNom()));
                         }
                         if (!found) entraTop = c;
-                        else entraTop = null;
                     }
                 }
             }
@@ -130,6 +133,43 @@ public class Cataleg {
             this._topCapitols.insertCapitol(entraTop);
         }
         this._topCapitols.sort();
+        System.out.println(this._topCapitols);
+        this.notifyTopValObservers();
     }
+    
+    public int getCodi(String nomCap) {
+        
+        for (Serie s : this._series) {
+            for (Temporada t : s.getTemporades()) {
+                for (Capitol c : t.getCapitols()) {
+                    if (c.getNom().equals(nomCap)) return c.getCodi();
+                }
+            }
+        }
+        return -1;
+    }
+    
+    
+    @Override
+    public void registerTopValObserver(TopValObserver o) {
+        this._topValObservers.add(o);
+    }
+
+    @Override
+    public void removeTopValObserver(TopValObserver o) {
+        int i = _topValObservers.indexOf(o);
+        if (i >= 0) {
+                _topValObservers.remove(i);
+        }
+    }
+    
+    @Override
+    public void notifyTopValObservers() {
+            for(int i = 0; i < _topValObservers.size(); i++) {
+                    TopValObserver observer = _topValObservers.get(i);
+                    observer.updateTopVal();
+            }
+    }
+    
     
 }
