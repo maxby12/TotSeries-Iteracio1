@@ -40,7 +40,7 @@ public class RankingCapitols {
     }
     
     public void sort() {
-        Collections.sort(this._capitols);
+        Collections.sort(this._capitols, new ComparatorNota());
     }
     
     public ArrayList<String> mostrarTop() {

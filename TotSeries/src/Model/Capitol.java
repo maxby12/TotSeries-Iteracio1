@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author Albert
  */
-public class Capitol implements Comparable<Capitol>, ElementCataleg {
+public class Capitol implements ElementCataleg {
     
     private String _nom;
     private String _duracio;
@@ -97,13 +97,7 @@ public class Capitol implements Comparable<Capitol>, ElementCataleg {
         return info;
     }
 
-    @Override
-    public int compareTo(Capitol t) {
-        float nota = t.getNota();
-        if (this._nota > nota) return -1;
-        else if (this._nota < nota) return 1;
-        else return 0;
-    }
+    
 
     @Override
     public ElementCataleg getChild(int i) {

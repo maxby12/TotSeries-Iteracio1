@@ -30,7 +30,6 @@ public class RankingCapitolsVistos {
     }*/
     
     public void insertCapitol(Capitol c) {
-        System.out.println("mec");
         if (this._capitols.size() == 10) {
             this._capitols.remove(this._capitols.size()-1);
         }
