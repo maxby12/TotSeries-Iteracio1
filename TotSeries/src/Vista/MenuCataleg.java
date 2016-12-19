@@ -46,8 +46,13 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
         ArrayList<String> series = _model.mostrarSeries();
         this.lstCataleg.setModel(new ItemListModel(series));
         this.admin = _ctrl.isAdmin(_user);
-        this.btnView.setEnabled(false);
-        this.btnRate.setEnabled(false);
+        if (!admin) {
+            this.btnView.setEnabled(false);
+            this.btnRate.setEnabled(false);
+        }else{
+            this.btnView.setEnabled(false);
+            this.btnRate.setEnabled(true);  
+        }
     }
     
     @Override
@@ -620,6 +625,15 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
         }
         else {
             // Aqui admin modifica valoracio del capítol
+            Valoracio v = new Valoracio(new JFrame(), true);
+            v.setVisible(true);
+            int nota = v.showDialog();
+
+            if (nota != -1) {
+                // Aqui s'ha de cridar a controlador i valorar
+                int codi = _ctrl.getCodi(_ultimCapVist); 
+                if (codi != -1) _ctrl.valorarCapitol(_user, codi, nota);
+            }
         }
     }//GEN-LAST:event_btnRateActionPerformed
     
