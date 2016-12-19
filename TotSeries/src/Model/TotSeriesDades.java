@@ -96,12 +96,22 @@ public class TotSeriesDades implements TotSeriesModelInterface {
     public void logIn(String userName, String password){
         Iterator<Client> llistaClientsIterator = _llistaClients.iterator();
         Client c = null;
-        boolean found = false;
-        while (llistaClientsIterator.hasNext() && !found) {
+        Administrador a = null;
+        boolean foundC = false;
+        boolean foundA = false;
+        while (llistaClientsIterator.hasNext() && !foundC) {
             c = llistaClientsIterator.next();
-            found = (c.getUsername()).equals(userName) ;
+            foundC = (c.getUsername()).equals(userName) ;
         }
-        if (found) {
+        if (!foundC) {
+            Iterator<Administrador> llistaAdminsIterator = _administradors.iterator();
+            while (llistaAdminsIterator.hasNext() && !foundA) {
+                a = llistaAdminsIterator.next();
+                foundA = (a.getUserName()).equals(userName);
+            }
+        }
+        
+        if (foundC) {
             if (c.checkPassword(password)) {
                 this._client = userName;
                 this.notifyClientObservers();
@@ -114,10 +124,24 @@ public class TotSeriesDades implements TotSeriesModelInterface {
             }
         }
         else {
-            JOptionPane.showMessageDialog(null,
-            "Nom d'usuari no registrat",
-            "Procés Cancel·lat",
-            JOptionPane.ERROR_MESSAGE);
+            if (foundA) {
+                if (a.checkPassword(password)) {
+                    this._client = userName;
+                    this.notifyClientObservers();
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,
+                    "Contrasenya erronea",
+                    "Procés Cancel·lat",
+                    JOptionPane.ERROR_MESSAGE);
+                }
+            }
+            else {
+                JOptionPane.showMessageDialog(null,
+                "Nom d'usuari no registrat",
+                "Procés Cancel·lat",
+                JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
     

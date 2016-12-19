@@ -23,7 +23,11 @@ public class Administrador {
     public String getUserName() {
         return _userName;
     }
-
+    
+    public boolean checkPassword(String password) {
+        return this._password.equals(password);
+    }
+    
     @Override
     public String toString() {
         return "Administrador{" + "_nom=" + _nom + ", _userName=" + _userName + '}';

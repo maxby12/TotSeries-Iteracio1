@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package Model;
 
 import java.util.Date;
@@ -14,7 +14,7 @@ import static org.junit.Assert.*;
 /**
  *
  * @author Albert
- */
+ 
 public class CapitolTest {
     
     private Capitol c1, c2, c3, c4;
@@ -38,7 +38,7 @@ public class CapitolTest {
 
     /**
      * Test of getCodi method, of class Capitol.
-     */
+     
     @Test
     public void testGetCodi() {
         // Estrcutura del codi: CCCTTTSSS on CCC=numero capitol, TTT=numero temporada i SSS=numero serie
@@ -51,7 +51,7 @@ public class CapitolTest {
     
     /**
      * Test of compareTo method, of class Capitol.
-     */
+     
     @Test
     public void testCompareTo() {
         // CompareTo implementat per a ordenar llista Capitols descendentment per nota
@@ -70,3 +70,4 @@ public class CapitolTest {
     }
     
 }
+*/

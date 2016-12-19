@@ -43,16 +43,13 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
         _model.registerTopValObserver((TopValObserver) this);
         _model.registerTopVistosObserver((TopVistosObserver) this);
         
-        ArrayList<String> series = _model.mostrarSeries();
-        this.lstCataleg.setModel(new ItemListModel(series));
-        this.admin = _ctrl.isAdmin(_user);
-        if (!admin) {
-            this.btnView.setEnabled(false);
-            this.btnRate.setEnabled(false);
-        }else{
-            this.btnView.setEnabled(false);
-            this.btnRate.setEnabled(true);  
-        }
+        this.lstCataleg.setModel(new ItemListModel(_model.mostrarSeries()));
+        this.lstValorats.setModel(new ItemListModel(_model.mostrarValorats()));
+        this.lstVistos.setModel(new ItemListModel(_model.mostrarVistos()));
+        
+        this.admin = _model.isAdmin(_user);
+        this.btnView.setEnabled(false);
+        this.btnRate.setEnabled(false);
     }
     
     @Override
@@ -535,6 +532,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 this.descCap.setText("");
                 this.lstCap.setModel(new ItemListModel());
                 this.btnView.setEnabled(false);
+                this.btnRate.setEnabled(false);
                 
                 String serie = (String)this.lstCataleg.getModel().getElementAt(i);
                 ArrayList<String> infoSerie = _model.infoSerie(i);
@@ -570,6 +568,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 this.idiomaCap.setText("");
                 this.descCap.setText("");
                 this.btnView.setEnabled(false);
+                this.btnRate.setEnabled(false);
                 
                 this.lstValorats.clearSelection();
                 this.lstVistos.clearSelection();
@@ -699,6 +698,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 this._ultimCapVist = ((String) lstValorats.getModel().getElementAt(i)).split(" -")[0];
             }
             this.lstCap.clearSelection();
+            this.lstVistos.clearSelection();
         }
     }//GEN-LAST:event_lstValoratsValueChanged
 
@@ -732,6 +732,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 this._ultimCapVist = ((String) lstVistos.getModel().getElementAt(i)).split(" -")[0];
             }
             this.lstCap.clearSelection();
+            this.lstValorats.clearSelection();
         }
     }//GEN-LAST:event_lstVistosValueChanged
     

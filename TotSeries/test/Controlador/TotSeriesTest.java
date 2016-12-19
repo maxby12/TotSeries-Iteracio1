@@ -2,7 +2,7 @@
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
- */
+ 
 package Controlador;
 
 import Model.Administrador;
@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
 /**
  *
  * @author Albert
- */
+ 
 public class TotSeriesTest {
     
     private TotSeriesDades _data;
@@ -57,7 +57,7 @@ public class TotSeriesTest {
     
     /**
      * Test of valorarCapitol method, of class TotSeries
-     */
+     
     @Test
     public void testValorarCapitol() {
         System.out.println("Test de valorar Capitol");
@@ -87,7 +87,7 @@ public class TotSeriesTest {
     
     /**
      * Test of registrarUsuari method, of class TotSeries.
-     */
+     
     @Test
     public void testRegistrarUsuari() {
         // Usuari ja registrat
@@ -115,7 +115,7 @@ public class TotSeriesTest {
     
     /**
      * Test of comprovarStatus method, of class TotSeries.
-     */
+     
     @Test
     public void testComprovarStatus() {
         // Usuari no esta veient cap capitol
@@ -128,7 +128,7 @@ public class TotSeriesTest {
     
     /**
      * Test of getCodi method, of class TotSeries.
-     */
+     
     @Test
     public void testGetCodi() {
         // Obtenció del codi del capitol numero 3 del topCapitols
@@ -142,3 +142,4 @@ public class TotSeriesTest {
     }
     
 }
+*/

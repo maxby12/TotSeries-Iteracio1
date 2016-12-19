@@ -130,8 +130,4 @@ public class TotSeries {
         return this._data.getCataleg().getCodi(nomCap);
     }
     
-    public boolean isAdmin(String userName) {
-        return _data.isAdmin(userName);
-    }
-    
 }
