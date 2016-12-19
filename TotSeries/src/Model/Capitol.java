@@ -24,6 +24,7 @@ public class Capitol implements Comparable<Capitol>, ElementCataleg {
     private int _num; //numCap
     private int _numTemp;
     private int _numS;
+    private int _visualitzacions;
     
 
     public Capitol(String _nom, String _duracio, String _idioma, String _descripcio, float _nota, Date _estrena, int _num, int _numT, int _numS) {
@@ -54,6 +55,14 @@ public class Capitol implements Comparable<Capitol>, ElementCataleg {
         
         this._llistaValoracions.add(valoracio);
 
+    }
+
+    public int getVisualitzacions() {
+        return this._visualitzacions;
+    }
+    
+    public void addVisualitzacio(){
+        this._visualitzacions++;
     }
 
     public String getDuracio() {

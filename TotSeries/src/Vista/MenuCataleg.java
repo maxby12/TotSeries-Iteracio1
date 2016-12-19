@@ -17,7 +17,7 @@ import javax.swing.*;
  *
  * @author Raül
  */
-public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, TopValObserver {
+public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, TopValObserver, TopVistosObserver {
     
     private TotSeries _ctrl;
     private TotSeriesDades _model;
@@ -41,6 +41,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
         
         _model.registerSeriesObserver((SeriesObserver) this);
         _model.registerTopValObserver((TopValObserver) this);
+        _model.registerTopVistosObserver((TopVistosObserver) this);
         
         ArrayList<String> series = _model.mostrarSeries();
         this.lstCataleg.setModel(new ItemListModel(series));
@@ -57,6 +58,12 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
     @Override
     public void updateTopVal() {
         this.lstValorats.setModel(new ItemListModel(_model.mostrarValorats()));
+    }
+    
+    
+    @Override
+    public void updateTopVistos() {
+        this.lstVistos.setModel(new ItemListModel(_model.mostrarVistos()));
     }
     
     /**
@@ -143,6 +150,11 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
         jScrollPane2.setViewportView(lstTemp);
 
         lstVistos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        lstVistos.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                lstVistosValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(lstVistos);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -535,6 +547,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                     this.lstTemp.setModel(new ItemListModel(temp));
                 }
                 this.lstValorats.clearSelection();
+                this.lstVistos.clearSelection();
             }
         }
     }//GEN-LAST:event_lstCatalegValueChanged
@@ -554,6 +567,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 this.btnView.setEnabled(false);
                 
                 this.lstValorats.clearSelection();
+                this.lstVistos.clearSelection();
             }
         }
     }//GEN-LAST:event_lstTempValueChanged
@@ -584,6 +598,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 this._ultimCapVist = (String) lstCap.getModel().getElementAt(i);
                 
                 this.lstValorats.clearSelection();
+                this.lstVistos.clearSelection();
             }
         }
     }//GEN-LAST:event_lstCapValueChanged
@@ -610,7 +625,9 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
     
     private void btnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewActionPerformed
         // TODO add your handling code here:
+        int codi = _ctrl.getCodi(_ultimCapVist);
         this._ctrl.reprodueixCapitol(_user);
+        this._ctrl.afegirVisualitzacio(codi);
         JFrame f = new JFrame();
         final Visualitzacio dialog = new Visualitzacio(f, true);
         
@@ -634,6 +651,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
         
         this._ctrl.aturaCapitol(_user);
         this.btnRate.setEnabled(true);
+        this.updateTopVistos();
         
     }//GEN-LAST:event_btnViewActionPerformed
 
@@ -669,6 +687,39 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
             this.lstCap.clearSelection();
         }
     }//GEN-LAST:event_lstValoratsValueChanged
+
+    private void lstVistosValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_lstVistosValueChanged
+        // TODO add your handling code here:
+        if (!evt.getValueIsAdjusting()) {
+            int i = this.lstVistos.getSelectedIndex();
+            if (i>=0) {
+                String s = (String) lstVistos.getModel().getElementAt(i);
+                String[] nomCap = s.split(" -");
+                int codi = this._ctrl.getCodi(nomCap[0]);
+                
+                if (codi != -1) {
+                    ArrayList<String> infoCap = _model.infoCapitol(codi);
+
+                    this.notaCap.setText(infoCap.get(0));
+                    this.nomCapitol.setText(infoCap.get(1));
+                    this.duracioCap.setText(infoCap.get(2));
+                    this.idiomaCap.setText(infoCap.get(3));
+                    this.descCap.setText(infoCap.get(4));
+                    this.btnRate.setEnabled(admin);
+                    this.btnView.setEnabled(!admin && !_user.equals(""));
+
+
+                    ArrayList<String> infoSerie = _model.infoSerie(codi%1000);
+                    this.nomSerie.setText(infoSerie.get(3));
+                    this.descrSerie.setText(infoSerie.get(0));
+                    this.dirSerie.setText(infoSerie.get(1));
+                    this.actorsSerie.setText(infoSerie.get(2));
+                }
+                this._ultimCapVist = ((String) lstVistos.getModel().getElementAt(i)).split(" -")[0];
+            }
+            this.lstCap.clearSelection();
+        }
+    }//GEN-LAST:event_lstVistosValueChanged
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea actorsSerie;
@@ -719,6 +770,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
     private javax.swing.JTextArea nomSerie;
     private javax.swing.JTextArea notaCap;
     // End of variables declaration//GEN-END:variables
+
 }
 
 

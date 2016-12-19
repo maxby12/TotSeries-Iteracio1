@@ -6,6 +6,7 @@
 package Model;
 
 import Vista.TopValObserver;
+import Vista.TopVistosObserver;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -13,15 +14,18 @@ import java.util.Iterator;
  *
  * @author Albert
  */
-public class Cataleg implements TopValSubjecte {
+public class Cataleg implements TopValSubjecte, TopVistosSubjecte {
     private ArrayList<ElementCataleg> _series;
     private RankingCapitols _topCapitols;
+    private RankingCapitolsVistos _topVistos;
     private RankingSeries _topMillorsSeries;
     private RankingSeries _topPitjorsSeries;
     private ArrayList<TopValObserver> _topValObservers = new ArrayList<TopValObserver>();
+    private ArrayList<TopVistosObserver> _topVistosObservers = new ArrayList<TopVistosObserver>();
     
     public Cataleg() {
         this._topCapitols = new RankingCapitols();
+        this._topVistos = new RankingCapitolsVistos();
         this._topMillorsSeries = new RankingSeries();
         this._topPitjorsSeries = new RankingSeries();
         this._series = new ArrayList<ElementCataleg>();
@@ -35,6 +39,12 @@ public class Cataleg implements TopValSubjecte {
         return _topCapitols;
     }
 
+    public void afegirVisualitzacio(int codi) {
+        ElementCataleg s = this._series.get(codi%1000);
+        ElementCataleg t = s.getChild((codi/1000)%1000);
+        Capitol c = (Capitol) t.getChild(codi/1000000);
+        c.addVisualitzacio();
+    }
     
     public ArrayList<String> mostrarSeries() {
         ArrayList<String> c = new ArrayList<>();
@@ -59,6 +69,10 @@ public class Cataleg implements TopValSubjecte {
     
     public ArrayList<String> mostrarValorats() {
         return this._topCapitols.mostrarTop();
+    }
+    
+    public ArrayList<String> mostrarVistos() {
+        return this._topVistos.mostrarTop();    
     }
     
     public ArrayList<String> infoSerie(int numS) {
@@ -111,6 +125,31 @@ public class Cataleg implements TopValSubjecte {
         this.notifyTopValObservers();
     }
     
+    public void actualitzarTopVistos() {
+        float minVistos = this._topVistos.getMinVistos();
+        Capitol entraTop = null;
+        for (ElementCataleg s : this._series) {
+            for (ElementCataleg t : s.getChildren()) {
+                for (ElementCataleg c : t.getChildren()) {
+                    if (((Capitol)c).getVisualitzacions() > minVistos) {
+                        Iterator<Capitol> llistaCapitolsIterator = this._topVistos.getCapitols().iterator();
+                        boolean found = false;
+                        while (llistaCapitolsIterator.hasNext() && !found) {
+                            Capitol temp = llistaCapitolsIterator.next();
+                            found = (c.getNom().equals(temp.getNom()));
+                        }
+                        if (!found) entraTop = (Capitol) c;
+                    }
+                }
+            }
+        }
+        if (entraTop != null) {
+            this._topVistos.insertCapitol(entraTop);
+        }
+        this._topVistos.sort();
+        this.notifyTopValObservers();
+    }
+    
     public int getCodi(String nomCap) {
         
         for (ElementCataleg s : this._series) {
@@ -144,6 +183,26 @@ public class Cataleg implements TopValSubjecte {
                     observer.updateTopVal();
             }
     }
-    
+
+    @Override
+    public void registerTopVistosObserver(TopVistosObserver o) {
+        this._topVistosObservers.add(o);
+    }
+
+    @Override
+    public void removeTopVistosObserver(TopVistosObserver o) {
+        int i = _topVistosObservers.indexOf(o);
+        if (i >= 0) {
+                _topVistosObservers.remove(i);
+        }
+    }
+
+    @Override
+    public void notifyTopVistosObservers() {
+        for(int i = 0; i < _topVistosObservers.size(); i++) {
+                    TopVistosObserver observer = _topVistosObservers.get(i);
+                    observer.updateTopVistos();
+            }
+    }
     
 }

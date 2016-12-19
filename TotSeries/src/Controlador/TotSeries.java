@@ -114,6 +114,10 @@ public class TotSeries {
         this._data.valorarCapitol(userName, numCap, nota);
     }
     
+    public void afegirVisualitzacio(int numCap) {
+        this._data.afegirVisualitzacio(numCap);
+    }
+    
     public void reprodueixCapitol(String userName) {
         this._data.iniciarStreaming(userName);
     }

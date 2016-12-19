@@ -12,6 +12,7 @@ import java.util.Iterator;
 import javax.swing.JOptionPane;
 import Vista.SeriesObserver;
 import Vista.TopValObserver;
+import Vista.TopVistosObserver;
 
 /**
  *
@@ -25,6 +26,10 @@ public class TotSeriesDades implements TotSeriesModelInterface {
     private String _client;
     private ArrayList<ClientObserver> _clientObservers = new ArrayList<ClientObserver>();
     private ArrayList<SeriesObserver> _seriesObservers = new ArrayList<SeriesObserver>();
+
+    
+
+   
 
     // Definim els possibles estats dels Clients
     protected enum View {
@@ -67,6 +72,11 @@ public class TotSeriesDades implements TotSeriesModelInterface {
 
     public void setDataPagament(Date _diaCobro) {
         this._dataPagament = _diaCobro;
+    }
+    
+    public void afegirVisualitzacio(int codi){
+        this._cataleg.afegirVisualitzacio(codi);
+        this._cataleg.actualitzarTopVistos();
     }
     
     public void registrarUsuari(String userName, String password, String nom, String nacionalitat, Date dataNaixament){
@@ -185,6 +195,10 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         return this._cataleg.mostrarValorats();
     }
     
+    @Override
+    public ArrayList<String> mostrarVistos() {
+        return this._cataleg.mostrarVistos();
+    }
     /*
     public String getCapitol(int numCap){
         
@@ -285,6 +299,16 @@ public class TotSeriesDades implements TotSeriesModelInterface {
     public void removeTopValObserver(TopValObserver o) {
         this._cataleg.removeTopValObserver(o);
         
+    }
+    
+     @Override
+    public void registerTopVistosObserver(TopVistosObserver o) {
+         this._cataleg.registerTopVistosObserver(o);
+    }
+
+    @Override
+    public void removeTopVistosObserver(TopVistosObserver o) {
+        this._cataleg.removeTopVistosObserver(o);
     }
     
 }
