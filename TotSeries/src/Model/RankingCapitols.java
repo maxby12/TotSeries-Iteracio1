@@ -16,9 +16,12 @@ import java.util.Comparator;
 public class RankingCapitols {
     private ArrayList<Capitol> _capitols;
     private Comparator _cmp;
+    private boolean _nota;
 
     public RankingCapitols(boolean nota) {
         this._capitols = new ArrayList<Capitol>(10);
+        this._nota = nota;
+        
         if(nota){
             this._cmp =  new ComparatorNota();
         }else{
@@ -56,21 +59,21 @@ public class RankingCapitols {
         Collections.sort(this._capitols, _cmp);
     }
     
-    public ArrayList<String> mostrarTopValorats() {
+    public ArrayList<String> mostrarTop() {
         ArrayList<String> s = new ArrayList<>();
-        for (Capitol c : this._capitols) {
-            String st = c.getNom() + " - Nota: " + String.format("%.2f", c.getNota());
-            s.add(st);
+        if (_nota) {
+            for (Capitol c : this._capitols) {
+                String st = c.getNom() + " - Nota: " + String.format("%.2f", c.getNota());
+                s.add(st);
+            }
         }
-        return s;
-    }
-    
-    public ArrayList<String> mostrarTopVistos() {
-        ArrayList<String> s = new ArrayList<>();
-        for (Capitol c : this._capitols) {
-            String st = c.getNom() + " - Visualitzacions: " + String.format("%d", c.getVisualitzacions());
-            s.add(st);
+        else {
+            for (Capitol c : this._capitols) {
+                String st = c.getNom() + " - Visualitzacions: " + String.format("%d", c.getVisualitzacions());
+                s.add(st);
+            }
         }
+
         return s;
     }
     

@@ -67,11 +67,11 @@ public class Cataleg implements TopValSubjecte, TopVistosSubjecte {
     }
     
     public ArrayList<String> mostrarValorats() {
-        return this._topCapitols.mostrarTopValorats();
+        return this._topCapitols.mostrarTop();
     }
     
     public ArrayList<String> mostrarVistos() {
-        return this._topVistos.mostrarTopVistos();    
+        return this._topVistos.mostrarTop();    
     }
     
     public ArrayList<String> infoSerie(int numS) {
