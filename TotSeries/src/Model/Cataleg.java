@@ -147,7 +147,7 @@ public class Cataleg implements TopValSubjecte, TopVistosSubjecte {
             this._topVistos.insertCapitol(entraTop);
         }
         this._topVistos.sort();
-        this.notifyTopValObservers();
+        this.notifyTopVistosObservers();
     }
     
     public int getCodi(String nomCap) {

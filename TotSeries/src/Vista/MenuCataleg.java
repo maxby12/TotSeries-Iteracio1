@@ -454,21 +454,19 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(70, 70, 70)
-                        .addComponent(jLabel3)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 68, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(66, 66, 66))
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addGap(100, 100, 100)
+                        .addComponent(jLabel3)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(90, 90, 90)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(89, Short.MAX_VALUE))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel4)
@@ -551,6 +549,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 }
                 this.lstValorats.clearSelection();
                 this.lstVistos.clearSelection();
+                this.descrSerie.setCaretPosition(0);
             }
         }
     }//GEN-LAST:event_lstCatalegValueChanged
@@ -603,6 +602,8 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
                 
                 this.lstValorats.clearSelection();
                 this.lstVistos.clearSelection();
+                this.descCap.setCaretPosition(0);
+                this.descrSerie.setCaretPosition(0);
             }
         }
     }//GEN-LAST:event_lstCapValueChanged
@@ -664,7 +665,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
         
         this._ctrl.aturaCapitol(_user);
         this.btnRate.setEnabled(true);
-        this.updateTopVistos();
+        
         
     }//GEN-LAST:event_btnViewActionPerformed
 
@@ -699,6 +700,8 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
             }
             this.lstCap.clearSelection();
             this.lstVistos.clearSelection();
+            this.descCap.setCaretPosition(0);
+            this.descrSerie.setCaretPosition(0);
         }
     }//GEN-LAST:event_lstValoratsValueChanged
 
@@ -733,6 +736,9 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
             }
             this.lstCap.clearSelection();
             this.lstValorats.clearSelection();
+            this.descCap.setCaretPosition(0);
+            this.descrSerie.setCaretPosition(0);
+            
         }
     }//GEN-LAST:event_lstVistosValueChanged
     
