@@ -16,16 +16,15 @@ import java.util.Iterator;
  */
 public class Cataleg implements TopValSubjecte, TopVistosSubjecte {
     private ArrayList<ElementCataleg> _series;
-    private RankingCapitols _topCapitols;
-    private RankingCapitolsVistos _topVistos;
+    private RankingCapitols _topCapitols, _topVistos;
     private RankingSeries _topMillorsSeries;
     private RankingSeries _topPitjorsSeries;
     private ArrayList<TopValObserver> _topValObservers = new ArrayList<TopValObserver>();
     private ArrayList<TopVistosObserver> _topVistosObservers = new ArrayList<TopVistosObserver>();
     
     public Cataleg() {
-        this._topCapitols = new RankingCapitols();
-        this._topVistos = new RankingCapitolsVistos();
+        this._topCapitols = new RankingCapitols(true);
+        this._topVistos = new RankingCapitols(false);
         this._topMillorsSeries = new RankingSeries();
         this._topPitjorsSeries = new RankingSeries();
         this._series = new ArrayList<ElementCataleg>();
@@ -68,11 +67,11 @@ public class Cataleg implements TopValSubjecte, TopVistosSubjecte {
     }
     
     public ArrayList<String> mostrarValorats() {
-        return this._topCapitols.mostrarTop();
+        return this._topCapitols.mostrarTopValorats();
     }
     
     public ArrayList<String> mostrarVistos() {
-        return this._topVistos.mostrarTop();    
+        return this._topVistos.mostrarTopVistos();    
     }
     
     public ArrayList<String> infoSerie(int numS) {

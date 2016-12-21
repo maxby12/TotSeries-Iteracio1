@@ -7,6 +7,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 
 /**
  *
@@ -14,15 +15,27 @@ import java.util.Collections;
  */
 public class RankingCapitols {
     private ArrayList<Capitol> _capitols;
+    private Comparator _cmp;
 
-    public RankingCapitols() {
+    public RankingCapitols(boolean nota) {
         this._capitols = new ArrayList<Capitol>(10);
+        if(nota){
+            this._cmp =  new ComparatorNota();
+        }else{
+            this._cmp =  new ComparatorVistos();
+        }
     }
     
     public float getNotaMin() {
         if (this._capitols.size()<10) return 0;
         else return this._capitols.get(this._capitols.size()-1).getNota();
     }
+    
+    public float getMinVistos() {
+        if (this._capitols.size()<10) return 0;
+        else return this._capitols.get(this._capitols.size()-1).getVisualitzacions();
+    }
+    
     public float getNotaMax() {
         if (this._capitols.size()==0) return 0;
         else return this._capitols.get(0).getNota();
@@ -40,13 +53,22 @@ public class RankingCapitols {
     }
     
     public void sort() {
-        Collections.sort(this._capitols, new ComparatorNota());
+        Collections.sort(this._capitols, _cmp);
     }
     
-    public ArrayList<String> mostrarTop() {
+    public ArrayList<String> mostrarTopValorats() {
         ArrayList<String> s = new ArrayList<>();
         for (Capitol c : this._capitols) {
             String st = c.getNom() + " - Nota: " + String.format("%.2f", c.getNota());
+            s.add(st);
+        }
+        return s;
+    }
+    
+    public ArrayList<String> mostrarTopVistos() {
+        ArrayList<String> s = new ArrayList<>();
+        for (Capitol c : this._capitols) {
+            String st = c.getNom() + " - Visualitzacions: " + String.format("%d", c.getVisualitzacions());
             s.add(st);
         }
         return s;
