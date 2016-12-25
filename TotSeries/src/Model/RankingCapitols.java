@@ -16,17 +16,11 @@ import java.util.Comparator;
 public class RankingCapitols {
     private ArrayList<Capitol> _capitols;
     private Comparator _cmp;
-    private boolean _nota;
 
-    public RankingCapitols(boolean nota) {
+    public RankingCapitols(Comparator cmp) {
         this._capitols = new ArrayList<Capitol>(10);
-        this._nota = nota;
-        
-        if(nota){
-            this._cmp =  new ComparatorNota();
-        }else{
-            this._cmp =  new ComparatorVistos();
-        }
+        this._cmp =  cmp;
+
     }
     
     public float getNotaMin() {
@@ -61,7 +55,7 @@ public class RankingCapitols {
     
     public ArrayList<String> mostrarTop() {
         ArrayList<String> s = new ArrayList<>();
-        if (_nota) {
+        if (_cmp instanceof ComparatorNota) {
             for (Capitol c : this._capitols) {
                 String st = c.getNom() + " - Nota: " + String.format("%.2f", c.getNota());
                 s.add(st);

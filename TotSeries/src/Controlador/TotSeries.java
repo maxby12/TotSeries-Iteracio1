@@ -9,6 +9,7 @@ import Model.Administrador;
 import Model.Cataleg;
 import Model.Client;
 import Model.TotSeriesDades;
+import Model.TotSeriesModelInterface;
 import Vista.MenuInicial;
 import java.util.ArrayList;
 import java.util.Date;

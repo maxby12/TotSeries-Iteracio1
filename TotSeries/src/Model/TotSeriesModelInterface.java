@@ -25,7 +25,7 @@ public interface TotSeriesModelInterface {
     ArrayList<String> mostrarVistos();
     ArrayList<String> infoCapitol(int numC);
     ArrayList<String> infoSerie(int numS);
-
+    boolean isAdmin(String userName);
     
     
     void registerClientObserver(ClientObserver o);

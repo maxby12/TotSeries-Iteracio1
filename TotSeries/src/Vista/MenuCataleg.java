@@ -1,7 +1,7 @@
 package Vista;
 
 import Controlador.TotSeries;
-import Model.TotSeriesDades;
+import Model.TotSeriesModelInterface;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ import javax.swing.*;
 public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, TopValObserver, TopVistosObserver {
     
     private TotSeries _ctrl;
-    private TotSeriesDades _model;
+    private TotSeriesModelInterface _model;
     private String _user;
     private String _ultimCapVist;
     private int numS;
@@ -31,7 +31,7 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
     /**
      * Creates new form MenuCataleg
      */
-    public MenuCataleg(java.awt.Frame parent, boolean modal, TotSeries ctrl, TotSeriesDades model, String us) {
+    public MenuCataleg(java.awt.Frame parent, boolean modal, TotSeries ctrl, TotSeriesModelInterface model, String us) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -782,6 +782,10 @@ public class MenuCataleg extends javax.swing.JDialog implements SeriesObserver, 
 
     private void btnSortirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSortirActionPerformed
         // TODO add your handling code here:
+        _model.removeSeriesObserver((SeriesObserver) this);
+        _model.removeTopValObserver((TopValObserver) this);
+        _model.removeTopVistosObserver((TopVistosObserver) this);
+        
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_btnSortirActionPerformed

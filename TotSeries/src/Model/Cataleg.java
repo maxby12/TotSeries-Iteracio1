@@ -23,8 +23,8 @@ public class Cataleg implements TopValSubjecte, TopVistosSubjecte {
     private ArrayList<TopVistosObserver> _topVistosObservers = new ArrayList<TopVistosObserver>();
     
     public Cataleg() {
-        this._topCapitols = new RankingCapitols(true);
-        this._topVistos = new RankingCapitols(false);
+        this._topCapitols = new RankingCapitols(new ComparatorNota());
+        this._topVistos = new RankingCapitols(new ComparatorVistos());
         this._topMillorsSeries = new RankingSeries();
         this._topPitjorsSeries = new RankingSeries();
         this._series = new ArrayList<ElementCataleg>();

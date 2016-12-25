@@ -8,6 +8,7 @@ package Vista;
 
 import Controlador.TotSeries;
 import Model.TotSeriesDades;
+import Model.TotSeriesModelInterface;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,7 +19,7 @@ public class MenuInicial extends javax.swing.JFrame implements ClientObserver {
     
     
     private TotSeries _ctrl;
-    private TotSeriesDades _model;
+    private TotSeriesModelInterface _model;
     private String _user;
     
 
@@ -26,7 +27,7 @@ public class MenuInicial extends javax.swing.JFrame implements ClientObserver {
         initComponents();
         this.setLocationRelativeTo(null);
         this._ctrl = controlador;
-        this._model = model;
+        this._model = (TotSeriesModelInterface)model;
         this._user = "";
         _model.registerClientObserver((ClientObserver) this);
     }
