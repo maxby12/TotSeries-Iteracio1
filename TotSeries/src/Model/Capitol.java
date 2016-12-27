@@ -89,15 +89,13 @@ public class Capitol implements ElementCataleg {
     @Override
     public ArrayList<String> getInfo() {
         ArrayList<String> info = new ArrayList<>();
-        info.add(Float.toString(_nota));
+        info.add(String.format("%.2f", _nota));
         info.add(_nom);
         info.add(_duracio);
         info.add(_idioma);
         info.add(_descripcio);
         return info;
     }
-
-    
 
     @Override
     public ElementCataleg getChild(int i) {

@@ -29,8 +29,6 @@ public class TotSeriesDades implements TotSeriesModelInterface {
 
     
 
-   
-
     // Definim els possibles estats dels Clients
     protected enum View {
         EMISSIO, NOEMISSIO
@@ -189,6 +187,7 @@ public class TotSeriesDades implements TotSeriesModelInterface {
         // Finalitza el streaming del capitol numero numCap
     }
     
+    @Override
     public boolean isAdmin(String userName) {
         Iterator<Administrador> llistaAdmins = _administradors.iterator();
         boolean found = false;
